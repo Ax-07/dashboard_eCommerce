@@ -1,0 +1,132 @@
+// -- SCHÉMA PRISMA COMMENTÉ POUR LA GESTION DES UTILISATEURS --
+
+model User {
+  id               String         @id @default(cuid())                // Clé primaire : identifiant unique généré via cuid()
+  name             String?                                            // Nom complet de l'utilisateur (optionnel)
+  email            String?        @unique                             // Email de l'utilisateur, doit être unique
+  password         String?                                            // Mot de passe hashé (optionnel, pour authentification interne)
+  emailVerified    DateTime?      @map("email_verified")              // Date de vérification de l'email, colonne SQL "email_verified"
+  avatar           String?                                            // URL de l'avatar ou photo de profil (optionnel)
+  image            String?                                            // URL de l'avatar ou photo de profil (optionnel)
+  stripeCustomerId String?        @map("stripe_customer_id")          // Identifiant du client Stripe (optionnel), colonne SQL "stripe_customer_id"
+
+  accounts         Account[]                                          // Relation 1:N avec le modèle Account (NextAuth)
+  sessions         Session[]                                          // Relation 1:N avec le modèle Session (NextAuth)
+  
+  addresses        Address[]                                          // Relation 1:N vers les adresses enregistrées (livraison/facturation)
+  orders           Order[]        @relation("UserOrders")             // Commandes passées par l'utilisateur (relation nommée)
+  carts            Cart[]         @relation("UserCarts")              // Paniers (historique ou en cours) de l'utilisateur
+  reviews          Review[]       @relation("UserReviews")            // Avis déposés par l'utilisateur
+  wishlists      Wishlist[]        @relation("UserWishlists")         // Listes de souhaits de l'utilisateur
+  notifications  Notification[]    @relation("UserNotifications")     // Notifications reçues par l'utilisateur
+
+  resetToken       String?                                            // Token de réinitialisation de mot de passe (optionnel)
+  resetTokenExpiry DateTime?                                          // Date d'expiration du resetToken (optionnel)
+
+  isActive         Boolean        @default(true)                      // Indique si le compte est actif ou suspendu
+  isVerified       Boolean        @default(false)                     // Indique si l'adresse e-mail est vérifiée
+  isVIP            Boolean        @default(false)                     // Statut VIP (clients privilégiés)
+  marketingOptIn   Boolean        @default(false)                     // Consentement aux emails marketing
+  roles            UserRole[]                                         // Rôles attribués à l'utilisateur (admin, support...)
+  activityLogs     UserActivity[]                                     // Logs d'activité (audit et suivi)
+  totalOrders      Int            @default(0)                         // Nombre total de commandes passées
+  totalSpent       Float          @default(0)                         // Montant total dépensé
+  tags             String[]                                           // Étiquettes personnalisées (ex: "VIP", "fraude")
+  internalNotes    String?                                            // Notes internes (commentaires des admins)
+  lastLoginAt      DateTime?                                          // Date et heure de la dernière connexion
+
+  @@map("users")                                                      // Nom de la table SQL : "users"
+  @@index([email], name: "idx_user_email")                            // Index sur le champ email
+  @@index([isActive], name: "idx_user_active")                        // Index sur le statut actif
+  @@index([isVerified], name: "idx_user_verified")                    // Index sur le statut vérifié
+  @@index([totalSpent], name: "idx_user_total_spent")                 // Index sur le montant total dépensé
+  @@index([lastLoginAt], name: "idx_user_last_login")                 // Index sur la date de dernière connexion
+}
+
+model UserRole {
+  id              String          @id @default(uuid())                                // Clé primaire : UUID généré
+  user            User            @relation(fields: [userId], references: [id])       // Relation vers l'utilisateur
+  userId          String                                                       // FK vers User.id
+  role            Role                                                         // Valeur de rôle (enum)
+
+  @@map("user_roles")                                                 // Table SQL "user_roles"
+  @@index([userId], name: "idx_user_role_userId")                     // Index sur userId
+  @@index([role], name: "idx_user_role")                              // Index sur le rôle
+}
+
+enum Role {                                                  
+  customer                                                            // Client classique
+  admin                                                               // Administrateur
+  manager                                                             // Manager
+  support                                                             // Support client
+}
+
+model Address {
+  id              String         @id @default(uuid())                   // Clé primaire : UUID
+  user            User           @relation(fields: [userId], references: [id])      // Propriétaire de l'adresse
+  userId          String                                                // FK vers User.id
+  fullName        String                                                // Nom complet pour la livraison
+  street          String                                                // Adresse (rue et numéro)
+  city            String                                                // Ville
+  postalCode      String                                                // Code postal
+  country         String                                                // Pays
+  phone           String?                                               // Téléphone de contact (optionnel)
+  isDefault       Boolean        @default(false)                        // Indique si c'est l'adresse par défaut
+  shippingInfo    ShippingInfo?  @relation("UserShippingInfo")          // Relation 1:1 vers infos de livraison
+  billingInfo     BillingInfo?   @relation("UserBillingInfo")           // Relation 1:1 vers infos de facturation
+  customerId      String?    
+  customer      Customer?     @relation(fields: [customerId], references: [id]) // Relation vers le client (optionnel)                                           
+  @@map("user_addresses")                                             // Table SQL "user_addresses"
+}
+
+model UserActivity {
+  id        String   @id @default(uuid())                             // Clé primaire : UUID
+  user      User     @relation(fields: [userId], references: [id])    // Utilisateur concerné
+  userId    String                                                    // FK vers User.id
+  activity  String                                                    // Description de l'activité (ex: "login", "update_profile")
+  timestamp DateTime @default(now())                                  // Date et heure de l'activité
+  ipAddress String?                                                   // Adresse IP (optionnel)
+
+  @@map("user_activities")                                            // Table SQL "user_activities"
+}
+
+model Customer {                                                      // Variante profil client
+  id         String   @id @default(uuid())                            // Clé primaire : UUID
+  firstName  String                                                   // Prénom du client
+  lastName   String                                                   // Nom de famille
+  email      String?  @unique                                         // Email du profil (optionnel et unique)
+  phone      String?                                                  // Téléphone du client
+  addresses  Address[]                                                // Adresses liées au client
+  orders     Order[]  @relation("OrdersForCustomer")                  // Commandes passées (relation nommée)
+
+  @@map("customers")                                                  // Table SQL "customers"
+}
+
+enum NotificationType {
+  order_update
+  promotion
+  wishlist_reminder
+  system
+  custom
+}
+
+model Notification {
+  id          String            @id @default(uuid())
+  userId      String
+  user        User              @relation("UserNotifications", fields: [userId], references: [id])
+  type        NotificationType
+  title       String
+  message     String?
+  url         String?
+  metadata    Json?
+  isRead      Boolean           @default(false)
+  sentAt      DateTime          @default(now())
+  readAt      DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@map("notifications")
+  @@index([userId], name: "idx_notification_userId")
+  @@index([type], name: "idx_notification_type")
+  @@index([isRead], name: "idx_notification_isRead")
+}
