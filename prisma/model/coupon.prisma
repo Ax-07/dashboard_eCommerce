@@ -1,0 +1,21 @@
+// --- SCHÉMA PRISMA COMMENTÉ POUR LES CODES PROMOTIONNELS ---
+
+model Coupon {
+  id                 String   @id @default(uuid())          // Clé primaire : UUID généré automatiquement
+  code               String   @unique                     // Code unique du coupon utilisé lors de l’achat
+  description        String?                              // Description du coupon (optionnel)
+  discountPercentage Float?                               // Pourcentage de remise appliquée (optionnel)
+  discountAmount     Float?                               // Montant fixe de remise (optionnel)
+  startDate          DateTime                             // Date (inclusive) de début de validité
+  endDate            DateTime                             // Date (inclusive) de fin de validité
+  isActive           Boolean  @default(true)              // Indicateur si le coupon est actif ou désactivé
+  usageLimit         Int?                                 // Nombre maximal d’utilisations (null = illimité)
+  createdAt          DateTime @default(now())             // Date de création du coupon
+  updatedAt          DateTime @updatedAt                  // Date de dernière mise à jour
+
+  @@map("coupons")                                        // Mappe ce modèle à la table SQL “coupons”
+  @@index([code], name: "idx_coupon_code")               // Index pour accélérer les recherches par code
+  @@index([isActive], name: "idx_coupon_active")         // Index sur le statut actif/inactif
+  @@index([startDate], name: "idx_coupon_startDate")     // Index sur la date de début
+  @@index([endDate], name: "idx_coupon_endDate")         // Index sur la date de fin
+}
