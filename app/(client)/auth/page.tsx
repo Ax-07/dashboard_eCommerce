@@ -9,10 +9,18 @@ import {
 import AuthForm from "@/src/blocks/auth/AuthForm";
 import { useState } from "react";
 import Navbar from "@/src/blocks/Navbar/Navbar";
+import { useAuth } from "@/src/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 const Auth = () => {
   const [isRegistering, setIsRegistering] = useState(false);
+  const { session } = useAuth();
+  const router = useRouter();
 
+  if (session && session.user) {
+    router.push("/");
+  }
+  
   return (
     <>
       <Navbar />
