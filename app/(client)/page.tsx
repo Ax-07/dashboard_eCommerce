@@ -5,20 +5,24 @@ import { Button } from "@/src/components/ui/button";
 import { useAuth } from "@/src/hooks/useAuth";
 import Link from "next/link";
 import React from "react";
+import { FaSpinner } from "react-icons/fa6";
 
 
 export default function Home() {
-  const { session } = useAuth();
+  const { session, loading } = useAuth();
 
-  if (!session || !session.user) return (
-    <DashboardShell>
-      <section className="flex flex-1 flex-col gap-4 p-4 pt-0 h-full">
-        <Button variant={"outline"} className="w-full" asChild>
-          <Link href="/auth">Se connecter</Link>
-        </Button>
-      </section>
-    </DashboardShell>
-  );
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <FaSpinner className="animate-spin text-4xl text-foreground" />
+        <span className="sr-only">Loading...</span>
+      </div>
+    );
+  }
+  if (!session || !session.user) {
+    return null;
+  }
+
   return (
     <DashboardShell>
       <section className="flex flex-1 flex-col gap-4 p-4 pt-0 h-full">
