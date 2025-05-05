@@ -1,0 +1,164 @@
+// ------------------ Products & Categories ------------------
+
+model Product {                                                      // Modèle représentant un produit
+  id            String           @id @default(uuid())            // Clé primaire : UUID
+  name          String                                      // Nom du produit
+  description   String                                      // Description détaillée
+  price         Float?                                     // Prix unitaire (optionnel)
+  categoryId    String?                                    // FK vers ProductCategory.id (optionnel)
+  category      ProductCategory? @relation(fields: [categoryId], references: [id]) // Catégorie associée
+  options       Option[]                                   // Variantes/options du produit
+  media         Media[]                                    // Médias associés (images, vidéos)
+  promotion     Promotion?                                 // Promotion en cours (optionnel)
+  attributes    Json?                                      // Attributs libres (tags, dimensions…)
+  stock         Stock?           @relation("ProductStock")   // Stock disponible (relation 1:1)
+  reviews       Review[]                                   // Avis clients
+  createdAt     DateTime         @default(now())              // Date de création
+  updatedAt     DateTime         @updatedAt                   // Date de dernière mise à jour
+
+  @@map("products")                                         // Table SQL "products"
+  @@index([categoryId], name: "idx_product_categoryId")    // Index sur la catégorie
+  @@index([name], name: "idx_product_name")               // Index sur le nom
+}
+
+model ProductCategory {                                              // Modèle de catégorie produit
+  id               String             @id @default(uuid())       // Clé primaire : UUID
+  name             String                                   // Nom de la catégorie
+  description      String?                                  // Description (optionnelle)
+  parentCategoryId String?                                   // FK vers catégorie parente (self-relation)
+  parentCategory   ProductCategory?   @relation("Subcategories", fields: [parentCategoryId], references: [id]) // Catégorie parente
+  subcategories    ProductCategory[]  @relation("Subcategories") // Sous-catégories
+  products         Product[]                                 // Produits rattachés
+  createdAt        DateTime           @default(now())         // Date de création
+  updatedAt        DateTime           @updatedAt              // Date de mise à jour
+
+  @@map("product_categories")                               // Table SQL "product_categories"
+  @@index([parentCategoryId], name: "idx_category_parentId")// Index sur la catégorie parente
+  @@index([name], name: "idx_category_name")               // Index sur le nom
+}
+
+model Option {                                          // Modèle option (ex: taille, couleur)
+  id         String        @id @default(uuid())       // Clé primaire : UUID
+  name       String                                // Nom de l'option
+  productId  String                                // FK vers Product.id
+  product    Product       @relation(fields: [productId], references: [id]) // Produit parent
+  values     OptionValue[]                         // Valeurs possibles
+
+  @@map("options")                               // Table SQL "options"
+  @@index([productId], name: "idx_option_productId") // Index sur productId
+  @@index([name], name: "idx_option_name")           // Index sur le nom de l'option
+}
+
+model OptionValue {                                       // Valeur d'une option (ex: "M", "Rouge")
+  id            String       @id @default(uuid())    // Clé primaire : UUID
+  name          String                              // Libellé de la valeur
+  quantity      Int?                                // Quantité en stock pour cette valeur
+  unit          String?                             // Unité de mesure (ex: g, ml)
+  unitPrice     Float?                              // Prix unitaire par unité
+  totalPrice    Float?                              // Prix total pour cette valeur
+  priceModifier Float?                              // Écart de prix relatif au produit de base
+  isDefault     Boolean?     @default(false)         // Valeur par défaut
+  optionId      String                              // FK vers Option.id
+  option        Option       @relation(fields: [optionId], references: [id]) // Option parente
+  stockId       String?      @unique                 // FK unique vers Stock.id (one-to-one)
+  stock         Stock?       @relation("OptionValueStock", fields: [stockId], references: [id]) // Stock spécifique
+
+  @@map("option_values")                         // Table SQL "option_values"
+}
+
+model Media {                                         // Modèle média (image, vidéo, audio)
+  id         String   @id @default(uuid())          // Clé primaire : UUID
+  productId  String                                 // FK vers Product.id
+  product    Product  @relation(fields: [productId], references: [id]) // Produit associé
+  url        String                                 // URL publique
+  type       MediaType                              // Type de média (enum)
+  alt        String?                                // Texte alternatif pour accessibilité
+  thumbnail  String?                                // URL de la miniature
+  isPrimary  Boolean? @default(false)               // Média principal
+
+  @@map("media")                                 // Table SQL "media"
+  @@index([productId], name: "idx_media_productId") // Index sur productId
+  @@index([type], name: "idx_media_type")          // Index sur le type
+}
+
+enum MediaType {                                    // Enum pour les types de média
+  image                                               // Image
+  video                                               // Vidéo
+  audio                                               // Audio
+}
+
+model Stock {                                        // Modèle de stock produit
+  id            String   @id @default(uuid())       // Clé primaire : UUID
+  productId     String?  @unique                   // FK unique vers Product.id (one-to-one)
+  product       Product? @relation("ProductStock", fields: [productId], references: [id]) // Produit lié
+  quantity      Int                                   // Quantité actuelle en stock
+  min           Int?                                  // Seuil minimum de réapprovisionnement
+  max           Int?                                  // Seuil maximum souhaité
+  location      String?                               // Emplacement (ex: entrepôt #, rayon)
+  optionValue   OptionValue? @relation("OptionValueStock") // Stock pour variante spécifique
+
+  @@map("stocks")                               // Table SQL "stocks"
+  @@index([productId], name: "idx_stock_productId") // Index sur productId
+  @@index([quantity], name: "idx_stock_quantity")   // Index sur la quantité
+}
+
+model Promotion {                                    // Modèle promotion (réductions temporaires)
+  id                 String   @id @default(uuid())  // Clé primaire : UUID
+  productId          String   @unique               // FK unique vers Product.id (one-to-one)
+  product            Product  @relation(fields: [productId], references: [id]) // Produit concerné
+  isOnSale           Boolean? @default(false)       // Indicateur de promotion active
+  discountPercentage Float?                        // Pourcentage de réduction
+  discountAmount     Float?                        // Montant fixe de réduction
+  salePrice          Float?                        // Prix promotionnel
+  saleStartDate      DateTime?                     // Début de la promo
+  saleEndDate        DateTime?                     // Fin de la promo
+
+  @@map("promotions")                           // Table SQL "promotions"
+  @@index([productId], name: "idx_promotion_productId") // Index sur productId
+  @@index([isOnSale], name: "idx_promotion_isOnSale")   // Index sur statut
+}
+
+model Review {                                      // Modèle avis client
+  id                 String   @id @default(uuid())  // Clé primaire : UUID
+  productId          String                         // FK vers Product.id
+  product            Product  @relation(fields: [productId], references: [id]) // Produit évalué
+  userId             String                         // FK vers User.id
+  user               User     @relation("UserReviews", fields: [userId], references: [id]) // Auteur de l'avis
+  rating             Int                            // Note (1–5)
+  comment            String?                        // Commentaire texte
+  isVerifiedPurchase Boolean? @default(false)        // Avis d'achat vérifié
+  createdAt          DateTime @default(now())        // Date de création
+
+  @@map("reviews")                              // Table SQL "reviews"
+  @@index([productId], name: "idx_review_productId") // Index sur productId
+  @@index([userId], name: "idx_review_userId")       // Index sur userId
+}
+
+// --- MODÈLE PRISMA POUR LA WISHLIST ---
+
+model Wishlist {
+  id        String         @id @default(uuid())
+  userId    String
+  user      User           @relation("UserWishlists", fields: [userId], references: [id])
+  items     WishlistItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@map("wishlists")
+  @@index([userId], name: "idx_wishlist_userId")
+}
+
+model WishlistItem {
+  id          String     @id @default(uuid())
+  wishlistId  String                                  // FK vers Wishlist.id
+  wishlist    Wishlist  @relation(fields: [wishlistId], references: [id])
+  productId   String                                  // Identifiant du produit
+  variantId   String?                                 // Identifiant de variante (optionnel)
+  quantity    Int       @default(1)                   // Nombre souhaité de ce produit
+  createdAt   DateTime  @default(now())
+
+  @@map("wishlist_items")
+  @@index([wishlistId], name: "idx_wishlistitem_wishlistId")
+  @@index([productId], name: "idx_wishlistitem_productId")
+  @@unique([wishlistId, productId, variantId], name: "uq_wishlistitem_product_variant")
+}
