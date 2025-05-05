@@ -1,0 +1,36 @@
+// --- SCHÉMA PRISMA COMMENTÉ POUR LA GESTION DU PANIER (CART) ---
+
+model Cart {
+  id         String     @id @default(uuid())                 // Clé primaire : identifiant unique du panier
+  userId     String?    @unique                              // FK vers User.id (utilisateur)
+  user       User?      @relation("UserCarts", fields: [userId], references: [id])  // Propriétaire du panier
+  items      CartItem[]                                      // Éléments du panier
+  couponCode String?                                       // Code promo appliqué (optionnel)
+  total      Float                                             // Montant total
+  updatedAt  DateTime   @updatedAt                         // Date de dernière mise à jour
+  createdAt  DateTime   @default(now())                    // Date de création
+
+  @@map("carts")                                           // Table SQL "carts"
+  @@index([userId], name: "idx_cart_userId")               // Index sur userId
+  @@index([updatedAt], name: "idx_cart_updatedAt")         // Index sur updatedAt
+  @@index([couponCode], name: "idx_cart_couponCode")       // Index sur couponCode
+  @@index([createdAt], name: "idx_cart_createdAt")         // Index sur createdAt
+}
+
+model CartItem {
+  id        String  @id @default(uuid())                   // Clé primaire : identifiant unique de l'élément
+  cartId    String                                          // FK vers Cart.id
+  cart      Cart    @relation(fields: [cartId], references: [id])  // Panier associé
+  productId String                                          // Identifiant du produit
+  variantId String?                                         // Identifiant de la variante (optionnel)
+  name      String                                          // Nom du produit
+  quantity  Int                                             // Quantité commandée
+  price     Float                                           // Prix unitaire
+  image     String?                                         // URL de l'image du produit
+
+  @@map("cart_items")                                     // Table SQL "cart_items"
+  @@index([cartId], name: "idx_cart_item_cartId")         // Index sur cartId
+  @@index([productId], name: "idx_cart_item_productId")   // Index sur productId
+  @@index([variantId], name: "idx_cart_item_variantId")   // Index sur variantId
+  @@index([quantity], name: "idx_cart_item_quantity")     // Index sur quantity
+}
