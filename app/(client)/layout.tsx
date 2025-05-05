@@ -6,8 +6,6 @@ import { cn } from "@/src/utils/tailwind_cn";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/src/components/themes/theme-provider";
 import { ViewportLayout } from "next/dist/lib/metadata/types/extra-types";
-import StoreProvider from "@/src/stores/storesProvider";
-import Navbar from "@/src/blocks/Navbar/Navbar";
 import { SidebarProvider } from "@/src/components/ui/sidebar";
 import { AppSidebar } from "@/src/blocks/dashboardBlocks/app-sidebar";
 import { Toaster } from "react-hot-toast";
@@ -59,16 +57,16 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider>
-            <StoreProvider>
               <SidebarProvider>
                 <AppSidebar />
                 <Toaster
                   position="top-center"
                   toastOptions={{ duration: 3000 }}
                 />
-                {children}
+                <main className="flex flex-1 flex-col gap-4 p-4 pt-0 h-full">
+                  {children}
+                </main>
               </SidebarProvider>
-            </StoreProvider>
           </SessionProvider>
         </ThemeProvider>
       </body>
