@@ -1,0 +1,220 @@
+// ------------------ Orders & Payments ------------------
+
+model Order {                                                   // Modèle représentant une commande
+  id            String        @id @default(uuid())             // Clé primaire : UUID
+  userId        String                                         // FK vers User.id (client qui a passé la commande)
+  user          User          @relation("UserOrders", fields: [userId], references: [id]) // Relation vers le client authentifié
+  customerId    String?                                        // FK optionnelle vers Customer.id (profil client détaillé)
+  customer      Customer?     @relation("OrdersForCustomer", fields: [customerId], references: [id]) // Relation vers le profil client
+  items         OrderItem[]                                    // Liste des articles de la commande
+
+  totalAmount   Float                                          // Montant total TTC
+  subtotal      Float                                          // Sous-total HT
+  taxAmount     Float                                          // Montant des taxes
+  shippingCost  Float                                          // Frais de livraison
+  discount      Float?                                         // Remise appliquée (optionnel)
+  status        OrderStatus                                   // Statut de la commande (enum)
+
+  paymentId     String        @unique                          // FK unique vers Payment.id (one-to-one)
+  payment       Payment       @relation("OrderPayment", fields: [paymentId], references: [id]) // Détails du paiement
+
+  shippingId    String        @unique                          // FK unique vers ShippingInfo.id (one-to-one)
+  shipping      ShippingInfo  @relation("OrderShipping", fields: [shippingId], references: [id]) // Détails de la livraison
+
+  billingId     String        @unique                          // FK unique vers BillingInfo.id (one-to-one)
+  billing       BillingInfo   @relation("OrderBilling", fields: [billingId], references: [id]) // Détails de la facturation
+
+  history       OrderEvent[]                                    // Historique des événements de la commande
+  invoiceUrl    String?                                        // URL de la facture PDF (optionnel)
+  internalNote  String?                                        // Note interne admin (optionnel)
+  tags          OrderTag[]                                     // Étiquettes personnalisées
+  createdAt     DateTime      @default(now())                  // Date de création
+  updatedAt     DateTime      @updatedAt                       // Date de mise à jour
+  cancelledAt   DateTime?                                      // Date d'annulation (optionnel)
+  refundedAt    DateTime?                                      // Date de remboursement (optionnel)
+
+  @@map("orders")                                          // Table SQL "orders"
+  @@index([userId], name: "idx_order_userId")              // Index sur userId
+  @@index([paymentId], name: "idx_order_paymentId")        // Index sur paymentId
+  @@index([shippingId], name: "idx_order_shippingId")      // Index sur shippingId
+}
+
+model OrderItem {                                               // Modèle représentant un article dans une commande
+  id             String        @id @default(uuid())           // Clé primaire : UUID
+  orderId        String                                        // FK vers Order.id
+  order          Order         @relation(fields: [orderId], references: [id]) // Relation vers la commande
+  productId      String                                        // Identifiant du produit
+  productName    String                                        // Nom du produit au moment de l'achat
+  sku            String                                        // SKU / référence produit
+  quantity       Int                                           // Quantité commandée
+  unitPrice      Float                                         // Prix unitaire
+  totalPrice     Float                                         // Prix total (unitPrice * quantity)
+  variantOptions String[]                                      // Options de variante (ex: ["Taille: M", "Couleur: Rouge"])
+  refundStatus   RefundStatus  @default(none)                  // Statut remboursement (enum)
+  returnEligible Boolean?      @default(true)                  // Éligibilité au retour
+
+  @@map("order_items")                                     // Table SQL "order_items"
+  @@index([orderId], name: "idx_orderitem_orderId")       // Index sur orderId
+  @@index([productId], name: "idx_orderitem_productId")   // Index sur productId
+}
+
+enum RefundStatus {                                            // Enum pour le statut de remboursement
+  none                                                           // Aucun remboursement
+  requested                                                      // Remboursement demandé
+  refunded                                                       // Remboursé
+}
+
+enum OrderStatus {                                             // Enum pour la progression de la commande
+  pending                                                         // En attente
+  paid                                                            // Payée
+  processing                                                      // En cours de traitement
+  shipped                                                         // Expédiée
+  delivered                                                       // Livrée
+  cancelled                                                       // Annulée
+  refunded                                                        // Remboursée
+  return_requested                                                // Retour demandé
+  return_approved                                                 // Retour approuvé
+}
+
+model Payment {                                                 // Modèle des informations de paiement
+  id             String        @id @default(uuid())           // Clé primaire : UUID
+  method         String                                        // Méthode (ex: Stripe, PayPal)
+  transactionId  String?                                       // ID de transaction externe
+  status         PaymentStatus                                // Statut du paiement (enum)
+  paidAt         DateTime?                                     // Date de paiement
+  refundedAmount Float?                                        // Montant remboursé (optionnel)
+
+  order          Order?        @relation("OrderPayment")     // Relation inverse vers Order
+
+  @@map("payments")                                       // Table SQL "payments"
+  @@index([transactionId], name: "idx_payment_transactionId") // Index sur transactionId
+}
+
+enum PaymentStatus {                                          // Enum des statuts de paiement
+  paid                                                           // Payé
+  pending                                                        // En attente
+  failed                                                         // Échoué
+  refunded                                                       // Remboursé
+}
+
+model ShippingInfo {                                           // Modèle des informations de livraison
+  id                String          @id @default(uuid())    // Clé primaire : UUID
+  method            String                                  // Transporteur ou point relais
+  trackingNumber    String?                                 // Numéro de suivi
+  status            ShippingStatus                          // Statut livraison (enum)
+  shippedAt         DateTime?                                // Date d'expédition
+  deliveredAt       DateTime?                                // Date de livraison
+  estimatedDelivery DateTime?                                // Date estimée
+  addressId         String          @unique                        // FK vers Address.id
+  address           Address         @relation("UserShippingInfo", fields: [addressId], references: [id]) // Adresse de livraison
+  order             Order?          @relation("OrderShipping") // Relation inverse vers Order
+
+  @@map("shipping_infos")                               // Table SQL "shipping_infos"
+  @@index([addressId], name: "idx_shippinginfo_addressId") // Index sur addressId
+}
+
+enum ShippingStatus {                                         // Enum des statuts de livraison
+  pending                                                        // En attente
+  shipped                                                        // Expédiée
+  delivered                                                      // Livrée
+  returned                                                       // Retournée
+}
+
+model BillingInfo {                                            // Modèle des informations de facturation
+  id                String          @id @default(uuid())    // Clé primaire : UUID
+  method            String                                  // Méthode de facturation (ex: Stripe, PayPal)
+  transactionId     String?                                 // ID de transaction externe
+  status            BillingStatus                            // Statut de facturation (enum)
+  billedAt          DateTime?                                // Date de facturation
+  amount            Float                                   // Montant facturé
+  addressId         String          @unique                        // FK vers Address.id
+  address           Address         @relation("UserBillingInfo", fields: [addressId], references: [id]) // Adresse de facturation
+  order             Order?          @relation("OrderBilling") // Relation inverse vers Order
+
+  @@map("billing_infos")                                // Table SQL "billing_infos"
+  @@index([transactionId], name: "idx_billinginfo_transactionId") // Index sur transactionId
+}
+
+enum BillingStatus {                                          // Enum des statuts de facturation
+  pending                                                        // En attente
+  paid                                                           // Payée
+  failed                                                         // Échouée
+}
+
+model OrderEvent {                                             // Historique des événements d'une commande
+  id         String      @id @default(uuid())                 // Clé primaire : UUID
+  orderId    String                                            // FK vers Order.id
+  order      Order       @relation(fields: [orderId], references: [id]) // Commande liée
+  status     OrderStatus                                   // Statut enregistré
+  note       String?                                         // Note descriptive (optionnel)
+  updatedBy  String?                                        // Utilisateur ou système ayant effectué la mise à jour
+  timestamp  DateTime    @default(now())                     // Date de l'événement
+
+  @@map("order_events")                                // Table SQL "order_events"
+  @@index([orderId], name: "idx_orderevent_orderId") // Index sur orderId
+}
+
+model RefundRequest {                                         // Demandes de remboursement
+  id             String      @id @default(uuid())           // Clé primaire : UUID
+  orderId        String                                        // FK vers Order.id
+  reason         String                                        // Motif du remboursement
+  status         RefundRequestStatus                           // Statut (enum)
+  requestedAt    DateTime                                      // Date de la requête
+  processedAt    DateTime?                                     // Date de traitement (optionnel)
+  refundedAmount Float?                                        // Montant remboursé (optionnel)
+  processedBy    String?                                       // Utilisateur ayant traité
+
+  @@map("refund_requests")                             // Table SQL "refund_requests"
+  @@index([orderId], name: "idx_refundrequest_orderId") // Index sur orderId
+}
+
+enum RefundRequestStatus {                              // Enum des statuts de refund request
+  pending                                                        // En attente
+  approved                                                       // Approuvé
+  rejected                                                       // Rejeté
+  refunded                                                       // Remboursé
+}
+
+model ReturnLog {                                            // Logs de retour de produits
+  id                String   @id @default(uuid())          // Clé primaire : UUID
+  orderId           String                                     // FK vers Order.id
+  items             String[]                                  // Liste des SKUs retournés
+  reason            String                                    // Motif du retour
+  returnStatus      ReturnStatus                              // Statut (enum)
+  returnRequestedAt DateTime                                 // Date de la requête
+  returnReceivedAt  DateTime?                                // Date de réception (optionnel)
+  processedBy       String?                                   // Utilisateur ayant traité
+
+  @@map("return_logs")                                 // Table SQL "return_logs"
+  @@index([orderId], name: "idx_returnlog_orderId")  // Index sur orderId
+}
+
+enum ReturnStatus {                                       // Enum des statuts de retour
+  pending                                                        // En attente
+  received                                                       // Reçu
+  rejected                                                       // Rejeté
+}
+
+model InternalNote {                                        // Notes internes sur une commande
+  id         String   @id @default(uuid())                 // Clé primaire : UUID
+  orderId    String                                        // FK vers Order.id
+  note       String                                        // Contenu de la note
+  createdAt  DateTime @default(now())                      // Date de création
+  createdBy  String                                        // Utilisateur ayant créé
+
+  @@map("internal_notes")                           // Table SQL "internal_notes"
+  @@index([orderId], name: "idx_internalnote_orderId")   // Index sur orderId
+}
+
+model OrderTag {                                           // Étiquettes personnalisées pour commandes
+  id         String   @id @default(uuid())                // Clé primaire : UUID
+  orderId    String                                        // FK vers Order.id
+  tag        String                                        // Valeur de l'étiquette
+  order      Order    @relation(fields: [orderId], references: [id]) // Commande liée
+  createdAt  DateTime @default(now())                      // Date de création
+  createdBy  String                                        // Utilisateur ayant créé
+
+  @@map("order_tags")                                // Table SQL "order_tags"
+  @@index([orderId], name: "idx_ordertag_orderId") // Index sur orderId
+  @@index([tag], name: "idx_ordertag_tag")         // Index sur le tag
+}
