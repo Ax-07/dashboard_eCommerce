@@ -52,7 +52,7 @@ model Option {                                          // Modèle option (ex: t
 model OptionValue {                                       // Valeur d'une option (ex: "M", "Rouge")
   id            String       @id @default(uuid())    // Clé primaire : UUID
   name          String                              // Libellé de la valeur
-  quantity      Int?                                // Quantité en stock pour cette valeur
+  quantity      Int?                                // Quantité 
   unit          String?                             // Unité de mesure (ex: g, ml)
   unitPrice     Float?                              // Prix unitaire par unité
   totalPrice    Float?                              // Prix total pour cette valeur
