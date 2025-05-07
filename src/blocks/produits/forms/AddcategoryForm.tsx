@@ -20,10 +20,8 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/src/components/ui/dialog";
 import { Plus } from "lucide-react";
 import {
@@ -36,13 +34,15 @@ import {
 const CreateCategorySchema = z.object({
   name: z.string().min(1, { message: "Le nom est requis" }),
   description: z.string().optional(),
+  parentId: z.string().optional(), // ID du parent si nécessaire
 });
 
 type CreateCategoryInput = z.infer<typeof CreateCategorySchema>;
 interface AddCategoryProps {
+  parentId?: string; // ID du parent si nécessaire
   className?: string;
 }
-export const AddCategory: React.FC<AddCategoryProps> = ({ className }) => {
+export const AddCategory: React.FC<AddCategoryProps> = ({ parentId, className }) => {
   const form = useForm<CreateCategoryInput>({
     resolver: zodResolver(CreateCategorySchema),
     defaultValues: { name: "", description: "" },
@@ -72,6 +72,21 @@ export const AddCategory: React.FC<AddCategoryProps> = ({ className }) => {
     <div onClick={(e) => e.stopPropagation()} className={className}>
         <Form {...form} >
           <form className="space-y-6">
+            {/* ID de la catégorie parente (optionnelle) */}
+            {parentId && <FormField
+              control={form.control}
+              name="parentId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Catégorie parente</FormLabel>
+                  <FormControl>
+                    <Input placeholder="ID de la catégorie parente" {...field} defaultValue={parentId} disabled/>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />}
+            {/* Nom (obligatoire) */}
             <FormField
               control={form.control}
               name="name"
@@ -113,7 +128,10 @@ export const AddCategory: React.FC<AddCategoryProps> = ({ className }) => {
   );
 };
 
-export const BtnAddCategory = () => {
+interface BtnAddCategoryProps {
+  parentId?: string; // ID du parent si nécessaire
+}
+export const BtnAddCategory: React.FC<BtnAddCategoryProps> = ({parentId}) => {
     const [hoverOpen, setHoverOpen] = useState(false)
     const [dialogOpen, setDialogOpen] = useState(false)
   
@@ -158,7 +176,7 @@ export const BtnAddCategory = () => {
                     catégorie.
                     </DialogDescription>
                 </DialogHeader>
-              <AddCategory className="border-none" />
+              <AddCategory parentId={parentId} className="border-none" />
             </DialogContent>
           </Dialog>
         </>
