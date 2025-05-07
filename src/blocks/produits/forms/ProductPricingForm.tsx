@@ -43,6 +43,7 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
     name: "options",
     control,
   });
+
   return (
     <div className={cn("", className)}>
       <p className="text-sm text-muted-foreground">
@@ -58,7 +59,14 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
             <FormItem>
               <FormLabel>Prix unitaire (€)</FormLabel>
               <FormControl>
-                <Input type="number" step="0.01" {...field} />
+                <Input
+                  type="number"
+                  step="0.01"
+                  {...field}
+                  onChange={(e) => {
+                    field.onChange(e);
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -74,7 +82,9 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
               <FormLabel>Unité</FormLabel>
               <FormControl>
                 <Select
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                  }}
                   value={field.value}
                   defaultValue="g"
                 >
@@ -104,7 +114,14 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
           <FormItem>
             <FormLabel>Prix (€)</FormLabel>
             <FormControl>
-              <Input type="number" step="0.01" {...field} />
+              <Input
+                type="number"
+                step="0.01"
+                {...field}
+                onChange={(e) => {
+                  field.onChange(e);
+                }}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -117,7 +134,7 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
           <h3 className="font-medium">Options d'achat / vente</h3>
           <Button
             type="button"
-            onClick={() =>
+            onClick={() => {
               append({
                 name: "",
                 values: [
@@ -129,8 +146,8 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
                     totalPrice: 0,
                   },
                 ],
-              })
-            }
+              });
+            }}
           >
             Ajouter un groupe
           </Button>
@@ -148,7 +165,9 @@ const ProductPricingForm: React.FC<ProductPricingFormProps> = ({
                 <Button
                   variant="destructive"
                   type="button"
-                  onClick={() => remove(i)}
+                  onClick={() => {
+                    remove(i);
+                  }}
                 >
                   Supprimer
                 </Button>
@@ -193,29 +212,37 @@ function ValuesTable({
           />
           <Input
             type="number"
+            min={0}
             placeholder="Quantité"
             {...register(`options.${nestIndex}.values.${idx}.quantity`)}
           />
           <Input
             placeholder="Unité"
             {...register(`options.${nestIndex}.values.${idx}.unit`)}
+
           />
           <Input
             type="number"
             step="0.01"
+            min={0}
             placeholder="Prix unitaire"
             {...register(`options.${nestIndex}.values.${idx}.unitPrice`)}
+
           />
           <Input
             type="number"
             step="0.01"
+            min={0}
             placeholder="Prix total"
             {...register(`options.${nestIndex}.values.${idx}.totalPrice`)}
+
           />
           <Button
             variant="destructive"
             type="button"
-            onClick={() => remove(idx)}
+            onClick={() => {
+              remove(idx)
+            }}
           >
             ×
           </Button>
