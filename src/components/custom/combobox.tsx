@@ -18,49 +18,30 @@ import {
   PopoverTrigger,
 } from "@/src/components/ui/popover";
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
-
 interface ComboboxProps {
   options: { value: string; label: string; description: string }[];
+  disabled?: boolean;
   placeholder?: string;
   buttonLabel?: string;
   commandEmpty?: string;
+  defaultValue?: string;
   onSelect?: (selected: string) => void;
 }
 
 const Combobox: React.FC<ComboboxProps> = ({
   options,
+  disabled,
   placeholder,
   buttonLabel,
   commandEmpty,
+  defaultValue,
   onSelect,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState(defaultValue);
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild disabled={disabled}>
         <Button
           variant="ghost"
           role="combobox"
