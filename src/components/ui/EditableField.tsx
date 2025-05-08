@@ -8,7 +8,6 @@ import Combobox from "./ComboBox";
 import ImagePicker from "./image-picker";
 import React from "react";
 import { uploadImageAction } from "@/src/lib/database/vercel-blob/vercel-blob.action";
-import { FeatureName } from "@/src/lib/features/features.validator";
 import { Label } from "./label";
 import { Checkbox } from "./checkbox";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -510,7 +509,7 @@ export const EditablePicturesField = ({
 
 interface Feature {
   id: string;
-  name: FeatureName;
+  name: any;
   description: string;
 }
 
