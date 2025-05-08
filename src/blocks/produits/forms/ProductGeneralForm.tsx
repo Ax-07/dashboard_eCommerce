@@ -13,6 +13,7 @@ import { cn } from "@/src/utils/tailwind_cn";
 import { Textarea } from "@/src/components/ui/textarea";
 import Combobox from "@/src/components/custom/combobox";
 import { BtnAddCategory } from "./AddcategoryForm";
+import ImagePicker from "@/src/components/ui/image-picker";
 
 
 const categories = [
@@ -214,6 +215,7 @@ const ProductGeneralForm: React.FC<ProductGeneralFormProps> = ({
       )}
 
       {/* Media */}
+      <ImagePicker filesUrl={[]} onFileChange={()=> console.log("on file change")} onDeleteFileUrl={()=> console.log("on delete file")}/>
     </div>
   );
 };
