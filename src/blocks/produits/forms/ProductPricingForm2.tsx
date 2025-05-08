@@ -119,7 +119,7 @@ const ProductPricingForm2: React.FC<ProductPricingFormProps> = ({
     <div className={cn("space-y-6", className)}>
       {groups.map((grp, gi) => (
         <div key={grp.id}>
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-between items-start mb-2">
             <FormField
               control={control}
               name={`options.${gi}.name`}
@@ -132,9 +132,9 @@ const ProductPricingForm2: React.FC<ProductPricingFormProps> = ({
                 </FormItem>
               )}
             />
-            <Button variant="destructive" onClick={() => removeGroup(gi)}>
+            {gi >= 2 && <Button variant="destructive" onClick={() => removeGroup(gi)}>
               Supprimer
-            </Button>
+            </Button>}
           </div>
           <OptionValuesTable
             groupIndex={gi}
