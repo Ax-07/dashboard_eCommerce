@@ -18,11 +18,9 @@ export const SuggestField: React.FC<SuggestFieldProps> = ({ form, controlPath })
   const value = form.getValues(controlPath as keyof ProductInput) as string;
 
   // on extrait product name, quantity, unit depuis le form
-  const [productName, quantity, unit] = useMemo(() => [
-    form.getValues("name"),
-    form.getValues(controlPath.replace(".name", ".quantity") as keyof ProductInput),
-    form.getValues(controlPath.replace(".name", ".unit") as keyof ProductInput),
-  ], [form, controlPath]);
+    const productName = form.watch("name")
+    const quantity = form.watch(controlPath.replace(".name", ".quantity") as keyof ProductInput)
+    const unit = form.watch(controlPath.replace(".name", ".unit") as keyof ProductInput)
 
   // génère dynamiquement les suggestions
   const suggestions = useMemo(
@@ -42,19 +40,16 @@ export const SuggestField: React.FC<SuggestFieldProps> = ({ form, controlPath })
         <FormItem>
           <FormControl>
             <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
+              <PopoverTrigger className="w-full rounded-none">
                 <Input
+                    className="w-full rounded-none"
                   {...field}
                   placeholder="Libellé (ex: og-kush-100g)"
                 />
               </PopoverTrigger>
               <PopoverContent className="p-0 w-[300px]" align="start">
                 <Command>
-                  {/* <CommandInput placeholder="Choisir un libellé…" className="h-8" /> */}
-                  <Input
-                  {...field}
-                  placeholder="Libellé (ex: og-kush-100g)"
-                />
+                  <CommandInput placeholder="Choisir un libellé…" className="h-8" />
                   <CommandList>
                     <CommandEmpty>Aucune suggestion</CommandEmpty>
                     <CommandGroup>
