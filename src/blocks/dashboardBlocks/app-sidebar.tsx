@@ -74,6 +74,7 @@ const data = {
           url: "/produits",
           icon: Box,
           items: [
+            { title: "Ajouter un produit", url: "/produits/ajouter" }, // Ajouter un nouveau produit
             { title: "Catalogue", url: "/produits/catalogue" }, // Lien vers le catalogue
             { title: "Inventaire", url: "/produits/inventaire" }, // Gestion de l'inventaire
             { title: "Collections", url: "/produits/collections" }, // Gestion des collections
