@@ -63,7 +63,7 @@ export default function RootLayout({
                   position="top-center"
                   toastOptions={{ duration: 2000 }}
                 />
-                <main className="flex flex-1 flex-col gap-4 p-4 pt-0 h-full">
+                <main className="flex flex-1 flex-col h-full">
                   {children}
                 </main>
               </SidebarProvider>
