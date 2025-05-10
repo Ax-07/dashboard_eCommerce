@@ -6,7 +6,10 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
+  Moon,
+  SettingsIcon,
   Sparkles,
+  Sun,
 } from "lucide-react";
 
 import {
@@ -20,7 +23,11 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu";
 import {
@@ -33,10 +40,12 @@ import { User } from "next-auth";
 import Link from "next/link";
 import { useAuth } from "@/src/hooks/useAuth";
 import { LogoutButton } from "@/src/components/auth/AuthButtons";
+import { useTheme } from "next-themes";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
   const { session, loading } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   if (loading || !session || !session.user)
     return (
@@ -49,7 +58,8 @@ export function NavUser() {
       </SidebarMenu>
     );
 
-  const user = session.user as User; console.log(user.image);
+  const user = session.user as User;
+  console.log(user.image);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -96,24 +106,44 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger className="flex items-center justify-between">
+                  {"Themes"}
+                  {theme === "light" && (
+                    <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  )}
+                  {theme === "dark" && (
+                    <Moon className="size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  )}
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem onClick={() => setTheme("light")}>
+                      Light
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("dark")}>
+                      Dark
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("system")}>
+                      System
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
-                <Link href="/account">My Account</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
+                <Link href="/account">Mon compte</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />
-                Notifications
+                <Link href="/account/notifications">Notifications</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <SettingsIcon />
+                <Link href="/account/settings">Paramètres</Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
