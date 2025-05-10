@@ -24,7 +24,7 @@ interface ComboboxProps {
   placeholder?: string;
   buttonLabel?: string;
   commandEmpty?: string;
-  defaultValue?: string;
+  value?: string;
   onSelect?: (selected: string) => void;
 }
 
@@ -34,11 +34,11 @@ const Combobox: React.FC<ComboboxProps> = ({
   placeholder,
   buttonLabel,
   commandEmpty,
-  defaultValue,
+  value,
   onSelect,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(defaultValue);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild disabled={disabled}>
@@ -60,12 +60,11 @@ const Combobox: React.FC<ComboboxProps> = ({
           <CommandList>
             <CommandEmpty>{commandEmpty}</CommandEmpty>
             <CommandGroup>
-              {options.map((option) => (
+              {options.map((option, index) => (
                 <CommandItem
-                  key={option.value}
+                  key={index}
                   value={option.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                     onSelect?.(currentValue === value ? "" : currentValue);
                   }}
