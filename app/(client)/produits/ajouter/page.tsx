@@ -1,11 +1,12 @@
+import { ProductForm } from "@/src/blocks/produits/addProduct/ProductForm";
 import React from "react";
-import AddProductForm from "@/src/blocks/produits/addProduct/AddProductForm";
+import { DashboardShell } from "@/src/blocks/dashboardBlocks/DashboardShell";
 
 const AjouterPage: React.FC = () => {
   return (
-    <section>
-      <AddProductForm />
-    </section>
+    <DashboardShell>
+      <ProductForm className="w-full"/>
+    </DashboardShell>
   );
 };
 
