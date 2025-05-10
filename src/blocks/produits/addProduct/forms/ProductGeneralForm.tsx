@@ -1,5 +1,5 @@
 // @/src/blocks/produits/forms/ProductGeneralForm.tsx
-"use clent";
+"use client";
 
 import React from "react";
 import {
@@ -17,63 +17,71 @@ import { Textarea } from "@/src/components/ui/textarea";
 import Combobox from "@/src/components/custom/combobox";
 import { BtnAddCategory } from "./AddcategoryForm";
 import ImagePicker from "@/src/components/ui/image-picker";
+import { getCategoriesWithSubcategories, PRODUCTS } from "@/src/mock";
 
-const categories = [
-  {
-    id: "fleurs",
-    name: "Fleurs",
-    subCategories: [
-      { id: "greenhouse", name: "Greenhouse" },
-      { id: "glasshouse", name: "Glasshouse" },
-      { id: "indoor", name: "Indoor" },
-      { id: "outdoor", name: "Outdoor" },
-    ],
-  },
-  {
-    id: "huiles",
-    name: "Huiles",
-    subCategories: [
-      { id: "huiles-essentielles", name: "Huiles essentielles" },
-      { id: "huiles-cosmetiques", name: "Huiles cosmétiques" },
-      { id: "huiles-alimentaires", name: "Huiles alimentaires" },
-    ],
-  },
-  {
-    id: "resines",
-    name: "Résines",
-    subCategories: [
-      { id: "hash", name: "Hash" },
-      { id: "rosin", name: "Rosin" },
-      { id: "live-resin", name: "Live resin" },
-    ],
-  },
-  {
-    id: "eliquides",
-    name: "E-liquides",
-    subCategories: [
-      { id: "eliquides-nicotine", name: "E-liquides avec nicotine" },
-      { id: "eliquides-sans-nicotine", name: "E-liquides sans nicotine" },
-    ],
-  },
-  {
-    id: "graines",
-    name: "Graines",
-    subCategories: [
-      { id: "feminisees", name: "Féminisées" },
-      { id: "regulars", name: "Regulars" },
-    ],
-  },
-  {
-    id: "accessoires",
-    name: "Accessoires",
-    subCategories: [
-      { id: "fumer", name: "Fumer" },
-      { id: "vaporiser", name: "Vaporiser" },
-      { id: "cultiver", name: "Cultiver" },
-    ],
-  },
-];
+// const categories = [
+//   {
+//     id: "fleurs",
+//     name: "Fleurs",
+//     slug: "fleurs",
+//     subCategories: [
+//       { id: "greenhouse", name: "Greenhouse" },
+//       { id: "glasshouse", name: "Glasshouse" },
+//       { id: "indoor", name: "Indoor" },
+//       { id: "outdoor", name: "Outdoor" },
+//     ],
+//   },
+//   {
+//     id: "huiles",
+//     name: "Huiles",
+//     slug: "huiles",
+//     subCategories: [
+//       { id: "huiles-essentielles", name: "Huiles essentielles" },
+//       { id: "huiles-cosmetiques", name: "Huiles cosmétiques" },
+//       { id: "huiles-alimentaires", name: "Huiles alimentaires" },
+//     ],
+//   },
+//   {
+//     id: "resines",
+//     name: "Résines",
+//     slug: "resines",
+//     subCategories: [
+//       { id: "hash", name: "Hash" },
+//       { id: "rosin", name: "Rosin" },
+//       { id: "live-resin", name: "Live resin" },
+//     ],
+//   },
+//   {
+//     id: "eliquides",
+//     name: "E-liquides",
+//     slug: "eliquides",
+//     subCategories: [
+//       { id: "eliquides-nicotine", name: "E-liquides avec nicotine" },
+//       { id: "eliquides-sans-nicotine", name: "E-liquides sans nicotine" },
+//     ],
+//   },
+//   {
+//     id: "graines",
+//     name: "Graines",
+//     slug: "graines",
+//     subCategories: [
+//       { id: "feminisees", name: "Féminisées" },
+//       { id: "regulars", name: "Regulars" },
+//     ],
+//   },
+//   {
+//     id: "accessoires",
+//     name: "Accessoires",
+//     slug: "accessoires",
+//     subCategories: [
+//       { id: "fumer", name: "Fumer" },
+//       { id: "vaporiser", name: "Vaporiser" },
+//       { id: "cultiver", name: "Cultiver" },
+//     ],
+//   },
+// ];
 
+const categories = getCategoriesWithSubcategories(PRODUCTS);
 interface ProductGeneralFormProps {
   form: UseFormReturn<ProductInput>;
   control: Control<ProductInput>;
@@ -89,11 +97,15 @@ const ProductGeneralForm: React.FC<ProductGeneralFormProps> = ({
 }) => {
   const { watch } = form;
 
-  const selectedCategoryId = watch("categoryId");
-  const currentCategory = categories.find(
-    (cat) => cat.id === selectedCategoryId
-  );
+  const selectedCategoryId = watch("categoryId"); console.log("selectedCategoryId", selectedCategoryId);
+  const currentCategory = categories.find((cat) => {
+    return cat.id === selectedCategoryId
+  }
+  ); console.log("currentCategory", currentCategory);
   const subCategories = currentCategory?.subCategories ?? [];
+  const currentSubCategory = subCategories.find((sub) => {
+   return sub.id === watch("subCategoryId");
+  }); console.log("currentSubCategory", currentSubCategory);
     
   return (
     <div className={cn("", className)}>
@@ -159,11 +171,11 @@ const ProductGeneralForm: React.FC<ProductGeneralFormProps> = ({
               <FormControl>
                 <Combobox
                   options={categories.map((category) => ({
-                    value: category.id,
+                    value: category.id!,
                     label: category.name,
                     description: category.name,
                   }))}
-                  defaultValue={field.value}
+                  value={field.value}
                   onSelect={(value) => {
                     field.onChange(value);
                   }}
@@ -194,12 +206,12 @@ const ProductGeneralForm: React.FC<ProductGeneralFormProps> = ({
                 <FormControl>
                   <Combobox
                     options={subCategories.map((subCategory) => ({
-                      value: subCategory.id,
+                      value: subCategory.id!,
                       label: subCategory.name,
                       description: subCategory.name,
                     }))}
                     disabled={subCategories.length === 0}
-                    defaultValue={field.value}
+                    value={field.value}
                     onSelect={(value) => {
                       field.onChange(value);
                     }}
