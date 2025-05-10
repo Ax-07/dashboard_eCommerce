@@ -1,0 +1,55 @@
+.textAnimation {
+    width: 100%;
+    height: fit-content;
+    margin-top: 50px;
+}
+
+.textanim {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    // overflow: hidden;
+    // width: 365px;
+}
+.letter {
+    opacity: 0;
+    min-width: 12px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+
+    @media screen and (max-width: $media-query-medium) {
+        min-width: 10px;
+    }
+    @media screen and (max-width: $media-query-small) {
+        min-width: 8px;
+    }
+
+}
+
+@for $i from 0 through 14 {
+    @keyframes moveIn#{$i} {
+        0% {
+          transform: translate(-50%,0%);
+          opacity: 0;
+          filter: blur(0px);
+          background: rgba($color: #fff, $alpha: 0);
+
+        }
+        75% {
+            filter: blur(20px);
+            background: rgba($color: #fff, $alpha: 1.0);
+
+        }
+        100% {
+          position: relative;
+          transform: translate(0, 0);
+          opacity: 1;
+          filter: blur(0px);
+          background: rgba($color: #fff, $alpha: 0);
+
+        }
+    }
+    .letter-#{$i} {
+        animation: moveIn#{$i} 0.15s ease-in #{calc($i / 7) + 0.25}s forwards;
+    }
+}
