@@ -28,6 +28,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/src/components/ui/pagination";
+import Link from "next/link";
 
 // const cols = [
 //   "SKU", // Stock Keeping Unit, un identifiant unique pour chaque produit.
@@ -156,7 +157,7 @@ const Catalogue = () => {
   const endItem = Math.min(startIdx + pagedProducts.length, totalItems);
 
   return (
-    <section className="relative flex-1 justify-between flex flex-col p-4">
+    <>
       {/* Recherche et Filtre */}
       <div>
       <div className="flex items-center mb-4 space-x-2">
@@ -207,10 +208,12 @@ const Catalogue = () => {
         >
           Réinitialiser les filtres
         </Button>
-        <Button variant="outline" className="ml-auto">
-          <Plus className="h-4 w-4" />
-          Ajouter un produit
+          <Link href="/produits/ajouter" className="ml-auto">
+        <Button variant="outline">
+            <Plus className="h-4 w-4" />
+            Ajouter un produit
         </Button>
+          </Link>
         <ComboboxCheckbox
           options={cols.map((col) => col.value)}
           selectedOptions={visibleCols}
@@ -222,6 +225,8 @@ const Catalogue = () => {
             }
           }}
           icon={<Columns2Icon className="h-4 w-4" />}
+          variant={"outline"}
+          size={"icon"}
         />
       </div>
       <Table>
@@ -308,9 +313,11 @@ const Catalogue = () => {
                   }
                 })}
               <TableHead className="">
-                <Button variant="ghost" className="mr-2">
-                  <PenBox className="h-4 w-4" />
-                </Button>
+                <Link href={`/produits/catalogue/${product.id}`}>
+                  <Button variant="ghost" className="mr-2">
+                    <PenBox className="h-4 w-4" />
+                  </Button>
+                </Link>
                 <Button variant="ghost" className="mr-2 hover:bg-destructive">
                   <Trash2 className="h-4 w-4" />
                 </Button>
@@ -393,7 +400,7 @@ const Catalogue = () => {
           </span>
         </PaginationContent>
       </Pagination>
-    </section>
+    </>
   );
 };
 
