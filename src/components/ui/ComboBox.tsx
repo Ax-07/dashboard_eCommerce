@@ -10,8 +10,9 @@ interface ComboboxProps {
   options: { value: string; label: string, description: string }[];
   placeholder?: string;
   onSelect?: (selected: string) => void;
-  initialDisplayCount: number;
+  initialDisplayCount?: number;
   children?: React.ReactNode;
+  className?: string;
 }
 
 interface ComboboxHeaderProps {
@@ -49,7 +50,7 @@ type ComboboxComponent = React.FC<ComboboxProps> & {
   Item: React.FC<ComboboxItemProps>;
 };
 
-const Combobox: ComboboxComponent = ({ options, placeholder, onSelect, initialDisplayCount }) => {
+const Combobox: ComboboxComponent = ({ options, placeholder, onSelect, initialDisplayCount, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,7 +122,7 @@ const Combobox: ComboboxComponent = ({ options, placeholder, onSelect, initialDi
     <div
       id="combobox"
       ref={containerRef}
-      className={cn(`relative flex py-1 px-3 dark:bg-input/30 border border-input w-full rounded-sm text-sm h-9`)}
+      className={cn(`relative flex py-1 px-3 dark:bg-input/30 border border-input w-full rounded-sm text-sm h-9`, className)}
     >
       <Combobox.Header
         inputValue={inputValue}
