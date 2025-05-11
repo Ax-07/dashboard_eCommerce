@@ -9,6 +9,7 @@ import {
   CommandList,
 } from "../ui/command";
 import { Checkbox } from "../ui/checkbox";
+import { cn } from "@/src/utils/tailwind_cn";
 
 interface ComboboxCheckboxProps {
   options: string[]; // Liste des options à afficher dans le combobox
@@ -19,6 +20,7 @@ interface ComboboxCheckboxProps {
   icon?: React.ReactNode; // Icône à afficher à côté de l'étiquette
   variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined; // Variante du bouton (par exemple, "outline", "ghost", etc.)
   size?: "default" | "icon" | "sm" | "lg" | null | undefined; // Taille du bouton (par exemple, "sm", "lg", etc.)
+  className?: string; // Classes CSS supplémentaires à appliquer au bouton
 }
 const ComboboxCheckbox: React.FC<ComboboxCheckboxProps> = ({
   options,
@@ -29,10 +31,11 @@ const ComboboxCheckbox: React.FC<ComboboxCheckboxProps> = ({
   icon,
   variant = "outline",
   size = "default",
+  className
 }) => {
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className={cn("", className)}>
         <Button variant={variant} size={size} className="">
           {icon && <span className="">{icon}</span>}
           {label && <span>{label}</span>}
