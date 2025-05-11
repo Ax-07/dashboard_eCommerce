@@ -26,6 +26,7 @@ interface ComboboxProps {
   commandEmpty?: string;
   value?: string;
   onSelect?: (selected: string) => void;
+  className?: string;
 }
 
 const Combobox: React.FC<ComboboxProps> = ({
@@ -36,17 +37,21 @@ const Combobox: React.FC<ComboboxProps> = ({
   commandEmpty,
   value,
   onSelect,
+  className,
 }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} >
       <PopoverTrigger asChild disabled={disabled}>
         <Button
           variant="ghost"
           role="combobox"
           aria-expanded={open}
-          className={cn("w-[300px] justify-between border", `${open && "border-ring ring-ring/50 ring-[3px]"}`)}
+          className={cn(
+            "w-[300px] justify-between border",
+            "data-[state=open]:ring-ring/50 data-[state=open]:ring-[3px]",
+            className)}
         >
           {value
             ? options.find((option) => option.value === value)?.label
@@ -58,7 +63,7 @@ const Combobox: React.FC<ComboboxProps> = ({
         <Command>
           <CommandInput placeholder={placeholder} className="h-9" />
           <CommandList>
-            <CommandEmpty>{commandEmpty}</CommandEmpty>
+            <CommandEmpty>{commandEmpty || ""}</CommandEmpty>
             <CommandGroup>
               {options.map((option, index) => (
                 <CommandItem
