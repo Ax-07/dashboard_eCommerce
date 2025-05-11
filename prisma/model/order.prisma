@@ -13,7 +13,8 @@ model Order {                                                   // Modèle repr�
   taxAmount     Float                                          // Montant des taxes
   shippingCost  Float                                          // Frais de livraison
   discount      Float?                                         // Remise appliquée (optionnel)
-  status        OrderStatus                                   // Statut de la commande (enum)
+  type          OrderType                                      // Type de commande (ex: "standard", "abonnement", "vente flash", "retour", etc.)
+  status        OrderStatus                                    // Statut de la commande (enum)
 
   paymentId     String        @unique                          // FK unique vers Payment.id (one-to-one)
   payment       Payment       @relation("OrderPayment", fields: [paymentId], references: [id]) // Détails du paiement
@@ -64,6 +65,16 @@ enum RefundStatus {                                            // Enum pour le s
   refunded                                                       // Remboursé
 }
 
+enum OrderType {                                             // Enum pour le type de commande
+  standard                                                       // Commande standard
+  subscription                                                   // Abonnement
+  sale                                                           // Vente
+  flash_sale                                                     // Vente flash
+  pre_order                                                      // Pré-commande
+  back_order                                                     // Commande en attente de réapprovisionnement
+  return                                                       // Retour
+}
+
 enum OrderStatus {                                             // Enum pour la progression de la commande
   pending                                                         // En attente
   paid                                                            // Payée
@@ -71,6 +82,7 @@ enum OrderStatus {                                             // Enum pour la p
   shipped                                                         // Expédiée
   delivered                                                       // Livrée
   cancelled                                                       // Annulée
+  completed                                                       // Terminée
   refunded                                                        // Remboursée
   return_requested                                                // Retour demandé
   return_approved                                                 // Retour approuvé
