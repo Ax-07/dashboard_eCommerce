@@ -18,6 +18,7 @@ export const OrderTypeEnum = z.enum(["standard", "subscription", "sale", "flash_
 // Address schema (supposé défini ailleurs, à adapter si nécessaire)
 const AddressSchema = z.object({
   id: z.string().uuid(),
+  fullName: z.string(),
   street: z.string(),
   city: z.string(),
   postalCode: z.string(),
@@ -57,7 +58,7 @@ export const ShippingInfoSchema = z.object({
   carrier: z.string().nullable(),
   shippingCost: z.number().nonnegative(),
   insuranceAmount: z.number().nonnegative(),
-  insuranceStatus: z.enum(["none", "pending", "approved", "rejected"]),
+  insuranceStatus: z.boolean().optional().default(false),
   status: ShippingStatusEnum,
   shippedAt: z.date().nullable(),
   deliveredAt: z.date().nullable(),
