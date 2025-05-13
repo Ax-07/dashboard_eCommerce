@@ -14,7 +14,7 @@ export const PRODUCTS = [
   ...ELIQUIDS,
 ];
 
-export const ORDER = [
+export const ORDERS = [
   ...mockOrder
 ]
 
