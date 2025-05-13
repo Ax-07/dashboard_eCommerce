@@ -110,13 +110,6 @@ enum PaymentStatus {                                          // Enum des statut
   refunded                                                       // Remboursé
 }
 
-enum InsuranceStatus {                                     // Enum des statuts d'assurance
-  none                                                           // Aucune assurance
-  requested                                                      // Assurance demandée
-  approved                                                       // Assurance approuvée
-  declined                                                       // Assurance refusée
-}
-
 model ShippingInfo {                                           // Modèle des informations de livraison
   id                String          @id @default(uuid())    // Clé primaire : UUID
   method            String                                  // Transporteur ou point relais
@@ -124,8 +117,8 @@ model ShippingInfo {                                           // Modèle des in
   trackingUrl       String?                                 // URL de suivi
   carrier           String?                                 // Transporteur (ex: UPS, FedEx)
   shippingCost      Float                                   // Coût de la livraison
-  insuranceAmount   Float?                                 // Montant de l'assurance (optionnel)
-  insuranceStatus   InsuranceStatus                          // Statut de l'assurance (enum)
+  insuranceAmount   Float?                                  // Montant de l'assurance (optionnel)
+  insuranceStatus   Boolean                                 // Statut de l'assurance (activée/désactivée)
   status            ShippingStatus                          // Statut livraison (enum)
   shippedAt         DateTime?                                // Date d'expédition
   deliveredAt       DateTime?                                // Date de livraison
