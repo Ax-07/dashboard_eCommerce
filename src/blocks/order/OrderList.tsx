@@ -5,7 +5,6 @@ import ButtonSort from "@/src/components/custom/ButtonSort";
 import ComboboxCheckbox from "@/src/components/custom/comboboxCheckbox";
 import { Button } from "@/src/components/ui/button";
 import { Checkbox } from "@/src/components/ui/checkbox";
-import SearchInput from "@/src/components/ui/input-search";
 import {
   Table,
   TableBody,
@@ -14,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table";
-import { ORDER } from "@/src/mock";
+import { ORDERS } from "@/src/mock";
 import { sortValues } from "@/src/utils/sortValues";
 import { Columns2Icon, PenBox, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -30,7 +29,7 @@ const cols = [
   { value: "date", label: "Date" },
   { value: "type", label: "Type" },
   { value: "status", label: "Status" },
-//   { value: "actions", label: "" },
+  //   { value: "actions", label: "" },
 ];
 const statusFilter = [
   { id: "all", label: "Tous" },
@@ -124,7 +123,7 @@ const OrderList = () => {
     setSearchTerm(term);
   };
 
-  const order = ORDER;
+  const order = ORDERS;
   const filteredOrder = order.filter((o) => {
     // Extraction propre de la colonne à chercher
     const fieldValue = (() => {
@@ -377,11 +376,17 @@ const OrderList = () => {
                   .map((col, index) => {
                     switch (col.value) {
                       case "id":
-                        return <TableHead key={index}>{order.id}</TableHead>;
+                        return (
+                          <TableHead key={index}>
+                            <Link href={`/commandes/${order.id}`}>
+                              {order.id}
+                            </Link>
+                          </TableHead>
+                        );
                       case "produit":
                         return (
                           <TableHead key={index}>
-                            <Link href={`/produits/catalogue/${order.id}`}>
+                            <Link href={`/commandes/${order.id}`}>
                               {order.items[0]?.productName}
                             </Link>
                           </TableHead>
