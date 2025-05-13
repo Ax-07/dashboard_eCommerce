@@ -93,6 +93,7 @@ model Payment {                                                 // Modèle des i
   method         String                                        // Méthode (ex: Stripe, PayPal)
   transactionId  String?                                       // ID de transaction externe
   status         PaymentStatus                                // Statut du paiement (enum)
+  amount        Float                                         // Montant Débité
   paidAt         DateTime?                                     // Date de paiement
   refundedAmount Float?                                        // Montant remboursé (optionnel)
 
@@ -109,10 +110,22 @@ enum PaymentStatus {                                          // Enum des statut
   refunded                                                       // Remboursé
 }
 
+enum InsuranceStatus {                                     // Enum des statuts d'assurance
+  none                                                           // Aucune assurance
+  requested                                                      // Assurance demandée
+  approved                                                       // Assurance approuvée
+  declined                                                       // Assurance refusée
+}
+
 model ShippingInfo {                                           // Modèle des informations de livraison
   id                String          @id @default(uuid())    // Clé primaire : UUID
   method            String                                  // Transporteur ou point relais
   trackingNumber    String?                                 // Numéro de suivi
+  trackingUrl       String?                                 // URL de suivi
+  carrier           String?                                 // Transporteur (ex: UPS, FedEx)
+  shippingCost      Float                                   // Coût de la livraison
+  insuranceAmount   Float?                                 // Montant de l'assurance (optionnel)
+  insuranceStatus   InsuranceStatus                          // Statut de l'assurance (enum)
   status            ShippingStatus                          // Statut livraison (enum)
   shippedAt         DateTime?                                // Date d'expédition
   deliveredAt       DateTime?                                // Date de livraison
