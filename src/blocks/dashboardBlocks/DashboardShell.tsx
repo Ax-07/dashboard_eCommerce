@@ -33,8 +33,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 const href = "/" + segments.slice(0, index + 1).join("/");
                 const isLast = index === segments.length - 1;
                 const label = decodeURIComponent(segment)
-                  .replace(/-/g, " ")
-                  .replace(/\b\w/g, (l) => l.toUpperCase());
+                  // .replace(/-/g, " ") // remplace les tirets par des espaces
+                  // .replace(/_/g, " ") // remplace les underscores par des espaces
+                  .replace(/\b\w/g, (l) => l.toUpperCase()); // met la première lettre de chaque mot en majuscule
 
                 return (
                   <React.Fragment key={href}>
