@@ -20,6 +20,7 @@ import Link from "next/link";
 import { usePagination } from "@/src/hooks/usePagination";
 import PaginationControls from "@/src/components/custom/PaginationControl";
 import ComboSearchInput from "@/src/components/custom/comboSearchInput";
+import { OrderInput } from "@/src/lib/validators/order.zod";
 
 const cols = [
   { value: "id", label: "ID" },
@@ -70,7 +71,10 @@ const dateFilter = [
 ];
 const PAGE_SIZE = 15;
 
-const OrderList = () => {
+interface OrderListProps {
+  orders: OrderInput[];
+}
+const OrderList: React.FC<OrderListProps> = ({orders}) => {
   const [selectedPrice, setSelectedPrice] = React.useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>([]);
   const [selectedDate, setSelectedDate] = React.useState<string[]>([]);
@@ -123,8 +127,7 @@ const OrderList = () => {
     setSearchTerm(term);
   };
 
-  const order = ORDERS;
-  const filteredOrder = order.filter((o) => {
+  const filteredOrder = orders.filter((o) => {
     // Extraction propre de la colonne à chercher
     const fieldValue = (() => {
       switch (colToSearch) {
