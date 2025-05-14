@@ -145,18 +145,6 @@ const OrderDetailPage: React.FC<OrderDetailPageProps> = ({ params }) => {
                   {order.payment.method}
                 </span>
               </p>
-              <p>
-                Statut :{" "}
-                <span className="text-muted-foreground">
-                  {order.payment.status}
-                </span>
-              </p>
-              <p>
-                Montant débité :{" "}
-                <span className="text-muted-foreground">
-                  {order.payment.amount} €
-                </span>
-              </p>
             </CardContent>
           </Card>
         </div>
