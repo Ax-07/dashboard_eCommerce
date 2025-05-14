@@ -8,6 +8,7 @@ model User {
   emailVerified    DateTime?      @map("email_verified")              // Date de vérification de l'email, colonne SQL "email_verified"
   avatar           String?                                            // URL de l'avatar ou photo de profil (optionnel)
   image            String?                                            // URL de l'avatar ou photo de profil (optionnel)
+  phone            String?                                            // Numéro de téléphone (optionnel)
   stripeCustomerId String?        @map("stripe_customer_id")          // Identifiant du client Stripe (optionnel), colonne SQL "stripe_customer_id"
 
   accounts         Account[]                                          // Relation 1:N avec le modèle Account (NextAuth)
@@ -33,7 +34,10 @@ model User {
   totalSpent       Float          @default(0)                         // Montant total dépensé
   tags             String[]                                           // Étiquettes personnalisées (ex: "VIP", "fraude")
   internalNotes    String?                                            // Notes internes (commentaires des admins)
+  
   lastLoginAt      DateTime?                                          // Date et heure de la dernière connexion
+  createdAt        DateTime       @default(now())                     // Date de création du compte
+  updatedAt        DateTime       @updatedAt                          // Date de la dernière mise à jour du compte
 
   @@map("users")                                                      // Nom de la table SQL : "users"
   @@index([email], name: "idx_user_email")                            // Index sur le champ email
@@ -60,7 +64,10 @@ enum Role {
   manager                                                             // Manager
   support                                                             // Support client
 }
-
+enum AddressType {
+  shipping                                                            // Adresse de livraison
+  billing                                                             // Adresse de facturation
+}
 model Address {
   id              String         @id @default(uuid())                   // Clé primaire : UUID
   user            User           @relation(fields: [userId], references: [id])      // Propriétaire de l'adresse
@@ -72,6 +79,7 @@ model Address {
   country         String                                                // Pays
   phone           String?                                               // Téléphone de contact (optionnel)
   isDefault       Boolean        @default(false)                        // Indique si c'est l'adresse par défaut
+  type            AddressType                                          // Type d'adresse (livraison ou facturation)
   shippingInfo    ShippingInfo?  @relation("UserShippingInfo")          // Relation 1:1 vers infos de livraison
   billingInfo     BillingInfo?   @relation("UserBillingInfo")           // Relation 1:1 vers infos de facturation
   customerId      String?    
