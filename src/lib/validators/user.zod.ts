@@ -29,6 +29,7 @@ export const AddressSchema = z.object({
   country: z.string(),
   phone: z.string().optional(),
   isDefault: z.boolean().default(false),
+  type: z.enum(["shipping", "billing"]).default("shipping"),
   customerId: z.string().uuid().nullable().optional(),
 });
 
@@ -72,6 +73,7 @@ export const UserSchema = z.object({
   emailVerified: z.date().nullable().optional(),
   avatar: z.string().nullable().optional(),
   image: z.string().nullable().optional(),
+  phone: z.string().nullable().optional(),
   stripeCustomerId: z.string().nullable().optional(),
 
   // Relations
@@ -98,8 +100,10 @@ export const UserSchema = z.object({
   totalOrders: z.number().int().nonnegative().default(0),
   totalSpent: z.number().nonnegative().default(0),
   tags: z.array(z.string()).optional(),
-  internalNotes: z.string().nullable().optional(),
+  internalNotes: z.array(z.unknown()).optional(), // InternalNote[]
   lastLoginAt: z.date().nullable().optional(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
 });
 
 export type UserInput = z.infer<typeof UserSchema>;
