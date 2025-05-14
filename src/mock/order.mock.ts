@@ -55,7 +55,8 @@ export const mockOrder: OrderInput[] = [
     paymentId: "pmt_00112233-4455-6677-8899-aabbccddeeff",
     payment: {
       id: "pmt_00112233-4455-6677-8899-aabbccddeeff",
-      method: "Stripe",
+      method: "Credit Card",
+      provider: "Stripe",
       transactionId: "ch_1J2Y3Z4A5B6C7D8E9F0G",
       status: "paid",
       amount: 176.99,
@@ -199,6 +200,7 @@ export const mockOrder: OrderInput[] = [
     payment: {
       id: "pmt_22334455-6677-8899-aabb-ccddeeff0011",
       method: "PayPal",
+      provider: "PayPal",
       transactionId: "PAYID-LKJHGFDSA123456",
       status: "paid",
       amount: 70.47,
@@ -317,7 +319,8 @@ export const mockOrder: OrderInput[] = [
     paymentId: "pmt_55667788-99aa-bbcc-ddee-ff0011223344",
     payment: {
       id: "pmt_55667788-99aa-bbcc-ddee-ff0011223344",
-      method: "Stripe",
+      method: "Credit Card",
+      provider: "Stripe",
       transactionId: "ch_9F8E7D6C5B4A3Z2Y1X0W",
       status: "paid",
       amount: 51.4,
