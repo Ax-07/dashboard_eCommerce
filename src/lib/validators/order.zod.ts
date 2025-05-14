@@ -43,6 +43,7 @@ export const OrderItemSchema = z.object({
 export const PaymentSchema = z.object({
   id: z.string().uuid(),
   method: z.string(),
+  provider: z.string(),
   transactionId: z.string().nullable(),
   status: PaymentStatusEnum,
   amount: z.number().nonnegative(),
