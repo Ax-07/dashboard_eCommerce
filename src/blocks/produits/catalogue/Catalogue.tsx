@@ -23,17 +23,6 @@ import Link from "next/link";
 import { usePagination } from "@/src/hooks/usePagination";
 import PaginationControls from "@/src/components/custom/PaginationControl";
 
-// const cols = [
-//   "SKU", // Stock Keeping Unit, un identifiant unique pour chaque produit.
-//   "Nom", // Nom du produit
-//   "Prix / Unités", // Prix par unité
-//   "Catégorie", // Catégorie du produit
-//   "Stock", // Quantité disponible en stock
-//   "Rating", // Note ou évaluation du produit
-//   "Status", // Statut du produit (disponible, en rupture de stock, etc.)
-//   "", // Actions possibles (modifier, supprimer, etc.)
-// ];
-
 const cols = [
   { name: "SKU", value: "id" },
   { name: "Nom", value: "name" },
@@ -42,7 +31,6 @@ const cols = [
   { name: "Stock", value: "stock" },
   { name: "Rating", value: "rating" },
   { name: "Status", value: "status" },
-  { name: "", value: "actions" },
 ];
 
 const statusFilter = [
@@ -67,6 +55,7 @@ const priceRangeFilter = [
 const PAGE_SIZE = 15;
 
 const Catalogue = () => {
+  const [searchTerm, setSearchTerm] = React.useState<string>("");
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = React.useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = React.useState<string[]>([]);
@@ -79,8 +68,6 @@ const Catalogue = () => {
   const [sortDirection, setSortDirection] = React.useState<"asc" | "desc">(
     "asc"
   );
-  const [searchOption, setSearchOption] = React.useState<string>("name");
-  const [searchTerm, setSearchTerm] = React.useState<string>("");
 
   /**
    * @description Fonction pour filtrer les produits par statut
