@@ -1,6 +1,8 @@
 // @/src/mock/client.mock.ts
 
-export const UserMock = [
+import { UserInput } from "../lib/validators/user.zod";
+
+export const UserMock: UserInput[] = [
   {
     id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
     name: "Alice Dupont",
@@ -12,24 +14,30 @@ export const UserMock = [
     isVerified: true,
     isVIP: false,
     marketingOptIn: true,
-    address: {
-      shipping: {
+    addresses: [
+      {
         id: "addr_11223344-5566-7788-99aa-bbccddeeff00",
+        userId: "d290f1ee-6c54-4b01-90e6-d701748f0851",
         fullName: "Alice Dupont",
         street: "12 rue de la Paix",
         city: "Paris",
         postalCode: "75002",
         country: "France",
+        isDefault: true,
+        type: "shipping",
       },
-      billing: {
+      {
         id: "addr_11223344-5566-7788-99aa-bbccddeeff00",
+        userId: "d290f1ee-6c54-4b01-90e6-d701748f0851",
         fullName: "Jean Dupont",
         street: "12 rue de la Paix",
         city: "Paris",
         postalCode: "75002",
         country: "France",
+        isDefault: true,
+        type: "billing",
       },
-    },
+    ],
     orders: [
       {
         id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -85,12 +93,12 @@ export const UserMock = [
       },
     ],
     reviews: [{}],
-    notification: [{}],
+    notifications: [],
     totalOrders: 1,
     totalSpent: 176.99,
     tags: ["VIP", "Newsletter"],
     internalNotes: [{}],
-    lastLogin: new Date("2023-10-01T12:00:00Z"),
+    lastLoginAt: new Date("2023-10-01T12:00:00Z"),
     createdAt: new Date("2023-01-01T12:00:00Z"),
     updatedAt: new Date("2023-10-01T12:00:00Z"),
   },
@@ -105,24 +113,30 @@ export const UserMock = [
     isVerified: true,
     isVIP: false,
     marketingOptIn: true,
-    address: {
-      shipping: {
+    addresses: [
+      {
         id: "addr_22334455-6677-8899-aabb-ccddeeff0011",
+        userId: "e7a1c2d3-4b5e-6f7a-8b9c-0d1e2f3a4b5c",
         fullName: "Bob Martin",
         street: "45 avenue des Champs",
         city: "Lyon",
         postalCode: "69001",
         country: "France",
+        isDefault: true,
+        type: "shipping",
       },
-      billing: {
+      {
         id: "addr_22334455-6677-8899-aabb-ccddeeff0011",
+        userId: "e7a1c2d3-4b5e-6f7a-8b9c-0d1e2f3a4b5c",
         fullName: "Bob Martin",
         street: "45 avenue des Champs",
         city: "Lyon",
         postalCode: "69001",
         country: "France",
+        isDefault: true,
+        type: "billing",
       },
-    },
+    ],
     orders: [
       {
         id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -165,19 +179,19 @@ export const UserMock = [
       },
     ],
     reviews: [{}],
-    notification: [{}],
+    notifications: [],
     totalOrders: 1,
     totalSpent: 70.47,
     tags: ["VIP", "Newsletter"],
     internalNotes: [{}],
-    lastLogin: new Date("2023-10-01T12:00:00Z"),
+    lastLoginAt: new Date("2023-10-01T12:00:00Z"),
     createdAt: new Date("2023-01-01T12:00:00Z"),
     updatedAt: new Date("2023-10-01T12:00:00Z"),
   },
   {
-      id: "f0e1d2c3-b4a5-6978-8a9b-0c1d2e3f4a5b",
-      name: "Charlie Dupuis",
-      email: "charlie.dupuis.exemple.com",
+    id: "f0e1d2c3-b4a5-6978-8a9b-0c1d2e3f4a5b",
+    name: "Charlie Dupuis",
+    email: "charlie.dupuis.exemple.com",
     avatar: "https://example.com/avatar.jpg",
     image: "https://example.com/image.jpg",
     phone: "+33 1 23 45 67 89",
@@ -185,47 +199,53 @@ export const UserMock = [
     isVerified: true,
     isVIP: false,
     marketingOptIn: true,
-    address: {
-      shipping: {
+    addresses: [
+      {
         id: "addr_33445566-7788-99aa-bbcc-ddeeff112233",
+        userId: "f0e1d2c3-b4a5-6978-8a9b-0c1d2e3f4a5b",
         fullName: "Charlie Dupuis",
         street: "89 boulevard Victor Hugo",
         city: "Marseille",
         postalCode: "13001",
         country: "France",
+        isDefault: true,
+        type: "shipping",
       },
-      billing: {
+      {
         id: "addr_33445566-7788-99aa-bbcc-ddeeff112233",
+        userId: "f0e1d2c3-b4a5-6978-8a9b-0c1d2e3f4a5b",
         fullName: "Charlie Dupuis",
         street: "89 boulevard Victor Hugo",
         city: "Marseille",
         postalCode: "13001",
         country: "France",
-      },
-    },
-    orders: [
-      {
-    id: "4c5d6e7f-8a9b-0c1d-2e3f-4a5b6c7d8e9f",
-    items: [
-      {
-        id: "77788899-aabb-ccdd-eeff-001122334455",
-        orderId: "4c5d6e7f-8a9b-0c1d-2e3f-4a5b6c7d8e9f",
-        productId: "prod_13579",
-        productName: "Baume réparateur CBD",
-        sku: "CBD-REPAIR-BALM",
-        quantity: 1,
-        unitPrice: 34.5,
-        totalPrice: 34.5,
-        variantOptions: ["Format: 75 ml"],
-        refundStatus: "requested",
-        returnEligible: false,
+        isDefault: true,
+        type: "billing",
       },
     ],
-    subtotal: 34.5,
-    taxAmount: 6.9,
-    shippingCost: 0.0,
-    discount: 0.0,
-    totalAmount: 51.4,
+    orders: [
+      {
+        id: "4c5d6e7f-8a9b-0c1d-2e3f-4a5b6c7d8e9f",
+        items: [
+          {
+            id: "77788899-aabb-ccdd-eeff-001122334455",
+            orderId: "4c5d6e7f-8a9b-0c1d-2e3f-4a5b6c7d8e9f",
+            productId: "prod_13579",
+            productName: "Baume réparateur CBD",
+            sku: "CBD-REPAIR-BALM",
+            quantity: 1,
+            unitPrice: 34.5,
+            totalPrice: 34.5,
+            variantOptions: ["Format: 75 ml"],
+            refundStatus: "requested",
+            returnEligible: false,
+          },
+        ],
+        subtotal: 34.5,
+        taxAmount: 6.9,
+        shippingCost: 0.0,
+        discount: 0.0,
+        totalAmount: 51.4,
       },
     ],
     carts: [{}],
@@ -245,12 +265,12 @@ export const UserMock = [
       },
     ],
     reviews: [{}],
-    notification: [{}],
+    notifications: [],
     totalOrders: 1,
     totalSpent: 51.4,
     tags: ["VIP", "Newsletter"],
     internalNotes: [{}],
-    lastLogin: new Date("2023-10-01T12:00:00Z"),
+    lastLoginAt: new Date("2023-10-01T12:00:00Z"),
     createdAt: new Date("2023-01-01T12:00:00Z"),
     updatedAt: new Date("2023-10-01T12:00:00Z"),
   },
