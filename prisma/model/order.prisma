@@ -90,7 +90,9 @@ enum OrderStatus {                                             // Enum pour la p
 
 model Payment {                                                 // Modèle des informations de paiement
   id             String        @id @default(uuid())           // Clé primaire : UUID
-  method         String                                        // Méthode (ex: Stripe, PayPal)
+  method         String                                        // Méthode (ex: carte de crédit, PayPal)
+  currency       String                                        // Devise (ex: USD, EUR)
+  provider       String                                        // Fournisseur de paiement (ex: Stripe, PayPal)
   transactionId  String?                                       // ID de transaction externe
   status         PaymentStatus                                // Statut du paiement (enum)
   amount        Float                                         // Montant Débité
