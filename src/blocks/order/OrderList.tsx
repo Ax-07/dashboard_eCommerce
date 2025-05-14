@@ -13,7 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table";
-import { ORDERS } from "@/src/mock";
 import { sortValues } from "@/src/utils/sortValues";
 import { Columns2Icon, PenBox, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -30,7 +29,6 @@ const cols = [
   { value: "date", label: "Date" },
   { value: "type", label: "Type" },
   { value: "status", label: "Status" },
-  //   { value: "actions", label: "" },
 ];
 const statusFilter = [
   { id: "all", label: "Tous" },
@@ -74,7 +72,7 @@ const PAGE_SIZE = 15;
 interface OrderListProps {
   orders: OrderInput[];
 }
-const OrderList: React.FC<OrderListProps> = ({orders}) => {
+const OrderList: React.FC<OrderListProps> = ({ orders }) => {
   const [selectedPrice, setSelectedPrice] = React.useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>([]);
   const [selectedDate, setSelectedDate] = React.useState<string[]>([]);
