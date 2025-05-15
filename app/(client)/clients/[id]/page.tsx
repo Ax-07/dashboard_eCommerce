@@ -15,7 +15,7 @@ const ClientByIdPage: React.FC<ClientByIdPageProps> = ({params}) => {
     
     return (
     <DashboardShell>
-      <section id="catalogue" className="relative flex-1 justify-between flex flex-col p-4">
+      <section id="catalogue" className="relative flex-1 justify-between flex flex-col p-4 items-center">
         <UserDetails user={user} />
       </section>
     </DashboardShell>
