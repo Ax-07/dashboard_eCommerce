@@ -5,6 +5,10 @@ import { CBD_RESIN } from "./productsResineCBD.exemple";
 import { ProductOutput } from "../lib/validators/product.zod";
 import { CategoryOutput, SubCategoryOutput } from "../lib/validators/category.zod";
 import { mockOrder } from "./order.mock";
+import { mockCarts } from "./carts.mock";
+import { mockReviews } from "./review.mock";
+import { mockTickets } from "./ticket.mock";
+import { mockMarketingStats } from "./marketing.mock";
 
 
 export const PRODUCTS = [
@@ -14,9 +18,11 @@ export const PRODUCTS = [
   ...ELIQUIDS,
 ];
 
-export const ORDERS = [
-  ...mockOrder
-]
+export const ORDERS = [...mockOrder];
+export const CARTS = [...mockCarts];
+export const REVIEWS = [...mockReviews];
+export const TICKETS = [...mockTickets];
+export const MARKETINGSTATS = [...mockMarketingStats];
 
 export const getCategories = (products: ProductOutput[]) => {
   const categories = new Set<string>();
