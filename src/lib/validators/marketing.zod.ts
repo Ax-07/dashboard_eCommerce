@@ -12,3 +12,13 @@ export const MarketingSchema = z.object({
 });
 
 export type MarketingInput = z.infer<typeof MarketingSchema>;
+
+export const MarketingStatsSchema = z.object({
+  userId:        z.string(),
+  emailOpenRate: z.number().min(0).max(100),
+  emailClickRate: z.number().min(0).max(100),
+  lastCampaign:  z.string(),
+  lastSentAt:    z.date(),
+});
+
+export type MarketingStats = z.infer<typeof MarketingStatsSchema>;
