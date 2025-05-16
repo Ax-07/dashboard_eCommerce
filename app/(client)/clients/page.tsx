@@ -8,7 +8,7 @@ const ListClientPage: React.FC = () => {
     <DashboardShell>
       <section
         id="catalogue"
-        className="relative flex-1 justify-between flex flex-col p-4 items-center"
+        className="relative flex-1 flex flex-col w-full p-4 items-center"
       >
         <UsersList users={UserMock} />
       </section>
