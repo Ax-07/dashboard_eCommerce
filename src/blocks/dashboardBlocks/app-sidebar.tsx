@@ -56,7 +56,7 @@ const data = {
           url: "/ventes",
           icon: ChartNoAxesColumn,
           items: [
-            { title: "Chiffre d'affaires", url: "/ventes/chiffre-d-affaires" }, // Chiffre d'affaires
+            { title: "Chiffre d'affaires", url: "/ventes/ca" }, // Chiffre d'affaires
             { title: "Panier moyen", url: "/ventes/panier-moyen" }, // Panier moyen
             { title: "Taux de conversion", url: "/ventes/taux-de-conversion" }, // Taux de conversion
             {
