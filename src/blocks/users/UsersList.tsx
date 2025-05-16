@@ -150,7 +150,7 @@ const ClientsList: React.FC<ClientsListProps> = ({ users }) => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex items-center space-x-2 mb-4">
         <Input
           placeholder="Rechercher clients..."
