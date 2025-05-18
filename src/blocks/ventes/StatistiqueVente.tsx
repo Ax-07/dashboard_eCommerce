@@ -11,6 +11,7 @@ import BarChartArea from "@/src/components/custom/charts/BarChartArea";
 import { ChartAreaInteractive } from "@/src/components/custom/charts/chart-area-interactive";
 import { chartData, chartConfig } from "@/src/components/custom/charts/chart-area-interactive";
 import MultiLineChart from "@/src/components/custom/charts/Multi-Line-Chart";
+import { PieChartComponent } from "@/src/components/custom/charts/pie-chart";
 
 const StatistiqueVente = () => {
   return (
@@ -18,7 +19,6 @@ const StatistiqueVente = () => {
       <div className="flex gap-4">
         {/* Graphiques Chiffre d'affaires */}
         <div className="flex-1">
-
             {/* <BarChartArea venteTotalMenuel={venteTotalMenuel} chartConfig={chartConfig} /> */}
             {/* <ChartAreaInteractive /> */}
             <MultiLineChart 
@@ -29,7 +29,13 @@ const StatistiqueVente = () => {
             />
         </div>
         <div className="flex flex-col flex-1 gap-4 h-full">
-          <div className="flex flex-1 gap-4">
+            <PieChartComponent
+              title="Répartition des ventes par catégorie"
+              description="Répartition des ventes sur les 3 derniers mois"
+              chartData={chartData}
+              chartConfig={chartConfig}
+              />
+          {/* <div className="flex flex-1 gap-4">
             <Card className="flex-1">
               <CardHeader>
                 <CardTitle>CA total</CardTitle>
@@ -51,7 +57,7 @@ const StatistiqueVente = () => {
               </CardHeader>
             </Card>
             <Card className="flex-1"></Card>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex gap-4 mt-4">
