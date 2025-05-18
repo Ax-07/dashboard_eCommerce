@@ -1,3 +1,4 @@
+// @/src/components/custom/charts/Multi-Line-Chart.tsx
 "use client";
 import React from "react";
 import { TrendingUp } from "lucide-react";
@@ -27,8 +28,9 @@ import {
   SelectValue,
 } from "../../ui/select";
 
-interface ChartData {
-  [key: string]: string | number | Date;
+export interface ChartData {
+  date: string;
+  [key: string]: number | string;
 }
 
 interface MultiLineChartProps {
