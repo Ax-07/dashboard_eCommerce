@@ -1,3 +1,4 @@
+// @/src
 "use client"
 import * as React from "react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
@@ -121,6 +122,7 @@ export const chartData = [
   { date: "2024-06-29", fleurs: 103, resines: 160, huiles: 120, eliquides: 60 },
   { date: "2024-06-30", fleurs: 446, resines: 400, huiles: 300, eliquides: 150 },
 ]
+
 export const chartConfig = {
   fleurs: { label: "Fleurs", color: "hsl(var(--chart-1))" },
   resines: { label: "Résines", color: "hsl(var(--chart-2))" },
