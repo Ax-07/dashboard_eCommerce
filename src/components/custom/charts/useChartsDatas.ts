@@ -1,134 +1,81 @@
+// @/src/components/custom/charts/useChatsDatas.ts
 import { useMemo } from "react"
 
-// @/src/components/custom/charts/useChatsDatas.ts
-export const chartData = [
-  { date: "2024-04-01", fleurs: 222, resines: 150, huiles: 100, eliquides: 50 },
-  { date: "2024-04-02", fleurs: 97, resines: 180, huiles: 120, eliquides: 60 },
-  { date: "2024-04-03", fleurs: 167, resines: 120, huiles: 80, eliquides: 40 },
-  { date: "2024-04-04", fleurs: 242, resines: 260, huiles: 140, eliquides: 70 },
-  { date: "2024-04-05", fleurs: 373, resines: 290, huiles: 160, eliquides: 80 },
-  { date: "2024-04-06", fleurs: 301, resines: 340, huiles: 200, eliquides: 90 },
-  { date: "2024-04-07", fleurs: 245, resines: 180, huiles: 120, eliquides: 60 },
-  { date: "2024-04-08", fleurs: 409, resines: 320, huiles: 180, eliquides: 100 },
-  { date: "2024-04-09", fleurs: 59, resines: 110, huiles: 90, eliquides: 50 },
-  { date: "2024-04-10", fleurs: 261, resines: 190, huiles: 130, eliquides: 70 },
-  { date: "2024-04-11", fleurs: 327, resines: 350, huiles: 220, eliquides: 120 },
-  { date: "2024-04-12", fleurs: 292, resines: 210, huiles: 140, eliquides: 90 },
-  { date: "2024-04-13", fleurs: 342, resines: 380, huiles: 200, eliquides: 110 },
-  { date: "2024-04-14", fleurs: 137, resines: 220, huiles: 160, eliquides: 80 },
-  { date: "2024-04-15", fleurs: 120, resines: 170, huiles: 110, eliquides: 60 },
-  { date: "2024-04-16", fleurs: 138, resines: 190, huiles: 130, eliquides: 70 },
-  { date: "2024-04-17", fleurs: 446, resines: 360, huiles: 240, eliquides: 130 },
-  { date: "2024-04-18", fleurs: 364, resines: 410, huiles: 280, eliquides: 150 },
-  { date: "2024-04-19", fleurs: 243, resines: 180, huiles: 150, eliquides: 80 },
-  { date: "2024-04-20", fleurs: 89, resines: 150, huiles: 120, eliquides: 70 },
-  { date: "2024-04-21", fleurs: 137, resines: 200, huiles: 130, eliquides: 80 },
-  { date: "2024-04-22", fleurs: 224, resines: 170, huiles: 110, eliquides: 60 },
-  { date: "2024-04-23", fleurs: 138, resines: 230, huiles: 160, eliquides: 90 },
-  { date: "2024-04-24", fleurs: 387, resines: 290, huiles: 200, eliquides: 120 },
-  { date: "2024-04-25", fleurs: 215, resines: 250, huiles: 180, eliquides: 100 },
-  { date: "2024-04-26", fleurs: 75, resines: 130, huiles: 100, eliquides: 50 },
-  { date: "2024-04-27", fleurs: 383, resines: 420, huiles: 300, eliquides: 150 },
-  { date: "2024-04-28", fleurs: 122, resines: 180, huiles: 120, eliquides: 70 },
-  { date: "2024-04-29", fleurs: 315, resines: 240, huiles: 160, eliquides: 80 },
-  { date: "2024-04-30", fleurs: 454, resines: 380, huiles: 220, eliquides: 120 },
-  { date: "2024-05-01", fleurs: 165, resines: 220, huiles: 140, eliquides: 90 },
-  { date: "2024-05-02", fleurs: 293, resines: 310, huiles: 200, eliquides: 110 },
-  { date: "2024-05-03", fleurs: 247, resines: 190, huiles: 130, eliquides: 70 },
-  { date: "2024-05-04", fleurs: 385, resines: 420, huiles: 300, eliquides: 150 },
-  { date: "2024-05-05", fleurs: 481, resines: 390, huiles: 250, eliquides: 130 },
-  { date: "2024-05-06", fleurs: 498, resines: 520, huiles: 400, eliquides: 200 },
-  { date: "2024-05-07", fleurs: 388, resines: 300, huiles: 200, eliquides: 100 },
-  { date: "2024-05-08", fleurs: 149, resines: 210, huiles: 140, eliquides: 80 },
-  { date: "2024-05-09", fleurs: 227, resines: 180, huiles: 120, eliquides: 70 },
-  { date: "2024-05-10", fleurs: 293, resines: 330, huiles: 240, eliquides: 130 },
-  { date: "2024-05-11", fleurs: 335, resines: 270, huiles: 180, eliquides: 90 },
-  { date: "2024-05-12", fleurs: 197, resines: 240, huiles: 160, eliquides: 80 },
-  { date: "2024-05-13", fleurs: 197, resines: 160, huiles: 100, eliquides: 50 },
-  { date: "2024-05-14", fleurs: 448, resines: 490, huiles: 350, eliquides: 180 },
-  { date: "2024-05-15", fleurs: 473, resines: 380, huiles: 250, eliquides: 130 },
-  { date: "2024-05-16", fleurs: 338, resines: 400, huiles: 280, eliquides: 140 },
-  { date: "2024-05-17", fleurs: 499, resines: 420, huiles: 300, eliquides: 150 },
-  { date: "2024-05-18", fleurs: 315, resines: 350, huiles: 240, eliquides: 120 },
-  { date: "2024-05-19", fleurs: 235, resines: 180, huiles: 130, eliquides: 70 },
-  { date: "2024-05-20", fleurs: 177, resines: 230, huiles: 160, eliquides: 80 },
-  { date: "2024-05-21", fleurs: 82, resines: 140, huiles: 100, eliquides: 50 },
-  { date: "2024-05-22", fleurs: 81, resines: 120, huiles: 90, eliquides: 40 },
-  { date: "2024-05-23", fleurs: 252, resines: 290, huiles: 200, eliquides: 100 },
-  { date: "2024-05-24", fleurs: 294, resines: 220, huiles: 150, eliquides: 80 },
-  { date: "2024-05-25", fleurs: 201, resines: 250, huiles: 170, eliquides: 90 },
-  { date: "2024-05-26", fleurs: 213, resines: 170, huiles: 120, eliquides: 60 },
-  { date: "2024-05-27", fleurs: 420, resines: 460, huiles: 350, eliquides: 180 },
-  { date: "2024-05-28", fleurs: 233, resines: 190, huiles: 130, eliquides: 70 },
-  { date: "2024-05-29", fleurs: 78, resines: 130, huiles: 100, eliquides: 50 },
-  { date: "2024-05-30", fleurs: 340, resines: 280, huiles: 200, eliquides: 100 },
-  { date: "2024-05-31", fleurs: 178, resines: 230, huiles: 160, eliquides: 80 },
-  { date: "2024-06-01", fleurs: 178, resines: 200, huiles: 140, eliquides: 70 },
-  { date: "2024-06-02", fleurs: 470, resines: 410, huiles: 300, eliquides: 150 },
-  { date: "2024-06-03", fleurs: 103, resines: 160, huiles: 120, eliquides: 60 },
-  { date: "2024-06-04", fleurs: 439, resines: 380, huiles: 250, eliquides: 130 },
-  { date: "2024-06-05", fleurs: 88, resines: 140, huiles: 100, eliquides: 50 },
-  { date: "2024-06-06", fleurs: 294, resines: 250, huiles: 180, eliquides: 90 },
-  { date: "2024-06-07", fleurs: 323, resines: 370, huiles: 270, eliquides: 140 },
-  { date: "2024-06-08", fleurs: 385, resines: 320, huiles: 220, eliquides: 110 },
-  { date: "2024-06-09", fleurs: 438, resines: 480, huiles: 350, eliquides: 180 },
-  { date: "2024-06-10", fleurs: 155, resines: 200, huiles: 140, eliquides: 70 },
-  { date: "2024-06-11", fleurs: 92, resines: 150, huiles: 110, eliquides: 60 },
-  { date: "2024-06-12", fleurs: 492, resines: 420, huiles: 310, eliquides: 160 },
-  { date: "2024-06-13", fleurs: 81, resines: 130, huiles: 100, eliquides: 50 },
-  { date: "2024-06-14", fleurs: 426, resines: 380, huiles: 280, eliquides: 140 },
-  { date: "2024-06-15", fleurs: 307, resines: 350, huiles: 240, eliquides: 120 },
-  { date: "2024-06-16", fleurs: 371, resines: 310, huiles: 220, eliquides: 110 },
-  { date: "2024-06-17", fleurs: 475, resines: 520, huiles: 400, eliquides: 200 },
-  { date: "2024-06-18", fleurs: 107, resines: 170, huiles: 120, eliquides: 60 },
-  { date: "2024-06-19", fleurs: 341, resines: 290, huiles: 200, eliquides: 100 },
-  { date: "2024-06-20", fleurs: 408, resines: 450, huiles: 330, eliquides: 170 },
-  { date: "2024-06-21", fleurs: 169, resines: 210, huiles: 150, eliquides: 80 },
-  { date: "2024-06-22", fleurs: 317, resines: 270, huiles: 190, eliquides: 90 },
-  { date: "2024-06-23", fleurs: 480, resines: 530, huiles: 410, eliquides: 200 },
-  { date: "2024-06-24", fleurs: 132, resines: 180, huiles: 130, eliquides: 70 },
-  { date: "2024-06-25", fleurs: 141, resines: 190, huiles: 140, eliquides: 80 },
-  { date: "2024-06-26", fleurs: 434, resines: 380, huiles: 280, eliquides: 140 },
-  { date: "2024-06-27", fleurs: 448, resines: 490, huiles: 350, eliquides: 180 },
-  { date: "2024-06-28", fleurs: 149, resines: 200, huiles: 140, eliquides: 70 },
-  { date: "2024-06-29", fleurs: 103, resines: 160, huiles: 120, eliquides: 60 },
-  { date: "2024-06-30", fleurs: 446, resines: 400, huiles: 300, eliquides: 150 },
-]
+export interface ChartData {
+  date: string;
+  [key: string]: number | string;
+}
 
-export const useChartsDatas = (startDate?: string, endDate?: string) => {
-  const chartConfig = {
-    fleurs: { label: "Fleurs", color: "var(--color-fleurs)" },
-    resines: { label: "Résines", color: "var(--color-resines)" },
-    huiles: { label: "Huiles", color: "var(--color-huiles)" },
-    eliquides: { label: "E-liquides", color: "var(--color-eliquides)" },
-  }
-  const totalByCategory = chartData.reduce(
+export type PieChartData = {
+  name: string;
+  value: number;
+  fill: string;
+}
+
+interface UseChartProps {
+  data: ChartData[];
+  startDate?: string;
+  endDate?: string;
+}
+
+export const useChartsDatas = ({
+  data,
+  startDate,
+  endDate,
+}: UseChartProps) => {
+  // const chartConfig = {
+  const sample: ChartData = data[0] || {};
+  const categoryKeys = Object.keys(sample).filter(key => key !== "date");
+ 
+  const chartConfig = categoryKeys.reduce<Record<string, { label: string; color: string }>>((acc, key) => {
+    acc[key] = {
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      color: `hsl(${(categoryKeys.indexOf(key) + 1) * (360 / categoryKeys.length) + 100}, 70%, 50%)`,
+    }
+    return acc
+  }, {})
+
+  const totalByCategory = (data).reduce(
     (acc, curr) => {
-      acc.fleurs += Number(curr.fleurs ?? 0)
-      acc.resines += Number(curr.resines ?? 0)
-      acc.huiles += Number(curr.huiles ?? 0)
-      acc.eliquides += Number(curr.eliquides ?? 0)
+      categoryKeys.forEach(key => {
+        if (!acc[key]) {
+          acc[key] = 0
+        }
+        acc[key] += typeof curr[key] === "number" ? (curr[key] as number) : 0
+      })
       return acc
     },
-    { fleurs: 0, resines: 0, huiles: 0, eliquides: 0 }
+    {} as Record<string, number>
   )
+
   const total = Object.values(totalByCategory).reduce((acc, curr) => {
     return acc + curr
   }, 0)
 
-  const pieChartData = [
-    { name: "Fleurs", value: totalByCategory.fleurs, fill: "var(--color-fleurs)" },
-    { name: "Résines", value: totalByCategory.resines, fill: "var(--color-resines)" },
-    { name: "Huiles", value: totalByCategory.huiles, fill: "var(--color-huiles)" },
-    { name: "E-liquides", value: totalByCategory.eliquides, fill: "var(--color-eliquides)" },
-  ]
+  const pieChartData: PieChartData[] = categoryKeys.map(key => ({
+    name: chartConfig[key].label,
+    value: totalByCategory[key],
+    fill: `var(--color-${key})`,
+  }))
+
 
   const filteredData = useMemo(() => {
-    return chartData.filter(d =>
+    return data.filter(d =>
       (!startDate || d.date >= startDate) &&
       (!endDate || d.date <= endDate)
     )
   }, [startDate, endDate])
+
+const chartData = useMemo<ChartData[]>(() => {
+  return filteredData.map(d => {
+    const newData = { date: d.date } as ChartData;
+    categoryKeys.forEach(key => {
+      // on sait que d[key] est number ou string
+      newData[key] = d[key] as number;
+    });
+    return newData;
+  });
+}, [filteredData, categoryKeys]);
 
   return {
     chartData,
