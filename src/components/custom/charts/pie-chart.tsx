@@ -19,14 +19,15 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/src/components/ui/chart"
-import { ChartData } from "./Multi-Line-Chart"
-import { useChartsDatas } from "./useChartsDatas"
+import { PieChartData, useChartsDatas } from "./useChartsDatas"
+import { ALLSELLS } from "@/src/mock/sells/monthly_sales"
 
 interface PieChartProps {
     title: string;
     description: string;
-    chartData: ChartData[]
+    chartData: PieChartData[]
     chartConfig: ChartConfig;
+    total?: number;
 }
 
 export const PieChartComponent: React.FC<PieChartProps> = ({
@@ -34,10 +35,10 @@ export const PieChartComponent: React.FC<PieChartProps> = ({
     description,
     chartData,
     chartConfig,
+    total = 0,
 }) => {
-
-const { total, pieChartData,  } = useChartsDatas()
-
+console.log('chartConfig', chartConfig)
+console.log('chartData', chartData)
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -55,10 +56,10 @@ const { total, pieChartData,  } = useChartsDatas()
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={pieChartData}
+              data={chartData}
               dataKey="value"
               nameKey="name"
-              innerRadius={60}
+              innerRadius={70}
               strokeWidth={5}
             >
               <Label
@@ -74,7 +75,7 @@ const { total, pieChartData,  } = useChartsDatas()
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-2xl font-bold"
+                          className="fill-foreground text-xl font-bold"
                         >
                           {/* {totalVisitors.toLocaleString()} */}
                           {total} €
