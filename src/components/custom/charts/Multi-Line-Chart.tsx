@@ -27,22 +27,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-
-export interface ChartData {
-  date: string;
-  [key: string]: number | string;
-}
-
+import { ChartData } from "./useChartsDatas";
 interface MultiLineChartProps {
   title: string;
   description: string;
   chartData: ChartData[];
-  chartConfig: {
-    [key: string]: {
-      label: string;
-      color: string;
-    };
-  };
+  chartConfig: ChartConfig;
 }
 // Helper: get last value of a key in data array
 function getLastValue(data: ChartData[], key: keyof ChartData): number {
@@ -74,7 +64,7 @@ const MultiLineChart: React.FC<MultiLineChartProps> = ({
   }, [isMobile]);
   // Filtrer les données selon la période sélectionnée
   const filteredData = React.useMemo(() => {
-    const referenceDate = new Date("2024-06-30");
+    const referenceDate = chartData[chartData.length - 1].date;
     let daysToSubtract = timeRange === "7d" ? 7 : timeRange === "30d" ? 30 : 90;
     const startDate = new Date(referenceDate);
     startDate.setDate(startDate.getDate() - daysToSubtract);
