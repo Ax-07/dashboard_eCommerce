@@ -12,8 +12,15 @@ import { ChartAreaInteractive } from "@/src/components/custom/charts/chart-area-
 import { chartData, chartConfig } from "@/src/components/custom/charts/chart-area-interactive";
 import MultiLineChart from "@/src/components/custom/charts/Multi-Line-Chart";
 import { PieChartComponent } from "@/src/components/custom/charts/pie-chart";
+import { ALLSELLS } from "@/src/mock/sells/monthly_sales";
+import { useChartsDatas } from "@/src/components/custom/charts/useChartsDatas";
 
 const StatistiqueVente = () => {
+  const { chartData, chartConfig, total, pieChartData } = useChartsDatas({
+    data: ALLSELLS,
+    startDate: ALLSELLS[0].date,
+    endDate: ALLSELLS[ALLSELLS.length - 1].date,
+  });
   return (
     <div className="w-full">
       <div className="flex gap-4">
@@ -32,8 +39,9 @@ const StatistiqueVente = () => {
             <PieChartComponent
               title="Répartition des ventes par catégorie"
               description="Répartition des ventes sur les 3 derniers mois"
-              chartData={chartData}
+              chartData={pieChartData}
               chartConfig={chartConfig}
+              total={total}
               />
           {/* <div className="flex flex-1 gap-4">
             <Card className="flex-1">
