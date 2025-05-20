@@ -14,12 +14,12 @@ model User {
   accounts         Account[]                                          // Relation 1:N avec le modèle Account (NextAuth)
   sessions         Session[]                                          // Relation 1:N avec le modèle Session (NextAuth)
   
-  addresses        Address[]                                          // Relation 1:N vers les adresses enregistrées (livraison/facturation)
+  addresses        Address[]      @relation("UserAddress")                                    // Relation 1:N vers les adresses enregistrées (livraison/facturation)
   orders           Order[]        @relation("UserOrders")             // Commandes passées par l'utilisateur (relation nommée)
   carts            Cart[]         @relation("UserCarts")              // Paniers (historique ou en cours) de l'utilisateur
   reviews          Review[]       @relation("UserReviews")            // Avis déposés par l'utilisateur
-  wishlists      Wishlist[]        @relation("UserWishlists")         // Listes de souhaits de l'utilisateur
-  notifications  Notification[]    @relation("UserNotifications")     // Notifications reçues par l'utilisateur
+  wishlists        Wishlist[]     @relation("UserWishlists")         // Listes de souhaits de l'utilisateur
+  notifications    Notification[] @relation("UserNotifications")     // Notifications reçues par l'utilisateur
 
   resetToken       String?                                            // Token de réinitialisation de mot de passe (optionnel)
   resetTokenExpiry DateTime?                                          // Date d'expiration du resetToken (optionnel)
@@ -70,7 +70,7 @@ enum AddressType {
 }
 model Address {
   id              String         @id @default(uuid())                   // Clé primaire : UUID
-  user            User           @relation(fields: [userId], references: [id])      // Propriétaire de l'adresse
+  user            User           @relation("UserAddress",fields: [userId], references: [id])      // Propriétaire de l'adresse
   userId          String                                                // FK vers User.id
   fullName        String                                                // Nom complet pour la livraison
   street          String                                                // Adresse (rue et numéro)
