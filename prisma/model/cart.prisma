@@ -2,9 +2,9 @@
 
 model Cart {
   id         String     @id @default(uuid())                 // Clé primaire : identifiant unique du panier
-  userId     String?    @unique                              // FK vers User.id (utilisateur)
+  userId     String?    @map("user_id")                      // non-unique : plusieurs paniers possibles
   user       User?      @relation("UserCarts", fields: [userId], references: [id])  // Propriétaire du panier
-  items      CartItem[]                                      // Éléments du panier
+  items      CartItem[] @relation("CartItems")              // Liste des éléments du panier
   couponCode String?                                       // Code promo appliqué (optionnel)
   total      Float                                             // Montant total
   updatedAt  DateTime   @updatedAt                         // Date de dernière mise à jour
@@ -19,8 +19,8 @@ model Cart {
 
 model CartItem {
   id        String  @id @default(uuid())                   // Clé primaire : identifiant unique de l'élément
-  cartId    String                                          // FK vers Cart.id
-  cart      Cart    @relation(fields: [cartId], references: [id])  // Panier associé
+  cartId    String                                         // FK vers Cart.id
+  cart      Cart    @relation("CartItems", fields: [cartId], references: [id]) // Panier associé
   productId String                                          // Identifiant du produit
   variantId String?                                         // Identifiant de la variante (optionnel)
   name      String                                          // Nom du produit
