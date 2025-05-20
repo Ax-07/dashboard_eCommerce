@@ -6,7 +6,7 @@ model Order {                                                   // Modèle repr�
   user          User          @relation("UserOrders", fields: [userId], references: [id]) // Relation vers le client authentifié
   customerId    String?                                        // FK optionnelle vers Customer.id (profil client détaillé)
   customer      Customer?     @relation("OrdersForCustomer", fields: [customerId], references: [id]) // Relation vers le profil client
-  items         OrderItem[]                                    // Liste des articles de la commande
+  items         OrderItem[]   @relation("OrderItems")                                 // Liste des articles de la commande
 
   totalAmount   Float                                          // Montant total TTC
   subtotal      Float                                          // Sous-total HT
@@ -43,7 +43,7 @@ model Order {                                                   // Modèle repr�
 model OrderItem {                                               // Modèle représentant un article dans une commande
   id             String        @id @default(uuid())           // Clé primaire : UUID
   orderId        String                                        // FK vers Order.id
-  order          Order         @relation(fields: [orderId], references: [id]) // Relation vers la commande
+  order          Order         @relation("OrderItems",fields: [orderId], references: [id]) // Relation vers la commande
   productId      String                                        // Identifiant du produit
   productName    String                                        // Nom du produit au moment de l'achat
   sku            String                                        // SKU / référence produit
