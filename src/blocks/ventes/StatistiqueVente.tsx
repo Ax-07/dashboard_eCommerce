@@ -14,6 +14,8 @@ import MultiLineChart from "@/src/components/custom/charts/Multi-Line-Chart";
 import { PieChartComponent } from "@/src/components/custom/charts/pie-chart";
 import { ALLSELLS } from "@/src/mock/sells/monthly_sales";
 import { useChartsDatas } from "@/src/components/custom/charts/useChartsDatas";
+import OrderList from "../order/OrderList";
+import { ORDERS } from "@/src/mock";
 
 const StatistiqueVente = () => {
   const { chartData, chartConfig, total, pieChartData } = useChartsDatas({
@@ -21,6 +23,7 @@ const StatistiqueVente = () => {
     startDate: ALLSELLS[0].date,
     endDate: ALLSELLS[ALLSELLS.length - 1].date,
   });
+  const orders = ORDERS;
   return (
     <div className="w-full">
       <div className="flex gap-4">
@@ -77,6 +80,7 @@ const StatistiqueVente = () => {
         <Card className="flex-1">
           <CardHeader>
             <CardTitle>Suivi des commandes</CardTitle>
+            <OrderList orders={orders}/>
           </CardHeader>
         </Card>
       </div>
