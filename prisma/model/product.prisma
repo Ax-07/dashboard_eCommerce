@@ -6,13 +6,13 @@ model Product {                                                      // Modèle 
   description   String                                      // Description détaillée
   price         Float?                                     // Prix unitaire (optionnel)
   categoryId    String?                                    // FK vers ProductCategory.id (optionnel)
-  category      ProductCategory? @relation(fields: [categoryId], references: [id]) // Catégorie associée
-  options       Option[]                                   // Variantes/options du produit
-  media         Media[]                                    // Médias associés (images, vidéos)
-  promotion     Promotion?                                 // Promotion en cours (optionnel)
+  category      ProductCategory? @relation("ProductCategory",fields: [categoryId], references: [id]) // Catégorie associée
+  options       Option[]         @relation("ProductOption")                          // Variantes/options du produit
+  media         Media[]          @relation("ProductMedia")                          // Médias associés (images, vidéos)
+  promotion     Promotion?       @relation("ProductPromotion")                          // Promotion en cours (optionnel)
   attributes    Json?                                      // Attributs libres (tags, dimensions…)
   stock         Stock?           @relation("ProductStock")   // Stock disponible (relation 1:1)
-  reviews       Review[]                                   // Avis clients
+  reviews       Review[]         @relation("ProductReview")                          // Avis clients
   createdAt     DateTime         @default(now())              // Date de création
   updatedAt     DateTime         @updatedAt                   // Date de dernière mise à jour
 
@@ -28,7 +28,7 @@ model ProductCategory {                                              // Modèle 
   parentCategoryId String?                                   // FK vers catégorie parente (self-relation)
   parentCategory   ProductCategory?   @relation("Subcategories", fields: [parentCategoryId], references: [id]) // Catégorie parente
   subcategories    ProductCategory[]  @relation("Subcategories") // Sous-catégories
-  products         Product[]                                 // Produits rattachés
+  products         Product[]          @relation("ProductCategory")                       // Produits rattachés
   createdAt        DateTime           @default(now())         // Date de création
   updatedAt        DateTime           @updatedAt              // Date de mise à jour
 
@@ -41,8 +41,8 @@ model Option {                                          // Modèle option (ex: t
   id         String        @id @default(uuid())       // Clé primaire : UUID
   name       String                                // Nom de l'option
   productId  String                                // FK vers Product.id
-  product    Product       @relation(fields: [productId], references: [id]) // Produit parent
-  values     OptionValue[]                         // Valeurs possibles
+  product    Product       @relation("ProductOption",fields: [productId], references: [id]) // Produit parent
+  values     OptionValue[] @relation("OptionValue")                        // Valeurs possibles
 
   @@map("options")                               // Table SQL "options"
   @@index([productId], name: "idx_option_productId") // Index sur productId
@@ -59,7 +59,7 @@ model OptionValue {                                       // Valeur d'une option
   priceModifier Float?                              // Écart de prix relatif au produit de base
   isDefault     Boolean?     @default(false)         // Valeur par défaut
   optionId      String                              // FK vers Option.id
-  option        Option       @relation(fields: [optionId], references: [id]) // Option parente
+  option        Option       @relation("OptionValue",fields: [optionId], references: [id]) // Option parente
   stockId       String?      @unique                 // FK unique vers Stock.id (one-to-one)
   stock         Stock?       @relation("OptionValueStock", fields: [stockId], references: [id]) // Stock spécifique
 
@@ -69,7 +69,7 @@ model OptionValue {                                       // Valeur d'une option
 model Media {                                         // Modèle média (image, vidéo, audio)
   id         String   @id @default(uuid())          // Clé primaire : UUID
   productId  String                                 // FK vers Product.id
-  product    Product  @relation(fields: [productId], references: [id]) // Produit associé
+  product    Product  @relation("ProductMedia",fields: [productId], references: [id]) // Produit associé
   url        String                                 // URL publique
   type       MediaType                              // Type de média (enum)
   alt        String?                                // Texte alternatif pour accessibilité
@@ -105,7 +105,7 @@ model Stock {                                        // Modèle de stock produit
 model Promotion {                                    // Modèle promotion (réductions temporaires)
   id                 String   @id @default(uuid())  // Clé primaire : UUID
   productId          String   @unique               // FK unique vers Product.id (one-to-one)
-  product            Product  @relation(fields: [productId], references: [id]) // Produit concerné
+  product            Product  @relation("ProductPromotion",fields: [productId], references: [id]) // Produit concerné
   isOnSale           Boolean? @default(false)       // Indicateur de promotion active
   discountPercentage Float?                        // Pourcentage de réduction
   discountAmount     Float?                        // Montant fixe de réduction
@@ -121,7 +121,7 @@ model Promotion {                                    // Modèle promotion (rédu
 model Review {                                      // Modèle avis client
   id                 String   @id @default(uuid())  // Clé primaire : UUID
   productId          String                         // FK vers Product.id
-  product            Product  @relation(fields: [productId], references: [id]) // Produit évalué
+  product            Product  @relation("ProductReview",fields: [productId], references: [id]) // Produit évalué
   userId             String                         // FK vers User.id
   user               User     @relation("UserReviews", fields: [userId], references: [id]) // Auteur de l'avis
   rating             Int                            // Note (1–5)
@@ -140,7 +140,7 @@ model Wishlist {
   id        String         @id @default(uuid())
   userId    String
   user      User           @relation("UserWishlists", fields: [userId], references: [id])
-  items     WishlistItem[]
+  items     WishlistItem[] @relation("WishlistItem")
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 
@@ -151,7 +151,7 @@ model Wishlist {
 model WishlistItem {
   id          String     @id @default(uuid())
   wishlistId  String                                  // FK vers Wishlist.id
-  wishlist    Wishlist  @relation(fields: [wishlistId], references: [id])
+  wishlist    Wishlist  @relation("WishlistItem",fields: [wishlistId], references: [id])
   productId   String                                  // Identifiant du produit
   variantId   String?                                 // Identifiant de variante (optionnel)
   quantity    Int       @default(1)                   // Nombre souhaité de ce produit
