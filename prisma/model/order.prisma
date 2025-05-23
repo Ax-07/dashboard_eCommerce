@@ -46,6 +46,7 @@ model OrderItem {                                               // Modèle repr�
   order          Order         @relation("OrderItems",fields: [orderId], references: [id]) // Relation vers la commande
   productId      String                                        // Identifiant du produit
   productName    String                                        // Nom du produit au moment de l'achat
+  productImage   String?                                       // URL de l'image du produit
   sku            String                                        // SKU / référence produit
   quantity       Int                                           // Quantité commandée
   unitPrice      Float                                         // Prix unitaire
