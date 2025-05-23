@@ -1,0 +1,2416 @@
+{
+  "Account": [],
+  "Session": [],
+  "Cart": [
+    {
+      "id": "e366f3ef-0232-46f3-929d-720e9734a72b",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "items": [
+        {
+          "id": "8eb25b15-19c4-4c32-9644-69bc424b2a9c",
+          "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+          "productId": "huile_spectre_complet-15pct-2025",
+          "productName": "Spectre Complet 15%",
+          "sku": "spectre-complet-sell-10ml",
+          "quantity": 10,
+          "unitPrice": 2.5,
+          "totalPrice": 25
+        },
+        {
+          "id": "0c1e94c4-e9d2-4767-b00a-13f9b482457c",
+          "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+          "productId": "huile_spectre_large-10pct-2025",
+          "productName": "Spectre Large 10%",
+          "sku": "large-sell-30ml",
+          "quantity": 30,
+          "unitPrice": 1.8,
+          "totalPrice": 54
+        },
+        {
+          "id": "d00cd3bf-7a65-4b7b-b526-8905048452b8",
+          "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+          "productId": "huile_isolat-99pct-2025",
+          "productName": "Isolat 99%",
+          "sku": "isolat-sell-50ml",
+          "quantity": 50,
+          "unitPrice": 2.5,
+          "totalPrice": 125
+        },
+        {
+          "id": "017fd674-7c55-4e55-b0e2-2b6992950b5a",
+          "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+          "productId": "huile_menthe-10pct-2025",
+          "productName": "Menthe 10%",
+          "sku": "menthe-sell-10ml",
+          "quantity": 10,
+          "unitPrice": 2.3,
+          "totalPrice": 23
+        },
+        {
+          "id": "438721d8-66cb-49f4-bfa6-3a3dbb67fef7",
+          "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+          "productId": "huile_nano-5pct-2025",
+          "productName": "Nano CBD 5%",
+          "sku": "nano-sell-30ml",
+          "quantity": 30,
+          "unitPrice": 3.5,
+          "totalPrice": 105
+        }
+      ],
+      "couponCode": "none",
+      "total": 332,
+      "updatedAt": "2025-05-23T07:36:49.219Z",
+      "createdAt": "2025-05-23T07:36:49.219Z"
+    },
+    {
+      "id": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "items": [
+        {
+          "id": "0a1b132d-6aa6-4107-9d46-cd74a61148a2",
+          "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+          "productId": "og_kush-greenhouse-2025",
+          "productName": "OG Kush greenhouse 2025",
+          "sku": "og_kush-sell-5g",
+          "quantity": 5,
+          "unitPrice": 4.4,
+          "totalPrice": 22
+        },
+        {
+          "id": "965bc652-377e-4563-9c31-4043ad46788e",
+          "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+          "productId": "ak_47-indoor-2025",
+          "productName": "AK-47 Indoor",
+          "sku": "AK_47-sell-10g",
+          "quantity": 10,
+          "unitPrice": 4,
+          "totalPrice": 40
+        },
+        {
+          "id": "528c1c17-4878-4514-9ab0-5e8370b01817",
+          "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+          "productId": "white_widow-2025",
+          "productName": "White Widow 2025",
+          "sku": "white_widow-sell-25g",
+          "quantity": 25,
+          "unitPrice": 3.6,
+          "totalPrice": 90
+        },
+        {
+          "id": "c695dd62-09bc-464e-9504-37a987b288ed",
+          "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+          "productId": "orange_vbio-glasshouse-2025",
+          "productName": "Orange bud",
+          "sku": "orange_vbio-sell-50g",
+          "quantity": 50,
+          "unitPrice": 3.2,
+          "totalPrice": 160
+        },
+        {
+          "id": "03c88210-5bb9-4859-99d9-eb0621af545c",
+          "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+          "productId": "gorilla_glue–greenhouse-2025",
+          "productName": "Gorilla Glue",
+          "sku": "gorilla_glue-sell-100g",
+          "quantity": 100,
+          "unitPrice": 2.8,
+          "totalPrice": 280
+        }
+      ],
+      "couponCode": "none",
+      "total": 592,
+      "updatedAt": "2025-05-23T07:36:49.219Z",
+      "createdAt": "2025-05-23T07:36:49.219Z"
+    },
+    {
+      "id": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "items": [
+        {
+          "id": "c0bb4758-3507-42fb-8f62-6f740dc3a9cb",
+          "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+          "productId": "bubba_kush–glasshouse-2025",
+          "productName": "Bubba Kush",
+          "sku": "bubba_kush-sell-5g",
+          "quantity": 5,
+          "unitPrice": 4.4,
+          "totalPrice": 22
+        },
+        {
+          "id": "13f49bae-081f-4d21-b868-a66c2053383b",
+          "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+          "productId": "blueberry_dream-greenhouse-2025",
+          "productName": "Blueberry Dream",
+          "sku": "blueberry_dream-sell-10g",
+          "quantity": 10,
+          "unitPrice": 4,
+          "totalPrice": 40
+        },
+        {
+          "id": "1592e753-cfc6-4beb-8073-f6f9cfabbd93",
+          "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+          "productId": "strawberry-glasshouse-2025",
+          "productName": "Strawberry",
+          "sku": "strawberry-sell-25g",
+          "quantity": 25,
+          "unitPrice": 3.6,
+          "totalPrice": 90
+        },
+        {
+          "id": "4ce71851-7e30-48da-9867-c246b6eec4ae",
+          "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+          "productId": "orange_V2-premium-glasshouse-2025",
+          "productName": "Orange bud V2",
+          "sku": "orange_V2-sell-50g",
+          "quantity": 50,
+          "unitPrice": 3.2,
+          "totalPrice": 160
+        },
+        {
+          "id": "3f00be56-4951-47bb-ab25-82c6bf3e3f2a",
+          "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+          "productId": "dark_devil-glasshouse-2025",
+          "productName": "Dark Devil",
+          "sku": "orange_V2-sell-100g",
+          "quantity": 100,
+          "unitPrice": 2.8,
+          "totalPrice": 280
+        }
+      ],
+      "couponCode": "none",
+      "total": 592,
+      "updatedAt": "2025-05-23T07:36:49.219Z",
+      "createdAt": "2025-05-23T07:36:49.219Z"
+    },
+    {
+      "id": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "items": [
+        {
+          "id": "849d5d85-12c5-47ca-9fd8-2533a7d04690",
+          "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+          "productId": "cannatonic-glasshouse-2025",
+          "productName": "Cannatonic",
+          "sku": "cannatonic-sell-5g",
+          "quantity": 5,
+          "unitPrice": 4.4,
+          "totalPrice": 22
+        },
+        {
+          "id": "7168a52d-d1b6-4691-ae64-ee5a09efe962",
+          "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+          "productId": "lemon_tonic-glasshouse-2025",
+          "productName": "Lemon Tonic",
+          "sku": "orange_V2-sell-10g",
+          "quantity": 10,
+          "unitPrice": 4,
+          "totalPrice": 40
+        },
+        {
+          "id": "ebb7d83f-4cb7-4592-8a1e-9d1f1bc6b52f",
+          "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+          "productId": "mandarine_Kush-glasshouse-2025",
+          "productName": "Mandarine Kush",
+          "sku": "mandarine_Kush-sell-25g",
+          "quantity": 25,
+          "unitPrice": 3.6,
+          "totalPrice": 90
+        },
+        {
+          "id": "867c8d08-97c1-47ad-8616-96da54ae636b",
+          "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+          "productId": "lemon_haze-Indoor-2025",
+          "productName": "Lemon Haze",
+          "sku": "lemon_haze-sell-50g",
+          "quantity": 50,
+          "unitPrice": 3.2,
+          "totalPrice": 160
+        },
+        {
+          "id": "7ca0ab4a-eace-4b1f-a5f2-3d24cd27090f",
+          "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+          "productId": "orange_cbdv-2024",
+          "productName": "Orange bud bio",
+          "sku": "orange_cbdv-sell-100g",
+          "quantity": 100,
+          "unitPrice": 2.8,
+          "totalPrice": 280
+        }
+      ],
+      "couponCode": "none",
+      "total": 592,
+      "updatedAt": "2025-05-23T07:36:49.219Z",
+      "createdAt": "2025-05-23T07:36:49.219Z"
+    }
+  ],
+  "CartItem": [
+    {
+      "id": "8eb25b15-19c4-4c32-9644-69bc424b2a9c",
+      "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+      "productId": "huile_spectre_complet-15pct-2025",
+      "productName": "Spectre Complet 15%",
+      "sku": "spectre-complet-sell-10ml",
+      "quantity": 10,
+      "unitPrice": 2.5,
+      "totalPrice": 25
+    },
+    {
+      "id": "0c1e94c4-e9d2-4767-b00a-13f9b482457c",
+      "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+      "productId": "huile_spectre_large-10pct-2025",
+      "productName": "Spectre Large 10%",
+      "sku": "large-sell-30ml",
+      "quantity": 30,
+      "unitPrice": 1.8,
+      "totalPrice": 54
+    },
+    {
+      "id": "d00cd3bf-7a65-4b7b-b526-8905048452b8",
+      "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+      "productId": "huile_isolat-99pct-2025",
+      "productName": "Isolat 99%",
+      "sku": "isolat-sell-50ml",
+      "quantity": 50,
+      "unitPrice": 2.5,
+      "totalPrice": 125
+    },
+    {
+      "id": "017fd674-7c55-4e55-b0e2-2b6992950b5a",
+      "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+      "productId": "huile_menthe-10pct-2025",
+      "productName": "Menthe 10%",
+      "sku": "menthe-sell-10ml",
+      "quantity": 10,
+      "unitPrice": 2.3,
+      "totalPrice": 23
+    },
+    {
+      "id": "438721d8-66cb-49f4-bfa6-3a3dbb67fef7",
+      "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+      "productId": "huile_nano-5pct-2025",
+      "productName": "Nano CBD 5%",
+      "sku": "nano-sell-30ml",
+      "quantity": 30,
+      "unitPrice": 3.5,
+      "totalPrice": 105
+    },
+    {
+      "id": "0a1b132d-6aa6-4107-9d46-cd74a61148a2",
+      "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+      "productId": "og_kush-greenhouse-2025",
+      "productName": "OG Kush greenhouse 2025",
+      "sku": "og_kush-sell-5g",
+      "quantity": 5,
+      "unitPrice": 4.4,
+      "totalPrice": 22
+    },
+    {
+      "id": "965bc652-377e-4563-9c31-4043ad46788e",
+      "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+      "productId": "ak_47-indoor-2025",
+      "productName": "AK-47 Indoor",
+      "sku": "AK_47-sell-10g",
+      "quantity": 10,
+      "unitPrice": 4,
+      "totalPrice": 40
+    },
+    {
+      "id": "528c1c17-4878-4514-9ab0-5e8370b01817",
+      "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+      "productId": "white_widow-2025",
+      "productName": "White Widow 2025",
+      "sku": "white_widow-sell-25g",
+      "quantity": 25,
+      "unitPrice": 3.6,
+      "totalPrice": 90
+    },
+    {
+      "id": "c695dd62-09bc-464e-9504-37a987b288ed",
+      "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+      "productId": "orange_vbio-glasshouse-2025",
+      "productName": "Orange bud",
+      "sku": "orange_vbio-sell-50g",
+      "quantity": 50,
+      "unitPrice": 3.2,
+      "totalPrice": 160
+    },
+    {
+      "id": "03c88210-5bb9-4859-99d9-eb0621af545c",
+      "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+      "productId": "gorilla_glue–greenhouse-2025",
+      "productName": "Gorilla Glue",
+      "sku": "gorilla_glue-sell-100g",
+      "quantity": 100,
+      "unitPrice": 2.8,
+      "totalPrice": 280
+    },
+    {
+      "id": "c0bb4758-3507-42fb-8f62-6f740dc3a9cb",
+      "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+      "productId": "bubba_kush–glasshouse-2025",
+      "productName": "Bubba Kush",
+      "sku": "bubba_kush-sell-5g",
+      "quantity": 5,
+      "unitPrice": 4.4,
+      "totalPrice": 22
+    },
+    {
+      "id": "13f49bae-081f-4d21-b868-a66c2053383b",
+      "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+      "productId": "blueberry_dream-greenhouse-2025",
+      "productName": "Blueberry Dream",
+      "sku": "blueberry_dream-sell-10g",
+      "quantity": 10,
+      "unitPrice": 4,
+      "totalPrice": 40
+    },
+    {
+      "id": "1592e753-cfc6-4beb-8073-f6f9cfabbd93",
+      "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+      "productId": "strawberry-glasshouse-2025",
+      "productName": "Strawberry",
+      "sku": "strawberry-sell-25g",
+      "quantity": 25,
+      "unitPrice": 3.6,
+      "totalPrice": 90
+    },
+    {
+      "id": "4ce71851-7e30-48da-9867-c246b6eec4ae",
+      "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+      "productId": "orange_V2-premium-glasshouse-2025",
+      "productName": "Orange bud V2",
+      "sku": "orange_V2-sell-50g",
+      "quantity": 50,
+      "unitPrice": 3.2,
+      "totalPrice": 160
+    },
+    {
+      "id": "3f00be56-4951-47bb-ab25-82c6bf3e3f2a",
+      "cartId": "f2f6751d-fa0c-4a4d-a4a2-da432dc8cc29",
+      "productId": "dark_devil-glasshouse-2025",
+      "productName": "Dark Devil",
+      "sku": "orange_V2-sell-100g",
+      "quantity": 100,
+      "unitPrice": 2.8,
+      "totalPrice": 280
+    },
+    {
+      "id": "849d5d85-12c5-47ca-9fd8-2533a7d04690",
+      "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+      "productId": "cannatonic-glasshouse-2025",
+      "productName": "Cannatonic",
+      "sku": "cannatonic-sell-5g",
+      "quantity": 5,
+      "unitPrice": 4.4,
+      "totalPrice": 22
+    },
+    {
+      "id": "7168a52d-d1b6-4691-ae64-ee5a09efe962",
+      "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+      "productId": "lemon_tonic-glasshouse-2025",
+      "productName": "Lemon Tonic",
+      "sku": "orange_V2-sell-10g",
+      "quantity": 10,
+      "unitPrice": 4,
+      "totalPrice": 40
+    },
+    {
+      "id": "ebb7d83f-4cb7-4592-8a1e-9d1f1bc6b52f",
+      "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+      "productId": "mandarine_Kush-glasshouse-2025",
+      "productName": "Mandarine Kush",
+      "sku": "mandarine_Kush-sell-25g",
+      "quantity": 25,
+      "unitPrice": 3.6,
+      "totalPrice": 90
+    },
+    {
+      "id": "867c8d08-97c1-47ad-8616-96da54ae636b",
+      "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+      "productId": "lemon_haze-Indoor-2025",
+      "productName": "Lemon Haze",
+      "sku": "lemon_haze-sell-50g",
+      "quantity": 50,
+      "unitPrice": 3.2,
+      "totalPrice": 160
+    },
+    {
+      "id": "7ca0ab4a-eace-4b1f-a5f2-3d24cd27090f",
+      "cartId": "3387b090-49ef-4d34-8e7d-2bdf107a6a5d",
+      "productId": "orange_cbdv-2024",
+      "productName": "Orange bud bio",
+      "sku": "orange_cbdv-sell-100g",
+      "quantity": 100,
+      "unitPrice": 2.8,
+      "totalPrice": 280
+    }
+  ],
+  "Coupon": [
+    {
+      "id": "aa932857-5f26-45ba-ba6f-38b1d8c44b00",
+      "code": "Coupon_code_0",
+      "description": "Coupon_description_0",
+      "discountPercentage": 0.5,
+      "discountAmount": 0.5,
+      "startDate": "2025-05-23T07:36:49.220Z",
+      "endDate": "2025-05-23T07:36:49.220Z",
+      "isActive": true,
+      "usageLimit": 0,
+      "createdAt": "2025-05-23T07:36:49.220Z",
+      "updatedAt": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "8ab94ff5-b731-449c-b715-2fbab0c38245",
+      "code": "Coupon_code_1",
+      "description": "Coupon_description_1",
+      "discountPercentage": 1.5,
+      "discountAmount": 1.5,
+      "startDate": "2025-05-22T07:36:49.220Z",
+      "endDate": "2025-05-22T07:36:49.220Z",
+      "isActive": false,
+      "usageLimit": 1,
+      "createdAt": "2025-05-22T07:36:49.220Z",
+      "updatedAt": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "Order": [
+    {
+      "id": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "shippingStatus": "pending",
+      "totalAmount": 398.4,
+      "subtotal": 332,
+      "taxAmount": 66.4,
+      "shippingCost": 0,
+      "discount": 0,
+      "items": [
+        {
+          "id": "ed7b32e4-8191-4afb-bf66-3c3309c96838",
+          "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "productId": "huile_spectre_complet-15pct-2025",
+          "productName": "Spectre Complet 15%",
+          "sku": "spectre-complet-sell-10ml",
+          "quantity": 10,
+          "unitPrice": 2.5,
+          "totalPrice": 25,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "e675dcfb-1ec9-479b-96b1-62e49754370b",
+          "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "productId": "huile_spectre_large-10pct-2025",
+          "productName": "Spectre Large 10%",
+          "sku": "large-sell-30ml",
+          "quantity": 30,
+          "unitPrice": 1.8,
+          "totalPrice": 54,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "01922049-e600-4a6e-ae41-a99e5d28c3fe",
+          "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "productId": "huile_isolat-99pct-2025",
+          "productName": "Isolat 99%",
+          "sku": "isolat-sell-50ml",
+          "quantity": 50,
+          "unitPrice": 2.5,
+          "totalPrice": 125,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "4ab1846d-1fe5-491a-8799-29c33c921268",
+          "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "productId": "huile_menthe-10pct-2025",
+          "productName": "Menthe 10%",
+          "sku": "menthe-sell-10ml",
+          "quantity": 10,
+          "unitPrice": 2.3,
+          "totalPrice": 23,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "6b689d9e-1ac9-496f-b013-7734d4fd5731",
+          "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "productId": "huile_nano-5pct-2025",
+          "productName": "Nano CBD 5%",
+          "sku": "nano-sell-30ml",
+          "quantity": 30,
+          "unitPrice": 3.5,
+          "totalPrice": 105,
+          "refundStatus": "none",
+          "returnEligible": true
+        }
+      ],
+      "paymentId": "f7dda60d-3538-495d-8e36-07df005f9baf"
+    },
+    {
+      "id": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "shippingStatus": "pending",
+      "totalAmount": 710.4,
+      "subtotal": 592,
+      "taxAmount": 118.4,
+      "shippingCost": 0,
+      "discount": 0,
+      "items": [
+        {
+          "id": "6ca35919-8bc8-4fa5-8835-481e2d976bf7",
+          "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "productId": "og_kush-greenhouse-2025",
+          "productName": "OG Kush greenhouse 2025",
+          "sku": "og_kush-sell-5g",
+          "quantity": 5,
+          "unitPrice": 4.4,
+          "totalPrice": 22,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "f35ce443-5cd1-4843-8365-32d3bb09149a",
+          "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "productId": "ak_47-indoor-2025",
+          "productName": "AK-47 Indoor",
+          "sku": "AK_47-sell-10g",
+          "quantity": 10,
+          "unitPrice": 4,
+          "totalPrice": 40,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "8244111e-95c2-4f53-95a2-a066f015390a",
+          "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "productId": "white_widow-2025",
+          "productName": "White Widow 2025",
+          "sku": "white_widow-sell-25g",
+          "quantity": 25,
+          "unitPrice": 3.6,
+          "totalPrice": 90,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "b1514b9e-f7d0-4a68-92d4-d96c5af66618",
+          "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "productId": "orange_vbio-glasshouse-2025",
+          "productName": "Orange bud",
+          "sku": "orange_vbio-sell-50g",
+          "quantity": 50,
+          "unitPrice": 3.2,
+          "totalPrice": 160,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "dae8104c-f917-4ee1-babc-6fe3786d239f",
+          "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "productId": "gorilla_glue–greenhouse-2025",
+          "productName": "Gorilla Glue",
+          "sku": "gorilla_glue-sell-100g",
+          "quantity": 100,
+          "unitPrice": 2.8,
+          "totalPrice": 280,
+          "refundStatus": "none",
+          "returnEligible": true
+        }
+      ],
+      "paymentId": "af36010d-6212-43ac-9be2-a79a9d4380a2"
+    },
+    {
+      "id": "93d8e726-7bf8-48aa-a361-909092304f27",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "shippingStatus": "pending",
+      "totalAmount": 710.4,
+      "subtotal": 592,
+      "taxAmount": 118.4,
+      "shippingCost": 0,
+      "discount": 0,
+      "items": [
+        {
+          "id": "df2d92a4-07dc-4224-81c4-4a6aa4501694",
+          "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+          "productId": "bubba_kush–glasshouse-2025",
+          "productName": "Bubba Kush",
+          "sku": "bubba_kush-sell-5g",
+          "quantity": 5,
+          "unitPrice": 4.4,
+          "totalPrice": 22,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "bc0b4546-0c88-4e7a-b7f8-82c254b2b040",
+          "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+          "productId": "blueberry_dream-greenhouse-2025",
+          "productName": "Blueberry Dream",
+          "sku": "blueberry_dream-sell-10g",
+          "quantity": 10,
+          "unitPrice": 4,
+          "totalPrice": 40,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "6addcc14-35a1-4c2b-b6e5-4f4698310f3e",
+          "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+          "productId": "strawberry-glasshouse-2025",
+          "productName": "Strawberry",
+          "sku": "strawberry-sell-25g",
+          "quantity": 25,
+          "unitPrice": 3.6,
+          "totalPrice": 90,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "75c2cfec-3077-41c6-acf8-6fb7fffe97d0",
+          "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+          "productId": "orange_V2-premium-glasshouse-2025",
+          "productName": "Orange bud V2",
+          "sku": "orange_V2-sell-50g",
+          "quantity": 50,
+          "unitPrice": 3.2,
+          "totalPrice": 160,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "9b8d0a0a-5787-4d13-a0a4-21f347d7fbdd",
+          "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+          "productId": "dark_devil-glasshouse-2025",
+          "productName": "Dark Devil",
+          "sku": "orange_V2-sell-100g",
+          "quantity": 100,
+          "unitPrice": 2.8,
+          "totalPrice": 280,
+          "refundStatus": "none",
+          "returnEligible": true
+        }
+      ],
+      "paymentId": "2d9cf618-f7cd-44f4-b2ae-abe1e7c5e075"
+    },
+    {
+      "id": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "shippingStatus": "pending",
+      "totalAmount": 710.4,
+      "subtotal": 592,
+      "taxAmount": 118.4,
+      "shippingCost": 0,
+      "discount": 0,
+      "items": [
+        {
+          "id": "7433e987-58b4-4328-a6b3-d328077bc997",
+          "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+          "productId": "cannatonic-glasshouse-2025",
+          "productName": "Cannatonic",
+          "sku": "cannatonic-sell-5g",
+          "quantity": 5,
+          "unitPrice": 4.4,
+          "totalPrice": 22,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "63ca74d2-043b-46ff-95f4-ff0d9af1a910",
+          "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+          "productId": "lemon_tonic-glasshouse-2025",
+          "productName": "Lemon Tonic",
+          "sku": "orange_V2-sell-10g",
+          "quantity": 10,
+          "unitPrice": 4,
+          "totalPrice": 40,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "e6dda32e-31cb-4bbd-8c28-4ebbb0010197",
+          "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+          "productId": "mandarine_Kush-glasshouse-2025",
+          "productName": "Mandarine Kush",
+          "sku": "mandarine_Kush-sell-25g",
+          "quantity": 25,
+          "unitPrice": 3.6,
+          "totalPrice": 90,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "7acbd1cb-8036-4a2e-90db-7347e757a55e",
+          "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+          "productId": "lemon_haze-Indoor-2025",
+          "productName": "Lemon Haze",
+          "sku": "lemon_haze-sell-50g",
+          "quantity": 50,
+          "unitPrice": 3.2,
+          "totalPrice": 160,
+          "refundStatus": "none",
+          "returnEligible": true
+        },
+        {
+          "id": "0856fc76-445d-4820-b66d-ec1da7403b80",
+          "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+          "productId": "orange_cbdv-2024",
+          "productName": "Orange bud bio",
+          "sku": "orange_cbdv-sell-100g",
+          "quantity": 100,
+          "unitPrice": 2.8,
+          "totalPrice": 280,
+          "refundStatus": "none",
+          "returnEligible": true
+        }
+      ],
+      "paymentId": "1dea7407-5674-4e99-b234-2052fab47f31"
+    }
+  ],
+  "OrderItem": [
+    {
+      "id": "ed7b32e4-8191-4afb-bf66-3c3309c96838",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "productId": "huile_spectre_complet-15pct-2025",
+      "productName": "Spectre Complet 15%",
+      "sku": "spectre-complet-sell-10ml",
+      "quantity": 10,
+      "unitPrice": 2.5,
+      "totalPrice": 25,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "e675dcfb-1ec9-479b-96b1-62e49754370b",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "productId": "huile_spectre_large-10pct-2025",
+      "productName": "Spectre Large 10%",
+      "sku": "large-sell-30ml",
+      "quantity": 30,
+      "unitPrice": 1.8,
+      "totalPrice": 54,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "01922049-e600-4a6e-ae41-a99e5d28c3fe",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "productId": "huile_isolat-99pct-2025",
+      "productName": "Isolat 99%",
+      "sku": "isolat-sell-50ml",
+      "quantity": 50,
+      "unitPrice": 2.5,
+      "totalPrice": 125,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "4ab1846d-1fe5-491a-8799-29c33c921268",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "productId": "huile_menthe-10pct-2025",
+      "productName": "Menthe 10%",
+      "sku": "menthe-sell-10ml",
+      "quantity": 10,
+      "unitPrice": 2.3,
+      "totalPrice": 23,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "6b689d9e-1ac9-496f-b013-7734d4fd5731",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "productId": "huile_nano-5pct-2025",
+      "productName": "Nano CBD 5%",
+      "sku": "nano-sell-30ml",
+      "quantity": 30,
+      "unitPrice": 3.5,
+      "totalPrice": 105,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "6ca35919-8bc8-4fa5-8835-481e2d976bf7",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "productId": "og_kush-greenhouse-2025",
+      "productName": "OG Kush greenhouse 2025",
+      "sku": "og_kush-sell-5g",
+      "quantity": 5,
+      "unitPrice": 4.4,
+      "totalPrice": 22,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "f35ce443-5cd1-4843-8365-32d3bb09149a",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "productId": "ak_47-indoor-2025",
+      "productName": "AK-47 Indoor",
+      "sku": "AK_47-sell-10g",
+      "quantity": 10,
+      "unitPrice": 4,
+      "totalPrice": 40,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "8244111e-95c2-4f53-95a2-a066f015390a",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "productId": "white_widow-2025",
+      "productName": "White Widow 2025",
+      "sku": "white_widow-sell-25g",
+      "quantity": 25,
+      "unitPrice": 3.6,
+      "totalPrice": 90,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "b1514b9e-f7d0-4a68-92d4-d96c5af66618",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "productId": "orange_vbio-glasshouse-2025",
+      "productName": "Orange bud",
+      "sku": "orange_vbio-sell-50g",
+      "quantity": 50,
+      "unitPrice": 3.2,
+      "totalPrice": 160,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "dae8104c-f917-4ee1-babc-6fe3786d239f",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "productId": "gorilla_glue–greenhouse-2025",
+      "productName": "Gorilla Glue",
+      "sku": "gorilla_glue-sell-100g",
+      "quantity": 100,
+      "unitPrice": 2.8,
+      "totalPrice": 280,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "df2d92a4-07dc-4224-81c4-4a6aa4501694",
+      "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+      "productId": "bubba_kush–glasshouse-2025",
+      "productName": "Bubba Kush",
+      "sku": "bubba_kush-sell-5g",
+      "quantity": 5,
+      "unitPrice": 4.4,
+      "totalPrice": 22,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "bc0b4546-0c88-4e7a-b7f8-82c254b2b040",
+      "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+      "productId": "blueberry_dream-greenhouse-2025",
+      "productName": "Blueberry Dream",
+      "sku": "blueberry_dream-sell-10g",
+      "quantity": 10,
+      "unitPrice": 4,
+      "totalPrice": 40,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "6addcc14-35a1-4c2b-b6e5-4f4698310f3e",
+      "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+      "productId": "strawberry-glasshouse-2025",
+      "productName": "Strawberry",
+      "sku": "strawberry-sell-25g",
+      "quantity": 25,
+      "unitPrice": 3.6,
+      "totalPrice": 90,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "75c2cfec-3077-41c6-acf8-6fb7fffe97d0",
+      "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+      "productId": "orange_V2-premium-glasshouse-2025",
+      "productName": "Orange bud V2",
+      "sku": "orange_V2-sell-50g",
+      "quantity": 50,
+      "unitPrice": 3.2,
+      "totalPrice": 160,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "9b8d0a0a-5787-4d13-a0a4-21f347d7fbdd",
+      "orderId": "93d8e726-7bf8-48aa-a361-909092304f27",
+      "productId": "dark_devil-glasshouse-2025",
+      "productName": "Dark Devil",
+      "sku": "orange_V2-sell-100g",
+      "quantity": 100,
+      "unitPrice": 2.8,
+      "totalPrice": 280,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "7433e987-58b4-4328-a6b3-d328077bc997",
+      "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+      "productId": "cannatonic-glasshouse-2025",
+      "productName": "Cannatonic",
+      "sku": "cannatonic-sell-5g",
+      "quantity": 5,
+      "unitPrice": 4.4,
+      "totalPrice": 22,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "63ca74d2-043b-46ff-95f4-ff0d9af1a910",
+      "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+      "productId": "lemon_tonic-glasshouse-2025",
+      "productName": "Lemon Tonic",
+      "sku": "orange_V2-sell-10g",
+      "quantity": 10,
+      "unitPrice": 4,
+      "totalPrice": 40,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "e6dda32e-31cb-4bbd-8c28-4ebbb0010197",
+      "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+      "productId": "mandarine_Kush-glasshouse-2025",
+      "productName": "Mandarine Kush",
+      "sku": "mandarine_Kush-sell-25g",
+      "quantity": 25,
+      "unitPrice": 3.6,
+      "totalPrice": 90,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "7acbd1cb-8036-4a2e-90db-7347e757a55e",
+      "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+      "productId": "lemon_haze-Indoor-2025",
+      "productName": "Lemon Haze",
+      "sku": "lemon_haze-sell-50g",
+      "quantity": 50,
+      "unitPrice": 3.2,
+      "totalPrice": 160,
+      "refundStatus": "none",
+      "returnEligible": true
+    },
+    {
+      "id": "0856fc76-445d-4820-b66d-ec1da7403b80",
+      "orderId": "90407bf2-912a-47cd-baeb-11ac7d25e243",
+      "productId": "orange_cbdv-2024",
+      "productName": "Orange bud bio",
+      "sku": "orange_cbdv-sell-100g",
+      "quantity": 100,
+      "unitPrice": 2.8,
+      "totalPrice": 280,
+      "refundStatus": "none",
+      "returnEligible": true
+    }
+  ],
+  "Payment": [
+    {
+      "id": "f7dda60d-3538-495d-8e36-07df005f9baf",
+      "method": "visa",
+      "currency": "eur",
+      "provider": "stripe",
+      "transactionId": null,
+      "status": "paid",
+      "amount": 398.4,
+      "paidAt": "2025-05-23T07:36:49.221Z",
+      "refundedAmount": null
+    },
+    {
+      "id": "af36010d-6212-43ac-9be2-a79a9d4380a2",
+      "method": "visa",
+      "currency": "eur",
+      "provider": "stripe",
+      "transactionId": null,
+      "status": "paid",
+      "amount": 710.4,
+      "paidAt": "2025-05-23T07:36:49.221Z",
+      "refundedAmount": null
+    },
+    {
+      "id": "2d9cf618-f7cd-44f4-b2ae-abe1e7c5e075",
+      "method": "visa",
+      "currency": "eur",
+      "provider": "stripe",
+      "transactionId": null,
+      "status": "paid",
+      "amount": 710.4,
+      "paidAt": "2025-05-23T07:36:49.221Z",
+      "refundedAmount": null
+    },
+    {
+      "id": "1dea7407-5674-4e99-b234-2052fab47f31",
+      "method": "visa",
+      "currency": "eur",
+      "provider": "stripe",
+      "transactionId": null,
+      "status": "paid",
+      "amount": 710.4,
+      "paidAt": "2025-05-23T07:36:49.221Z",
+      "refundedAmount": null
+    }
+  ],
+  "ShippingInfo": [
+    {
+      "id": "9a9cfb5b-6566-4963-9f1f-0f7a1bf3dd84",
+      "method": "ShippingInfo_method_0",
+      "trackingNumber": "ShippingInfo_trackingNumber_0",
+      "trackingUrl": "ShippingInfo_trackingUrl_0",
+      "carrier": "ShippingInfo_carrier_0",
+      "shippingCost": 0.5,
+      "insuranceAmount": 0.5,
+      "insuranceStatus": true,
+      "status": "pending",
+      "shippedAt": "2025-05-23T07:36:49.220Z",
+      "deliveredAt": "2025-05-23T07:36:49.220Z",
+      "estimatedDelivery": "2025-05-23T07:36:49.220Z",
+      "addressId": "f340e0c7-761b-4ca1-aa1b-ae89667cb02c"
+    },
+    {
+      "id": "7256463d-949d-4294-8214-523d4e363eb1",
+      "method": "ShippingInfo_method_1",
+      "trackingNumber": "ShippingInfo_trackingNumber_1",
+      "trackingUrl": "ShippingInfo_trackingUrl_1",
+      "carrier": "ShippingInfo_carrier_1",
+      "shippingCost": 1.5,
+      "insuranceAmount": 1.5,
+      "insuranceStatus": false,
+      "status": "shipped",
+      "shippedAt": "2025-05-22T07:36:49.220Z",
+      "deliveredAt": "2025-05-22T07:36:49.220Z",
+      "estimatedDelivery": "2025-05-22T07:36:49.220Z",
+      "addressId": "81f60a9f-5e90-4fb3-863a-f17e0945627d"
+    }
+  ],
+  "BillingInfo": [
+    {
+      "id": "dcad7f5f-29e7-4b6d-85b8-6936b33e6885",
+      "method": "BillingInfo_method_0",
+      "transactionId": "BillingInfo_transactionId_0",
+      "status": "pending",
+      "billedAt": "2025-05-23T07:36:49.220Z",
+      "amount": 0.5,
+      "addressId": "f340e0c7-761b-4ca1-aa1b-ae89667cb02c"
+    },
+    {
+      "id": "a3dc2988-3566-4c13-908f-9598013c8656",
+      "method": "BillingInfo_method_1",
+      "transactionId": "BillingInfo_transactionId_1",
+      "status": "paid",
+      "billedAt": "2025-05-22T07:36:49.220Z",
+      "amount": 1.5,
+      "addressId": "81f60a9f-5e90-4fb3-863a-f17e0945627d"
+    }
+  ],
+  "OrderEvent": [
+    {
+      "id": "f586590d-a30c-4f65-ade1-de846a6c32ee",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "status": "pending",
+      "note": "OrderEvent_note_0",
+      "updatedBy": "OrderEvent_updatedBy_0",
+      "timestamp": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "f9b37db0-3e30-4f07-8166-7bf0556de09b",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "status": "paid",
+      "note": "OrderEvent_note_1",
+      "updatedBy": "OrderEvent_updatedBy_1",
+      "timestamp": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "RefundRequest": [
+    {
+      "id": "8ed389a4-4f28-4c8e-877f-1e624e841c44",
+      "orderId": "RefundRequest_orderId_0",
+      "reason": "RefundRequest_reason_0",
+      "status": "pending",
+      "requestedAt": "2025-05-23T07:36:49.220Z",
+      "processedAt": "2025-05-23T07:36:49.220Z",
+      "refundedAmount": 0.5,
+      "processedBy": "RefundRequest_processedBy_0"
+    },
+    {
+      "id": "3ab7b19b-b501-42f5-9807-d6565d702106",
+      "orderId": "RefundRequest_orderId_1",
+      "reason": "RefundRequest_reason_1",
+      "status": "approved",
+      "requestedAt": "2025-05-22T07:36:49.220Z",
+      "processedAt": "2025-05-22T07:36:49.220Z",
+      "refundedAmount": 1.5,
+      "processedBy": "RefundRequest_processedBy_1"
+    }
+  ],
+  "ReturnLog": [
+    {
+      "id": "2785972e-a610-4dda-9e00-a0660adcaeaf",
+      "orderId": "ReturnLog_orderId_0",
+      "reason": "ReturnLog_reason_0",
+      "returnStatus": "pending",
+      "returnRequestedAt": "2025-05-23T07:36:49.220Z",
+      "returnReceivedAt": "2025-05-23T07:36:49.220Z",
+      "processedBy": "ReturnLog_processedBy_0"
+    },
+    {
+      "id": "b8f3863e-6337-4e67-8b84-7b8c33f3d48c",
+      "orderId": "ReturnLog_orderId_1",
+      "reason": "ReturnLog_reason_1",
+      "returnStatus": "received",
+      "returnRequestedAt": "2025-05-22T07:36:49.220Z",
+      "returnReceivedAt": "2025-05-22T07:36:49.220Z",
+      "processedBy": "ReturnLog_processedBy_1"
+    }
+  ],
+  "InternalNote": [
+    {
+      "id": "b84e0c72-cab0-4836-aad6-8d277b37b105",
+      "orderId": "InternalNote_orderId_0",
+      "note": "InternalNote_note_0",
+      "createdAt": "2025-05-23T07:36:49.220Z",
+      "createdBy": "InternalNote_createdBy_0"
+    },
+    {
+      "id": "77d94795-b3e0-4edf-aabe-05c999e3873c",
+      "orderId": "InternalNote_orderId_1",
+      "note": "InternalNote_note_1",
+      "createdAt": "2025-05-22T07:36:49.220Z",
+      "createdBy": "InternalNote_createdBy_1"
+    }
+  ],
+  "OrderTag": [
+    {
+      "id": "f382fc3a-5f94-46c6-a39b-8ca2dc81889d",
+      "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+      "tag": "OrderTag_tag_0",
+      "createdAt": "2025-05-23T07:36:49.220Z",
+      "createdBy": "OrderTag_createdBy_0"
+    },
+    {
+      "id": "4ed7d9ed-7e67-42d3-9ec0-0ca885425fb4",
+      "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+      "tag": "OrderTag_tag_1",
+      "createdAt": "2025-05-22T07:36:49.220Z",
+      "createdBy": "OrderTag_createdBy_1"
+    }
+  ],
+  "Product": [
+    {
+      "id": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+      "name": "Product_name_0",
+      "description": "Product_description_0",
+      "price": 0.5,
+      "categoryId": "6b5e5ce7-55bf-4af9-8406-9cb1bed98aa7",
+      "options": [
+        {
+          "id": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+          "name": "Option_name_0",
+          "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+          "values": [
+            {
+              "id": "94d3cfc3-9844-496c-a61b-4e25fba8d25f",
+              "name": "OptionValue_name_0",
+              "quantity": 0,
+              "unit": "OptionValue_unit_0",
+              "unitPrice": 0.5,
+              "totalPrice": 0.5,
+              "priceModifier": 0.5,
+              "isDefault": true,
+              "optionId": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+              "stockId": "892fbbab-db08-4d21-b447-b8b8d2471b3e"
+            }
+          ]
+        }
+      ],
+      "media": [
+        {
+          "id": "03cf0da0-97ba-4c02-b999-d567be52a1c4",
+          "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+          "url": "Media_url_0",
+          "type": "image",
+          "alt": "Media_alt_0",
+          "thumbnail": "Media_thumbnail_0",
+          "isPrimary": true
+        }
+      ],
+      "attributes": {
+        "placeholder": "attributes_0"
+      },
+      "reviews": [
+        {
+          "id": "3ab64764-f942-4724-944c-ca878fec2ee1",
+          "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "rating": 0,
+          "comment": "Review_comment_0",
+          "isVerifiedPurchase": true,
+          "createdAt": "2025-05-23T07:36:49.220Z"
+        }
+      ],
+      "createdAt": "2025-05-23T07:36:49.220Z",
+      "updatedAt": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+      "name": "Product_name_1",
+      "description": "Product_description_1",
+      "price": 1.5,
+      "categoryId": "f55b2479-826b-422f-8b05-d839e8b3386d",
+      "options": [
+        {
+          "id": "a65f77c6-d653-4499-bc90-94cc450e4538",
+          "name": "Option_name_1",
+          "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+          "values": [
+            {
+              "id": "82578921-4260-4b49-a4bc-6a899324bf41",
+              "name": "OptionValue_name_1",
+              "quantity": 1,
+              "unit": "OptionValue_unit_1",
+              "unitPrice": 1.5,
+              "totalPrice": 1.5,
+              "priceModifier": 1.5,
+              "isDefault": false,
+              "optionId": "a65f77c6-d653-4499-bc90-94cc450e4538",
+              "stockId": "c6fbc36a-e892-4513-ab4a-f8d324ab86d4"
+            }
+          ]
+        }
+      ],
+      "media": [
+        {
+          "id": "63d9ee02-e4a0-425e-b151-ddcf3be528b4",
+          "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+          "url": "Media_url_1",
+          "type": "video",
+          "alt": "Media_alt_1",
+          "thumbnail": "Media_thumbnail_1",
+          "isPrimary": false
+        }
+      ],
+      "attributes": {
+        "placeholder": "attributes_1"
+      },
+      "reviews": [
+        {
+          "id": "4d50b99d-d8ea-4d1f-b94e-8f075ffeb73a",
+          "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "rating": 1,
+          "comment": "Review_comment_1",
+          "isVerifiedPurchase": false,
+          "createdAt": "2025-05-22T07:36:49.220Z"
+        }
+      ],
+      "createdAt": "2025-05-22T07:36:49.220Z",
+      "updatedAt": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "ProductCategory": [
+    {
+      "id": "6b5e5ce7-55bf-4af9-8406-9cb1bed98aa7",
+      "name": "ProductCategory_name_0",
+      "description": "ProductCategory_description_0",
+      "parentCategoryId": "6b5e5ce7-55bf-4af9-8406-9cb1bed98aa7",
+      "subcategories": [],
+      "products": [
+        {
+          "id": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+          "name": "Product_name_0",
+          "description": "Product_description_0",
+          "price": 0.5,
+          "categoryId": "6b5e5ce7-55bf-4af9-8406-9cb1bed98aa7",
+          "options": [
+            {
+              "id": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+              "name": "Option_name_0",
+              "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+              "values": [
+                {
+                  "id": "94d3cfc3-9844-496c-a61b-4e25fba8d25f",
+                  "name": "OptionValue_name_0",
+                  "quantity": 0,
+                  "unit": "OptionValue_unit_0",
+                  "unitPrice": 0.5,
+                  "totalPrice": 0.5,
+                  "priceModifier": 0.5,
+                  "isDefault": true,
+                  "optionId": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+                  "stockId": "892fbbab-db08-4d21-b447-b8b8d2471b3e"
+                }
+              ]
+            }
+          ],
+          "media": [
+            {
+              "id": "03cf0da0-97ba-4c02-b999-d567be52a1c4",
+              "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+              "url": "Media_url_0",
+              "type": "image",
+              "alt": "Media_alt_0",
+              "thumbnail": "Media_thumbnail_0",
+              "isPrimary": true
+            }
+          ],
+          "attributes": {
+            "placeholder": "attributes_0"
+          },
+          "reviews": [
+            {
+              "id": "3ab64764-f942-4724-944c-ca878fec2ee1",
+              "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+              "userId": "cmb0hmaf60000q0hpgju204we",
+              "rating": 0,
+              "comment": "Review_comment_0",
+              "isVerifiedPurchase": true,
+              "createdAt": "2025-05-23T07:36:49.220Z"
+            }
+          ],
+          "createdAt": "2025-05-23T07:36:49.220Z",
+          "updatedAt": "2025-05-23T07:36:49.220Z"
+        }
+      ],
+      "createdAt": "2025-05-23T07:36:49.220Z",
+      "updatedAt": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "f55b2479-826b-422f-8b05-d839e8b3386d",
+      "name": "ProductCategory_name_1",
+      "description": "ProductCategory_description_1",
+      "parentCategoryId": "f55b2479-826b-422f-8b05-d839e8b3386d",
+      "subcategories": [],
+      "products": [
+        {
+          "id": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+          "name": "Product_name_1",
+          "description": "Product_description_1",
+          "price": 1.5,
+          "categoryId": "f55b2479-826b-422f-8b05-d839e8b3386d",
+          "options": [
+            {
+              "id": "a65f77c6-d653-4499-bc90-94cc450e4538",
+              "name": "Option_name_1",
+              "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+              "values": [
+                {
+                  "id": "82578921-4260-4b49-a4bc-6a899324bf41",
+                  "name": "OptionValue_name_1",
+                  "quantity": 1,
+                  "unit": "OptionValue_unit_1",
+                  "unitPrice": 1.5,
+                  "totalPrice": 1.5,
+                  "priceModifier": 1.5,
+                  "isDefault": false,
+                  "optionId": "a65f77c6-d653-4499-bc90-94cc450e4538",
+                  "stockId": "c6fbc36a-e892-4513-ab4a-f8d324ab86d4"
+                }
+              ]
+            }
+          ],
+          "media": [
+            {
+              "id": "63d9ee02-e4a0-425e-b151-ddcf3be528b4",
+              "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+              "url": "Media_url_1",
+              "type": "video",
+              "alt": "Media_alt_1",
+              "thumbnail": "Media_thumbnail_1",
+              "isPrimary": false
+            }
+          ],
+          "attributes": {
+            "placeholder": "attributes_1"
+          },
+          "reviews": [
+            {
+              "id": "4d50b99d-d8ea-4d1f-b94e-8f075ffeb73a",
+              "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+              "userId": "cmb0hmaf60001q0hp243e2mbc",
+              "rating": 1,
+              "comment": "Review_comment_1",
+              "isVerifiedPurchase": false,
+              "createdAt": "2025-05-22T07:36:49.220Z"
+            }
+          ],
+          "createdAt": "2025-05-22T07:36:49.220Z",
+          "updatedAt": "2025-05-22T07:36:49.220Z"
+        }
+      ],
+      "createdAt": "2025-05-22T07:36:49.220Z",
+      "updatedAt": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "Option": [
+    {
+      "id": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+      "name": "Option_name_0",
+      "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+      "values": [
+        {
+          "id": "94d3cfc3-9844-496c-a61b-4e25fba8d25f",
+          "name": "OptionValue_name_0",
+          "quantity": 0,
+          "unit": "OptionValue_unit_0",
+          "unitPrice": 0.5,
+          "totalPrice": 0.5,
+          "priceModifier": 0.5,
+          "isDefault": true,
+          "optionId": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+          "stockId": "892fbbab-db08-4d21-b447-b8b8d2471b3e"
+        }
+      ]
+    },
+    {
+      "id": "a65f77c6-d653-4499-bc90-94cc450e4538",
+      "name": "Option_name_1",
+      "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+      "values": [
+        {
+          "id": "82578921-4260-4b49-a4bc-6a899324bf41",
+          "name": "OptionValue_name_1",
+          "quantity": 1,
+          "unit": "OptionValue_unit_1",
+          "unitPrice": 1.5,
+          "totalPrice": 1.5,
+          "priceModifier": 1.5,
+          "isDefault": false,
+          "optionId": "a65f77c6-d653-4499-bc90-94cc450e4538",
+          "stockId": "c6fbc36a-e892-4513-ab4a-f8d324ab86d4"
+        }
+      ]
+    }
+  ],
+  "OptionValue": [
+    {
+      "id": "94d3cfc3-9844-496c-a61b-4e25fba8d25f",
+      "name": "OptionValue_name_0",
+      "quantity": 0,
+      "unit": "OptionValue_unit_0",
+      "unitPrice": 0.5,
+      "totalPrice": 0.5,
+      "priceModifier": 0.5,
+      "isDefault": true,
+      "optionId": "ca6b64dd-4aaf-415d-b353-8253cd496504",
+      "stockId": "892fbbab-db08-4d21-b447-b8b8d2471b3e"
+    },
+    {
+      "id": "82578921-4260-4b49-a4bc-6a899324bf41",
+      "name": "OptionValue_name_1",
+      "quantity": 1,
+      "unit": "OptionValue_unit_1",
+      "unitPrice": 1.5,
+      "totalPrice": 1.5,
+      "priceModifier": 1.5,
+      "isDefault": false,
+      "optionId": "a65f77c6-d653-4499-bc90-94cc450e4538",
+      "stockId": "c6fbc36a-e892-4513-ab4a-f8d324ab86d4"
+    }
+  ],
+  "Media": [
+    {
+      "id": "03cf0da0-97ba-4c02-b999-d567be52a1c4",
+      "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+      "url": "Media_url_0",
+      "type": "image",
+      "alt": "Media_alt_0",
+      "thumbnail": "Media_thumbnail_0",
+      "isPrimary": true
+    },
+    {
+      "id": "63d9ee02-e4a0-425e-b151-ddcf3be528b4",
+      "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+      "url": "Media_url_1",
+      "type": "video",
+      "alt": "Media_alt_1",
+      "thumbnail": "Media_thumbnail_1",
+      "isPrimary": false
+    }
+  ],
+  "Stock": [
+    {
+      "id": "892fbbab-db08-4d21-b447-b8b8d2471b3e",
+      "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+      "quantity": 0,
+      "min": 0,
+      "max": 0,
+      "location": "Stock_location_0"
+    },
+    {
+      "id": "c6fbc36a-e892-4513-ab4a-f8d324ab86d4",
+      "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+      "quantity": 1,
+      "min": 1,
+      "max": 1,
+      "location": "Stock_location_1"
+    }
+  ],
+  "Promotion": [
+    {
+      "id": "7e00fd68-c822-493c-97e8-35581af9ca41",
+      "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+      "isOnSale": true,
+      "discountPercentage": 0.5,
+      "discountAmount": 0.5,
+      "salePrice": 0.5,
+      "saleStartDate": "2025-05-23T07:36:49.220Z",
+      "saleEndDate": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "d188d585-6ff9-471c-b241-a2bd02c87b10",
+      "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+      "isOnSale": false,
+      "discountPercentage": 1.5,
+      "discountAmount": 1.5,
+      "salePrice": 1.5,
+      "saleStartDate": "2025-05-22T07:36:49.220Z",
+      "saleEndDate": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "Review": [
+    {
+      "id": "3ab64764-f942-4724-944c-ca878fec2ee1",
+      "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "rating": 0,
+      "comment": "Review_comment_0",
+      "isVerifiedPurchase": true,
+      "createdAt": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "4d50b99d-d8ea-4d1f-b94e-8f075ffeb73a",
+      "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "rating": 1,
+      "comment": "Review_comment_1",
+      "isVerifiedPurchase": false,
+      "createdAt": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "Wishlist": [
+    {
+      "id": "8716e3f9-eed3-4a54-affd-52598c060dd2",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "items": [
+        {
+          "id": "24412c79-f9ac-4080-b2c1-f9c65c3dcd53",
+          "wishlistId": "8716e3f9-eed3-4a54-affd-52598c060dd2",
+          "productId": "WishlistItem_productId_0",
+          "variantId": "WishlistItem_variantId_0",
+          "quantity": 0,
+          "createdAt": "2025-05-23T07:36:49.220Z"
+        }
+      ],
+      "createdAt": "2025-05-23T07:36:49.220Z",
+      "updatedAt": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "9f4e6c07-132c-48b7-887f-12554e736605",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "items": [
+        {
+          "id": "8adb07e3-7219-41b2-8eef-86a09bd949c9",
+          "wishlistId": "9f4e6c07-132c-48b7-887f-12554e736605",
+          "productId": "WishlistItem_productId_1",
+          "variantId": "WishlistItem_variantId_1",
+          "quantity": 1,
+          "createdAt": "2025-05-22T07:36:49.220Z"
+        }
+      ],
+      "createdAt": "2025-05-22T07:36:49.220Z",
+      "updatedAt": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "WishlistItem": [
+    {
+      "id": "24412c79-f9ac-4080-b2c1-f9c65c3dcd53",
+      "wishlistId": "8716e3f9-eed3-4a54-affd-52598c060dd2",
+      "productId": "WishlistItem_productId_0",
+      "variantId": "WishlistItem_variantId_0",
+      "quantity": 0,
+      "createdAt": "2025-05-23T07:36:49.220Z"
+    },
+    {
+      "id": "8adb07e3-7219-41b2-8eef-86a09bd949c9",
+      "wishlistId": "9f4e6c07-132c-48b7-887f-12554e736605",
+      "productId": "WishlistItem_productId_1",
+      "variantId": "WishlistItem_variantId_1",
+      "quantity": 1,
+      "createdAt": "2025-05-22T07:36:49.220Z"
+    }
+  ],
+  "User": [
+    {
+      "id": "cmb0hmaf60000q0hpgju204we",
+      "name": "James Smith",
+      "email": "james.smith@example.com",
+      "password": "User_password_0",
+      "avatar": "User_avatar_0",
+      "image": "User_image_0",
+      "phone": "+44 2284213049",
+      "stripeCustomerId": "User_stripeCustomerId_0",
+      "accounts": [
+        null
+      ],
+      "sessions": [
+        null
+      ],
+      "addresses": [
+        {
+          "id": "f340e0c7-761b-4ca1-aa1b-ae89667cb02c",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "fullName": "James Smith",
+          "street": "1 High Street",
+          "city": "London",
+          "postalCode": "SW1A 1AA",
+          "country": "UK",
+          "phone": "+44 2284213049",
+          "isDefault": true,
+          "type": "shipping",
+          "customerId": "a921637e-3ee8-42f3-b2fd-2497893a391e"
+        }
+      ],
+      "orders": [
+        {
+          "id": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "status": "pending",
+          "paymentStatus": "pending",
+          "shippingStatus": "pending",
+          "totalAmount": 398.4,
+          "subtotal": 332,
+          "taxAmount": 66.4,
+          "shippingCost": 0,
+          "discount": 0,
+          "items": [
+            {
+              "id": "ed7b32e4-8191-4afb-bf66-3c3309c96838",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_spectre_complet-15pct-2025",
+              "productName": "Spectre Complet 15%",
+              "sku": "spectre-complet-sell-10ml",
+              "quantity": 10,
+              "unitPrice": 2.5,
+              "totalPrice": 25,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "e675dcfb-1ec9-479b-96b1-62e49754370b",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_spectre_large-10pct-2025",
+              "productName": "Spectre Large 10%",
+              "sku": "large-sell-30ml",
+              "quantity": 30,
+              "unitPrice": 1.8,
+              "totalPrice": 54,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "01922049-e600-4a6e-ae41-a99e5d28c3fe",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_isolat-99pct-2025",
+              "productName": "Isolat 99%",
+              "sku": "isolat-sell-50ml",
+              "quantity": 50,
+              "unitPrice": 2.5,
+              "totalPrice": 125,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "4ab1846d-1fe5-491a-8799-29c33c921268",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_menthe-10pct-2025",
+              "productName": "Menthe 10%",
+              "sku": "menthe-sell-10ml",
+              "quantity": 10,
+              "unitPrice": 2.3,
+              "totalPrice": 23,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "6b689d9e-1ac9-496f-b013-7734d4fd5731",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_nano-5pct-2025",
+              "productName": "Nano CBD 5%",
+              "sku": "nano-sell-30ml",
+              "quantity": 30,
+              "unitPrice": 3.5,
+              "totalPrice": 105,
+              "refundStatus": "none",
+              "returnEligible": true
+            }
+          ],
+          "paymentId": "f7dda60d-3538-495d-8e36-07df005f9baf"
+        }
+      ],
+      "carts": [
+        {
+          "id": "e366f3ef-0232-46f3-929d-720e9734a72b",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "items": [
+            {
+              "id": "8eb25b15-19c4-4c32-9644-69bc424b2a9c",
+              "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+              "productId": "huile_spectre_complet-15pct-2025",
+              "productName": "Spectre Complet 15%",
+              "sku": "spectre-complet-sell-10ml",
+              "quantity": 10,
+              "unitPrice": 2.5,
+              "totalPrice": 25
+            },
+            {
+              "id": "0c1e94c4-e9d2-4767-b00a-13f9b482457c",
+              "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+              "productId": "huile_spectre_large-10pct-2025",
+              "productName": "Spectre Large 10%",
+              "sku": "large-sell-30ml",
+              "quantity": 30,
+              "unitPrice": 1.8,
+              "totalPrice": 54
+            },
+            {
+              "id": "d00cd3bf-7a65-4b7b-b526-8905048452b8",
+              "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+              "productId": "huile_isolat-99pct-2025",
+              "productName": "Isolat 99%",
+              "sku": "isolat-sell-50ml",
+              "quantity": 50,
+              "unitPrice": 2.5,
+              "totalPrice": 125
+            },
+            {
+              "id": "017fd674-7c55-4e55-b0e2-2b6992950b5a",
+              "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+              "productId": "huile_menthe-10pct-2025",
+              "productName": "Menthe 10%",
+              "sku": "menthe-sell-10ml",
+              "quantity": 10,
+              "unitPrice": 2.3,
+              "totalPrice": 23
+            },
+            {
+              "id": "438721d8-66cb-49f4-bfa6-3a3dbb67fef7",
+              "cartId": "e366f3ef-0232-46f3-929d-720e9734a72b",
+              "productId": "huile_nano-5pct-2025",
+              "productName": "Nano CBD 5%",
+              "sku": "nano-sell-30ml",
+              "quantity": 30,
+              "unitPrice": 3.5,
+              "totalPrice": 105
+            }
+          ],
+          "couponCode": "none",
+          "total": 332,
+          "updatedAt": "2025-05-23T07:36:49.219Z",
+          "createdAt": "2025-05-23T07:36:49.219Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "3ab64764-f942-4724-944c-ca878fec2ee1",
+          "productId": "4c5526ca-76ce-457c-b3e9-ba528d2246f2",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "rating": 0,
+          "comment": "Review_comment_0",
+          "isVerifiedPurchase": true,
+          "createdAt": "2025-05-23T07:36:49.220Z"
+        }
+      ],
+      "wishlists": [
+        {
+          "id": "8716e3f9-eed3-4a54-affd-52598c060dd2",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "items": [
+            {
+              "id": "24412c79-f9ac-4080-b2c1-f9c65c3dcd53",
+              "wishlistId": "8716e3f9-eed3-4a54-affd-52598c060dd2",
+              "productId": "WishlistItem_productId_0",
+              "variantId": "WishlistItem_variantId_0",
+              "quantity": 0,
+              "createdAt": "2025-05-23T07:36:49.220Z"
+            }
+          ],
+          "createdAt": "2025-05-23T07:36:49.220Z",
+          "updatedAt": "2025-05-23T07:36:49.220Z"
+        }
+      ],
+      "notifications": [
+        {
+          "id": "a09fd706-0c10-4900-b656-870261602280",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "type": "order_update",
+          "title": "Notification_title_0",
+          "message": "Notification_message_0",
+          "url": "Notification_url_0",
+          "metadata": {
+            "placeholder": "metadata_0"
+          },
+          "isRead": true,
+          "sentAt": "2025-05-23T07:36:49.221Z",
+          "readAt": "2025-05-23T07:36:49.221Z",
+          "createdAt": "2025-05-23T07:36:49.221Z",
+          "updatedAt": "2025-05-23T07:36:49.221Z"
+        }
+      ],
+      "resetToken": "User_resetToken_0",
+      "roles": [
+        {
+          "id": "d03a2897-56fe-40b8-a30a-b334451ed9c1",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "role": "customer"
+        }
+      ],
+      "activityLogs": [
+        {
+          "id": "71e02faa-c0f9-48fd-a016-e54e95392dea",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "activity": "UserActivity_activity_0",
+          "timestamp": "2025-05-23T07:36:49.221Z",
+          "ipAddress": "UserActivity_ipAddress_0"
+        }
+      ],
+      "internalNotes": "User_internalNotes_0"
+    },
+    {
+      "id": "cmb0hmaf60001q0hp243e2mbc",
+      "name": "María Fernández",
+      "email": "maría.fernández@example.com",
+      "password": "User_password_1",
+      "avatar": "User_avatar_1",
+      "image": "User_image_1",
+      "phone": "+34 662853928",
+      "stripeCustomerId": "User_stripeCustomerId_1",
+      "accounts": [
+        null
+      ],
+      "sessions": [
+        null
+      ],
+      "addresses": [
+        {
+          "id": "81f60a9f-5e90-4fb3-863a-f17e0945627d",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "fullName": "María Fernández",
+          "street": "2 Calle Real",
+          "city": "Barcelona",
+          "postalCode": "08001",
+          "country": "ES",
+          "phone": "+34 662853928",
+          "isDefault": false,
+          "type": "billing",
+          "customerId": "b2333574-7f68-438b-b0eb-3a80923e31a4"
+        }
+      ],
+      "orders": [
+        {
+          "id": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "status": "pending",
+          "paymentStatus": "pending",
+          "shippingStatus": "pending",
+          "totalAmount": 710.4,
+          "subtotal": 592,
+          "taxAmount": 118.4,
+          "shippingCost": 0,
+          "discount": 0,
+          "items": [
+            {
+              "id": "6ca35919-8bc8-4fa5-8835-481e2d976bf7",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "og_kush-greenhouse-2025",
+              "productName": "OG Kush greenhouse 2025",
+              "sku": "og_kush-sell-5g",
+              "quantity": 5,
+              "unitPrice": 4.4,
+              "totalPrice": 22,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "f35ce443-5cd1-4843-8365-32d3bb09149a",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "ak_47-indoor-2025",
+              "productName": "AK-47 Indoor",
+              "sku": "AK_47-sell-10g",
+              "quantity": 10,
+              "unitPrice": 4,
+              "totalPrice": 40,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "8244111e-95c2-4f53-95a2-a066f015390a",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "white_widow-2025",
+              "productName": "White Widow 2025",
+              "sku": "white_widow-sell-25g",
+              "quantity": 25,
+              "unitPrice": 3.6,
+              "totalPrice": 90,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "b1514b9e-f7d0-4a68-92d4-d96c5af66618",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "orange_vbio-glasshouse-2025",
+              "productName": "Orange bud",
+              "sku": "orange_vbio-sell-50g",
+              "quantity": 50,
+              "unitPrice": 3.2,
+              "totalPrice": 160,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "dae8104c-f917-4ee1-babc-6fe3786d239f",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "gorilla_glue–greenhouse-2025",
+              "productName": "Gorilla Glue",
+              "sku": "gorilla_glue-sell-100g",
+              "quantity": 100,
+              "unitPrice": 2.8,
+              "totalPrice": 280,
+              "refundStatus": "none",
+              "returnEligible": true
+            }
+          ],
+          "paymentId": "af36010d-6212-43ac-9be2-a79a9d4380a2"
+        }
+      ],
+      "carts": [
+        {
+          "id": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "items": [
+            {
+              "id": "0a1b132d-6aa6-4107-9d46-cd74a61148a2",
+              "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+              "productId": "og_kush-greenhouse-2025",
+              "productName": "OG Kush greenhouse 2025",
+              "sku": "og_kush-sell-5g",
+              "quantity": 5,
+              "unitPrice": 4.4,
+              "totalPrice": 22
+            },
+            {
+              "id": "965bc652-377e-4563-9c31-4043ad46788e",
+              "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+              "productId": "ak_47-indoor-2025",
+              "productName": "AK-47 Indoor",
+              "sku": "AK_47-sell-10g",
+              "quantity": 10,
+              "unitPrice": 4,
+              "totalPrice": 40
+            },
+            {
+              "id": "528c1c17-4878-4514-9ab0-5e8370b01817",
+              "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+              "productId": "white_widow-2025",
+              "productName": "White Widow 2025",
+              "sku": "white_widow-sell-25g",
+              "quantity": 25,
+              "unitPrice": 3.6,
+              "totalPrice": 90
+            },
+            {
+              "id": "c695dd62-09bc-464e-9504-37a987b288ed",
+              "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+              "productId": "orange_vbio-glasshouse-2025",
+              "productName": "Orange bud",
+              "sku": "orange_vbio-sell-50g",
+              "quantity": 50,
+              "unitPrice": 3.2,
+              "totalPrice": 160
+            },
+            {
+              "id": "03c88210-5bb9-4859-99d9-eb0621af545c",
+              "cartId": "8501a08d-3910-4d0a-9ac2-088ff9867b5e",
+              "productId": "gorilla_glue–greenhouse-2025",
+              "productName": "Gorilla Glue",
+              "sku": "gorilla_glue-sell-100g",
+              "quantity": 100,
+              "unitPrice": 2.8,
+              "totalPrice": 280
+            }
+          ],
+          "couponCode": "none",
+          "total": 592,
+          "updatedAt": "2025-05-23T07:36:49.219Z",
+          "createdAt": "2025-05-23T07:36:49.219Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "4d50b99d-d8ea-4d1f-b94e-8f075ffeb73a",
+          "productId": "6f4d592e-8295-4d12-8a83-a20b1aededeb",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "rating": 1,
+          "comment": "Review_comment_1",
+          "isVerifiedPurchase": false,
+          "createdAt": "2025-05-22T07:36:49.220Z"
+        }
+      ],
+      "wishlists": [
+        {
+          "id": "9f4e6c07-132c-48b7-887f-12554e736605",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "items": [
+            {
+              "id": "8adb07e3-7219-41b2-8eef-86a09bd949c9",
+              "wishlistId": "9f4e6c07-132c-48b7-887f-12554e736605",
+              "productId": "WishlistItem_productId_1",
+              "variantId": "WishlistItem_variantId_1",
+              "quantity": 1,
+              "createdAt": "2025-05-22T07:36:49.220Z"
+            }
+          ],
+          "createdAt": "2025-05-22T07:36:49.220Z",
+          "updatedAt": "2025-05-22T07:36:49.220Z"
+        }
+      ],
+      "notifications": [
+        {
+          "id": "da7a992a-1459-43b1-83bf-a8ef8e16473a",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "type": "promotion",
+          "title": "Notification_title_1",
+          "message": "Notification_message_1",
+          "url": "Notification_url_1",
+          "metadata": {
+            "placeholder": "metadata_1"
+          },
+          "isRead": false,
+          "sentAt": "2025-05-22T07:36:49.221Z",
+          "readAt": "2025-05-22T07:36:49.221Z",
+          "createdAt": "2025-05-22T07:36:49.221Z",
+          "updatedAt": "2025-05-22T07:36:49.221Z"
+        }
+      ],
+      "resetToken": "User_resetToken_1",
+      "roles": [
+        {
+          "id": "4b0a51f0-3c46-451b-a016-83e993100aab",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "role": "admin"
+        }
+      ],
+      "activityLogs": [
+        {
+          "id": "3368a0f1-468c-4626-8c88-1227d6c95603",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "activity": "UserActivity_activity_1",
+          "timestamp": "2025-05-22T07:36:49.221Z",
+          "ipAddress": "UserActivity_ipAddress_1"
+        }
+      ],
+      "internalNotes": "User_internalNotes_1"
+    }
+  ],
+  "UserRole": [
+    {
+      "id": "d03a2897-56fe-40b8-a30a-b334451ed9c1",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "role": "customer"
+    },
+    {
+      "id": "4b0a51f0-3c46-451b-a016-83e993100aab",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "role": "admin"
+    }
+  ],
+  "Address": [
+    {
+      "id": "f340e0c7-761b-4ca1-aa1b-ae89667cb02c",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "fullName": "James Smith",
+      "street": "1 High Street",
+      "city": "London",
+      "postalCode": "SW1A 1AA",
+      "country": "UK",
+      "phone": "+44 2284213049",
+      "isDefault": true,
+      "type": "shipping",
+      "customerId": "a921637e-3ee8-42f3-b2fd-2497893a391e"
+    },
+    {
+      "id": "81f60a9f-5e90-4fb3-863a-f17e0945627d",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "fullName": "María Fernández",
+      "street": "2 Calle Real",
+      "city": "Barcelona",
+      "postalCode": "08001",
+      "country": "ES",
+      "phone": "+34 662853928",
+      "isDefault": false,
+      "type": "billing",
+      "customerId": "b2333574-7f68-438b-b0eb-3a80923e31a4"
+    }
+  ],
+  "UserActivity": [
+    {
+      "id": "71e02faa-c0f9-48fd-a016-e54e95392dea",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "activity": "UserActivity_activity_0",
+      "timestamp": "2025-05-23T07:36:49.221Z",
+      "ipAddress": "UserActivity_ipAddress_0"
+    },
+    {
+      "id": "3368a0f1-468c-4626-8c88-1227d6c95603",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "activity": "UserActivity_activity_1",
+      "timestamp": "2025-05-22T07:36:49.221Z",
+      "ipAddress": "UserActivity_ipAddress_1"
+    }
+  ],
+  "Customer": [
+    {
+      "id": "a921637e-3ee8-42f3-b2fd-2497893a391e",
+      "firstName": "Customer_firstName_0",
+      "lastName": "Customer_lastName_0",
+      "email": "Customer_email_0",
+      "phone": "Customer_phone_0",
+      "addresses": [
+        {
+          "id": "f340e0c7-761b-4ca1-aa1b-ae89667cb02c",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "fullName": "James Smith",
+          "street": "1 High Street",
+          "city": "London",
+          "postalCode": "SW1A 1AA",
+          "country": "UK",
+          "phone": "+44 2284213049",
+          "isDefault": true,
+          "type": "shipping",
+          "customerId": "a921637e-3ee8-42f3-b2fd-2497893a391e"
+        }
+      ],
+      "orders": [
+        {
+          "id": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "status": "pending",
+          "paymentStatus": "pending",
+          "shippingStatus": "pending",
+          "totalAmount": 398.4,
+          "subtotal": 332,
+          "taxAmount": 66.4,
+          "shippingCost": 0,
+          "discount": 0,
+          "items": [
+            {
+              "id": "ed7b32e4-8191-4afb-bf66-3c3309c96838",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_spectre_complet-15pct-2025",
+              "productName": "Spectre Complet 15%",
+              "sku": "spectre-complet-sell-10ml",
+              "quantity": 10,
+              "unitPrice": 2.5,
+              "totalPrice": 25,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "e675dcfb-1ec9-479b-96b1-62e49754370b",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_spectre_large-10pct-2025",
+              "productName": "Spectre Large 10%",
+              "sku": "large-sell-30ml",
+              "quantity": 30,
+              "unitPrice": 1.8,
+              "totalPrice": 54,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "01922049-e600-4a6e-ae41-a99e5d28c3fe",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_isolat-99pct-2025",
+              "productName": "Isolat 99%",
+              "sku": "isolat-sell-50ml",
+              "quantity": 50,
+              "unitPrice": 2.5,
+              "totalPrice": 125,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "4ab1846d-1fe5-491a-8799-29c33c921268",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_menthe-10pct-2025",
+              "productName": "Menthe 10%",
+              "sku": "menthe-sell-10ml",
+              "quantity": 10,
+              "unitPrice": 2.3,
+              "totalPrice": 23,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "6b689d9e-1ac9-496f-b013-7734d4fd5731",
+              "orderId": "8bb664da-ed56-44fb-97b9-e33bba2cd7f8",
+              "productId": "huile_nano-5pct-2025",
+              "productName": "Nano CBD 5%",
+              "sku": "nano-sell-30ml",
+              "quantity": 30,
+              "unitPrice": 3.5,
+              "totalPrice": 105,
+              "refundStatus": "none",
+              "returnEligible": true
+            }
+          ],
+          "paymentId": "f7dda60d-3538-495d-8e36-07df005f9baf"
+        }
+      ]
+    },
+    {
+      "id": "b2333574-7f68-438b-b0eb-3a80923e31a4",
+      "firstName": "Customer_firstName_1",
+      "lastName": "Customer_lastName_1",
+      "email": "Customer_email_1",
+      "phone": "Customer_phone_1",
+      "addresses": [
+        {
+          "id": "81f60a9f-5e90-4fb3-863a-f17e0945627d",
+          "userId": "cmb0hmaf60001q0hp243e2mbc",
+          "fullName": "María Fernández",
+          "street": "2 Calle Real",
+          "city": "Barcelona",
+          "postalCode": "08001",
+          "country": "ES",
+          "phone": "+34 662853928",
+          "isDefault": false,
+          "type": "billing",
+          "customerId": "b2333574-7f68-438b-b0eb-3a80923e31a4"
+        }
+      ],
+      "orders": [
+        {
+          "id": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+          "userId": "cmb0hmaf60000q0hpgju204we",
+          "status": "pending",
+          "paymentStatus": "pending",
+          "shippingStatus": "pending",
+          "totalAmount": 710.4,
+          "subtotal": 592,
+          "taxAmount": 118.4,
+          "shippingCost": 0,
+          "discount": 0,
+          "items": [
+            {
+              "id": "6ca35919-8bc8-4fa5-8835-481e2d976bf7",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "og_kush-greenhouse-2025",
+              "productName": "OG Kush greenhouse 2025",
+              "sku": "og_kush-sell-5g",
+              "quantity": 5,
+              "unitPrice": 4.4,
+              "totalPrice": 22,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "f35ce443-5cd1-4843-8365-32d3bb09149a",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "ak_47-indoor-2025",
+              "productName": "AK-47 Indoor",
+              "sku": "AK_47-sell-10g",
+              "quantity": 10,
+              "unitPrice": 4,
+              "totalPrice": 40,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "8244111e-95c2-4f53-95a2-a066f015390a",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "white_widow-2025",
+              "productName": "White Widow 2025",
+              "sku": "white_widow-sell-25g",
+              "quantity": 25,
+              "unitPrice": 3.6,
+              "totalPrice": 90,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "b1514b9e-f7d0-4a68-92d4-d96c5af66618",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "orange_vbio-glasshouse-2025",
+              "productName": "Orange bud",
+              "sku": "orange_vbio-sell-50g",
+              "quantity": 50,
+              "unitPrice": 3.2,
+              "totalPrice": 160,
+              "refundStatus": "none",
+              "returnEligible": true
+            },
+            {
+              "id": "dae8104c-f917-4ee1-babc-6fe3786d239f",
+              "orderId": "0043c401-3980-4dd7-88e8-313ddb221e9f",
+              "productId": "gorilla_glue–greenhouse-2025",
+              "productName": "Gorilla Glue",
+              "sku": "gorilla_glue-sell-100g",
+              "quantity": 100,
+              "unitPrice": 2.8,
+              "totalPrice": 280,
+              "refundStatus": "none",
+              "returnEligible": true
+            }
+          ],
+          "paymentId": "af36010d-6212-43ac-9be2-a79a9d4380a2"
+        }
+      ]
+    }
+  ],
+  "Notification": [
+    {
+      "id": "a09fd706-0c10-4900-b656-870261602280",
+      "userId": "cmb0hmaf60000q0hpgju204we",
+      "type": "order_update",
+      "title": "Notification_title_0",
+      "message": "Notification_message_0",
+      "url": "Notification_url_0",
+      "metadata": {
+        "placeholder": "metadata_0"
+      },
+      "isRead": true,
+      "sentAt": "2025-05-23T07:36:49.221Z",
+      "readAt": "2025-05-23T07:36:49.221Z",
+      "createdAt": "2025-05-23T07:36:49.221Z",
+      "updatedAt": "2025-05-23T07:36:49.221Z"
+    },
+    {
+      "id": "da7a992a-1459-43b1-83bf-a8ef8e16473a",
+      "userId": "cmb0hmaf60001q0hp243e2mbc",
+      "type": "promotion",
+      "title": "Notification_title_1",
+      "message": "Notification_message_1",
+      "url": "Notification_url_1",
+      "metadata": {
+        "placeholder": "metadata_1"
+      },
+      "isRead": false,
+      "sentAt": "2025-05-22T07:36:49.221Z",
+      "readAt": "2025-05-22T07:36:49.221Z",
+      "createdAt": "2025-05-22T07:36:49.221Z",
+      "updatedAt": "2025-05-22T07:36:49.221Z"
+    }
+  ]
+}
