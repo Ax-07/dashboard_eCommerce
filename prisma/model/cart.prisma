@@ -18,19 +18,20 @@ model Cart {
 }
 
 model CartItem {
-  id        String  @id @default(uuid())                   // Clé primaire : identifiant unique de l'élément
-  cartId    String                                         // FK vers Cart.id
-  cart      Cart    @relation("CartItems", fields: [cartId], references: [id]) // Panier associé
-  productId String                                          // Identifiant du produit
-  variantId String?                                         // Identifiant de la variante (optionnel)
-  name      String                                          // Nom du produit
-  quantity  Int                                             // Quantité commandée
-  price     Float                                           // Prix unitaire
-  image     String?                                         // URL de l'image du produit
+  id              String  @id @default(uuid())                  // Clé primaire : identifiant unique de l'élément
+  cartId          String                                        // FK vers Cart.id
+  cart            Cart    @relation("CartItems", fields: [cartId], references: [id]) // Panier associé
+  productId       String                                        // Identifiant du produit
+  productName     String                                        // Nom du produit au moment de l'achat
+  productImage    String?                                       // URL de l'image du produit
+  sku             String                                        // SKU / référence produit
+  quantity        Int                                           // Quantité commandée
+  unitPrice       Float                                         // Prix unitaire
+  totalPrice      Float                                         // Prix total (unitPrice * quantity)
+  variantOptions  String[]                                      // Options de variante (ex: ["Taille: M", "Couleur: Rouge"])
 
   @@map("cart_items")                                     // Table SQL "cart_items"
   @@index([cartId], name: "idx_cart_item_cartId")         // Index sur cartId
   @@index([productId], name: "idx_cart_item_productId")   // Index sur productId
-  @@index([variantId], name: "idx_cart_item_variantId")   // Index sur variantId
   @@index([quantity], name: "idx_cart_item_quantity")     // Index sur quantity
 }
