@@ -8,8 +8,11 @@ import { firstNamesByCountry, lastNamesByCountry, addressesByCountry, phoneConfi
 import { PRODUCTS } from '../../mock/index'
 
 // Configuration
-const ITEMS_PER_ORDER = 5;
+const sampleCount = 2; // Nombre d'échantillons à générer
+const CART_PER_USER = 2; // Nombre de paniers par utilisateur
+const ITEMS_PER_CART = 5;
 const ORDERS_PER_USER = 2;
+const ITEMS_PER_ORDER = 5;
 const ORDER_TAX_RATE = 0.2;
 const DEFAULT_SHIPPING = 5.0;
 
@@ -46,13 +49,12 @@ function generateFieldValue(model: string, field: DMMF.Field, i: number): Scalar
 async function main() {
     const schema = readFileSync('./generated/prisma/schema.prisma', 'utf-8');
     const dmmf = await getDMMF({ datamodel: schema });
-const datamodel = dmmf.datamodel;
+    const datamodel = dmmf.datamodel;
 
     // Prepare enums
-  const enumsMap: Record<string, string[]> = {};
+    const enumsMap: Record<string, string[]> = {};
     datamodel.enums.forEach(en => enumsMap[en.name] = en.values.map(v => v.name));
 
-    const sampleCount = 2; // Nombre d'échantillons à générer
     const output: Record<string, any[]> = {}; // Objet pour stocker les données générées
     const modelIds: Record<string, Scalar[]> = {}; // Objet pour stocker les IDs des modèles
     const userCountries: string[] = []; // Tableau pour stocker les pays des utilisateurs
@@ -76,7 +78,7 @@ const datamodel = dmmf.datamodel;
     datamodel.models.forEach(model => {
         if (excludedModels.has(model.name)) return; // Ignore les modèles exclus
         const modelToUpdate = output[model.name]; // Récupère le tableau des objets pour le modèle
-  if (!Array.isArray(modelToUpdate)) return;  // ← si on n’a rien généré pour ce modèle, on skip
+        if (!Array.isArray(modelToUpdate)) return;  // ← si on n’a rien généré pour ce modèle, on skip
 
         modelToUpdate.forEach((obj, i) => {
             const country = model.name === 'User' ? userCountries[i] : model.name === 'Address' ? userCountries[i] : ""; // Définit le pays en fonction du modèle
@@ -91,8 +93,8 @@ const datamodel = dmmf.datamodel;
                     && f.relationFromFields.includes(field.name)
                 );
 
+                // Gestion des relations un-à-plusieurs (ex : User.posts) 
                 if (relObj) {
-                    // relObj.relationName === "UserPosts", relObj.type === "User"
                     const relatedModelName = relObj.type;
                     const pool = modelIds[relatedModelName] || [];
                     obj[field.name] = pool[i % pool.length];
@@ -155,6 +157,33 @@ const datamodel = dmmf.datamodel;
                     }
                 }
 
+                // Cas particulier : Cart
+                if (model.name === 'Cart') {
+                    output['Cart'] = [];
+                    modelIds['Cart'] = [];
+                    
+                    modelIds['User'].forEach((userId, uIdx) => {
+                        for (let j = 0; j < CART_PER_USER; j++) {
+                            const idField = model.fields.find(f => f.isId);
+                            if (!idField) return; // Si aucun champ ID n'est trouvé, passe au modèle suivant
+                            const cartId = generateFieldValue('Cart', idField, uIdx * CART_PER_USER + j);
+
+                            const cart = {
+                                id: cartId,
+                                userId: userId,
+                                items: [],
+                                couponCode: "none",
+                                total: 0,
+                                updatedAt: new Date().toISOString(),
+                                createdAt: new Date().toISOString(),
+                            };
+                            output['Cart'].push(cart); // Ajoute le panier à l'objet de sortie
+                            modelIds['Cart'].push(cart.id); // Ajoute l'ID du panier au tableau des IDs
+                        }
+                    })
+                    return;
+                }
+
                 // Cas particulier : Order
                 if (model.name === 'Order') {
                     output['Order'] = [];
@@ -203,6 +232,56 @@ const datamodel = dmmf.datamodel;
             });
         })
     });
+    // 2) Post-traitement des Cart : on lie les items aux paniers
+    const totalCarts = output.Cart.length;
+    output['CartItem'] = [];
+    modelIds['CartItem'] = [];
+
+    for (let u = 0; u < totalCarts; u++) {
+        const cart = output.Cart[u];
+
+        for (let k = 0; k < ITEMS_PER_CART; k++) {
+            const prod = PRODUCTS[(u * ITEMS_PER_CART + k) % PRODUCTS.length];
+            const idField = datamodel.models.find(m => m.name === 'CartItem')?.fields.find(f => f.isId);
+            if (!idField) continue; // Si aucun champ ID n'est trouvé, passe à l'itération suivante
+            const itemId = generateFieldValue('CartItem', idField, u * ITEMS_PER_CART + k);
+            const saleOptions = prod.options.find(o => o.name === 'Prix de vente');
+            if (!saleOptions) continue; // Si aucune option de vente n'est trouvée, passe à l'itération suivante
+            const optionValue = saleOptions.values[(k % saleOptions.values.length)];
+            
+            const sku = optionValue.sku || `${cart.id}-${k}`;
+            const qty = optionValue.quantity || 1; // Quantité par défaut à 1 si non spécifiée
+            const unitPrice = Number(((optionValue.unitPrice ?? prod.price ?? 0).toFixed(2))); // Prix unitaire (ou prix par défaut)
+            const totalPrice = Number((unitPrice * qty).toFixed(2));
+
+            const item = {
+                id: itemId,
+                cartId: cart.id,
+                productId: prod.id,
+                productName: prod.name,
+                sku: sku,
+                quantity: qty,
+                unitPrice: unitPrice,
+                totalPrice: totalPrice,
+            };
+
+            output['CartItem'].push(item);
+            modelIds['CartItem'].push(itemId);
+            cart.items = cart.items || []; // Initialise le tableau des items du panier
+            cart.items.push(item); // Ajoute l'item au panier
+        }
+    }
+
+    // 2) Post-traitement des Carts : calcul des montants
+    if (Array.isArray(output.Cart)) {
+        output['Cart'].forEach(cart => {
+            const items = Array.isArray(cart.items) ? cart.items : []; // on récupère les items (déjà mockés)
+            const total = items.reduce((sum: any, it: { totalPrice: any; }) => sum + (it.totalPrice || 0), 0); // Calcul du sous-total hors taxe
+
+            // On réécrit dans l’objet
+            cart.total = total;
+        });
+    }
 
     // 3) Post-traitement des OrderItem : on lie les items aux commandes
     const totalOrders = output.Order.length;
@@ -254,15 +333,15 @@ const datamodel = dmmf.datamodel;
         output.Order.forEach(order => {
             const items = Array.isArray(order.items) ? order.items : []; // on récupère les items (déjà mockés)
             const subtotal = items.reduce((sum: any, it: { totalPrice: any; }) => sum + (it.totalPrice || 0), 0); // Calcul du sous-total hors taxe
-            const taxAmount = Number((subtotal * 0.2).toFixed(2)); // Taxe (ici 20%)
-            const shippingCost = subtotal + taxAmount >= 70 ? 0 : 5.00; // Frais de port (0 si commande > 70€)
+            const taxAmount = Number((subtotal * ORDER_TAX_RATE).toFixed(2)); // Taxe (ici 20%)
+            const shippingCost = subtotal + taxAmount >= 70 ? 0 : DEFAULT_SHIPPING; // Frais de port (0 si commande > 70€)
             const discount = typeof order.discount === 'number' ? order.discount : 0; // Remise par défaut si absent
             const totalAmount = subtotal + taxAmount + shippingCost - discount; // Total TTC
             const paymentId = uuidv4(); // Génération d'un ID de paiement
             // Prépare l’objet Payment
             const payment = {
                 id: paymentId,
-                method: 'visa',    // ou 'stripe', etc.
+                method: 'visa',
                 currency: 'EUR',
                 provider: 'stripe',
                 transactionId: null,
@@ -299,7 +378,7 @@ const datamodel = dmmf.datamodel;
         });
     }
 
-    writeFileSync('./prisma/test-generator.json', JSON.stringify(output, null, 2), 'utf-8');
+    writeFileSync('./src/mock/test-generator.json', JSON.stringify(output, null, 2), 'utf-8');
 }
 main().then(() => {
     console.log('Data generation completed.');
