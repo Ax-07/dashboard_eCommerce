@@ -8,7 +8,7 @@ import { firstNamesByCountry, lastNamesByCountry, addressesByCountry, phoneConfi
 import { PRODUCTS } from '../../mock/index'
 
 // Configuration
-const sampleCount = 2; // Nombre d'échantillons à générer
+const sampleCount = 100; // Nombre d'échantillons à générer
 const CART_PER_USER = 2; // Nombre de paniers par utilisateur
 const ITEMS_PER_CART = 5;
 const ORDERS_PER_USER = 2;
@@ -20,7 +20,7 @@ const DEFAULT_SHIPPING = 5.0;
 type Scalar = string | number | boolean | object | null;
 
 function randomNumberString(len: number): string {
-  return Array.from({ length: len }, () => Math.floor(Math.random() * 10)).join('');
+    return Array.from({ length: len }, () => Math.floor(Math.random() * 10)).join('');
 }
 function formatPhone(code: string): string {
     const cfg = phoneConfigByCountry[code] || { prefix: '+1', length: 10 };
@@ -38,13 +38,36 @@ function generatePlaceholder(model: string, field: DMMF.Field, i: number): Scala
     }
 }
 function generateFieldValue(model: string, field: DMMF.Field, i: number): Scalar {
-  const def = field.default;
-  if (def && typeof def === 'object' && 'name' in def) {
-    if (def.name === 'cuid') return cuid();
-    if (def.name === 'uuid') return uuidv4();
-  }
+    const def = field.default;
+    if (def && typeof def === 'object' && 'name' in def) {
+        if (def.name === 'cuid') return cuid();
+        if (def.name === 'uuid') return uuidv4();
+    }
     return generatePlaceholder(model, field, i);
 }
+/**
+ * Renvoie une date ISO aléatoire entre `start` et `end`
+ */
+function randomDateISO(start: Date, end: Date): string {
+    const startMs = start.getTime();
+    const endMs = end.getTime();
+    const randomMs = startMs + Math.random() * (endMs - startMs);
+    return new Date(randomMs).toISOString();
+}
+/** 
+ * Renvoie une date ISO aléatoire entre `start` et `start + maxDeltaMs`. 
+ * `maxDeltaMs` est en millisecondes.
+ */
+function randomDateNear(start: Date, maxDeltaMs: number): string {
+  const s = start.getTime();
+  const e = s + maxDeltaMs;
+  const randMs = s + Math.random() * (e - s);
+  return new Date(randMs).toISOString();
+}
+
+// Exemples d’utilisation :
+const debutPeriode = new Date("2025-01-01T00:00:00.000Z");
+const finPeriode = new Date();  // maintenant
 
 async function main() {
     const schema = readFileSync('./generated/prisma/schema.prisma', 'utf-8');
@@ -161,21 +184,23 @@ async function main() {
                 if (model.name === 'Cart') {
                     output['Cart'] = [];
                     modelIds['Cart'] = [];
-                    
+
                     modelIds['User'].forEach((userId, uIdx) => {
                         for (let j = 0; j < CART_PER_USER; j++) {
                             const idField = model.fields.find(f => f.isId);
                             if (!idField) return; // Si aucun champ ID n'est trouvé, passe au modèle suivant
                             const cartId = generateFieldValue('Cart', idField, uIdx * CART_PER_USER + j);
 
+                            const createdAt = randomDateISO(debutPeriode, finPeriode);
+                            const updatedAt = randomDateNear(new Date(createdAt), 3600_000);
                             const cart = {
                                 id: cartId,
                                 userId: userId,
                                 items: [],
                                 couponCode: "none",
                                 total: 0,
-                                updatedAt: new Date().toISOString(),
-                                createdAt: new Date().toISOString(),
+                                createdAt: createdAt,
+                                updatedAt: updatedAt,
                             };
                             output['Cart'].push(cart); // Ajoute le panier à l'objet de sortie
                             modelIds['Cart'].push(cart.id); // Ajoute l'ID du panier au tableau des IDs
@@ -195,7 +220,8 @@ async function main() {
                             if (!idField) return; // Si aucun champ ID n'est trouvé, passe au modèle suivant
                             const orderId = generateFieldValue('Order', idField, uIdx * ORDERS_PER_USER + j);
 
-                            // Construit l'objet order
+                            const createdAt = randomDateISO(debutPeriode, finPeriode);
+                            const updatedAt = randomDateNear(new Date(createdAt), 3600_000);
                             const order = {
                                 id: orderId,
                                 userId: userId,
@@ -207,6 +233,8 @@ async function main() {
                                 taxAmount: 0,
                                 shippingCost: 5.00,
                                 discount: 0,
+                                createdAt: createdAt,
+                                updatedAt: updatedAt,
                             };
 
                             // Stocke dans output et modelIds
@@ -248,7 +276,7 @@ async function main() {
             const saleOptions = prod.options.find(o => o.name === 'Prix de vente');
             if (!saleOptions) continue; // Si aucune option de vente n'est trouvée, passe à l'itération suivante
             const optionValue = saleOptions.values[(k % saleOptions.values.length)];
-            
+
             const sku = optionValue.sku || `${cart.id}-${k}`;
             const qty = optionValue.quantity || 1; // Quantité par défaut à 1 si non spécifiée
             const unitPrice = Number(((optionValue.unitPrice ?? prod.price ?? 0).toFixed(2))); // Prix unitaire (ou prix par défaut)
@@ -299,7 +327,7 @@ async function main() {
             const saleOptions = prod.options.find(o => o.name === 'Prix de vente');
             if (!saleOptions) continue; // Si aucune option de vente n'est trouvée, passe à l'itération suivante
             const optionValue = saleOptions.values[(k % saleOptions.values.length)];
-            
+
             const sku = optionValue.sku || `${order.id}-${k}`;
             const qty = optionValue.quantity || 1; // Quantité par défaut à 1 si non spécifiée
             const unitPrice = Number(((optionValue.unitPrice ?? prod.price ?? 0).toFixed(2))); // Prix unitaire (ou prix par défaut)
@@ -338,6 +366,7 @@ async function main() {
             const discount = typeof order.discount === 'number' ? order.discount : 0; // Remise par défaut si absent
             const totalAmount = subtotal + taxAmount + shippingCost - discount; // Total TTC
             const paymentId = uuidv4(); // Génération d'un ID de paiement
+            const paidAt = randomDateNear(new Date(order.updatedAt), 3600_000);
             // Prépare l’objet Payment
             const payment = {
                 id: paymentId,
@@ -347,7 +376,7 @@ async function main() {
                 transactionId: null,
                 status: 'pending', // statut initial
                 amount: null,      // à remplir en post-traitement
-                paidAt: null,
+                paidAt: paidAt,
                 refundedAmount: null,
             };
             // On réécrit dans l’objet
