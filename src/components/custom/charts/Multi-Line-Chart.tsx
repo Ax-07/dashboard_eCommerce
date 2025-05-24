@@ -1,7 +1,6 @@
 // @/src/components/custom/charts/Multi-Line-Chart.tsx
 "use client";
 import React from "react";
-import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
@@ -59,7 +58,6 @@ const MultiLineChart: React.FC<MultiLineChartProps> = ({
   React.useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");
-      console.log("isMobile");
     }
   }, [isMobile]);
   // Filtrer les données selon la période sélectionnée
@@ -188,10 +186,7 @@ const MultiLineChart: React.FC<MultiLineChartProps> = ({
               minTickGap={32}
               tickFormatter={(value) => {
                 const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                });
+                return date.toLocaleDateString("fr-FR");
               }}
             />
             <ChartTooltip
@@ -199,10 +194,7 @@ const MultiLineChart: React.FC<MultiLineChartProps> = ({
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    });
+                    return new Date(value).toLocaleDateString("fr-FR");
                   }}
                   indicator="dot"
                 />
