@@ -406,7 +406,7 @@ const OrderList: React.FC<OrderListProps> = ({ orders }) => {
                       case "date":
                         return (
                           <TableHead key={index}>
-                            {order.createdAt.toLocaleDateString("fr-FR", {})}
+                            {new Date(order.createdAt).toLocaleDateString("fr-FR")}
                           </TableHead>
                         );
                       case "type":
