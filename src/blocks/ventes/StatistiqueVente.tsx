@@ -16,14 +16,24 @@ import { ALLSELLS } from "@/src/mock/sells/monthly_sales";
 import { useChartsDatas } from "@/src/components/custom/charts/useChartsDatas";
 import OrderList from "../order/OrderList";
 import { ORDERS } from "@/src/mock";
+import { getComputeSells } from "@/src/mock/sells/computeSells";
+import { getBestSellingProducts } from "@/src/mock/sells/computeTopSells";
+import TopSellsList from "./TopSellsList";
 
-const StatistiqueVente = () => {
+interface StatistiqueVenteProps {
+  data: any;
+}
+
+const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({data}) => {
+  const parsedData = JSON.parse(data.value);
+  const orders2 = parsedData.Order; console.log("orders2", orders2);
+  const sellsbycategorybydate = getComputeSells({ Order: orders2 });
   const { chartData, chartConfig, total, pieChartData } = useChartsDatas({
-    data: ALLSELLS,
-    startDate: ALLSELLS[0].date,
-    endDate: ALLSELLS[ALLSELLS.length - 1].date,
+    data: sellsbycategorybydate,
+    startDate: sellsbycategorybydate[0].date,
+    endDate: sellsbycategorybydate[sellsbycategorybydate.length - 1].date,
   });
-  const orders = ORDERS;
+  const bestSeller = getBestSellingProducts(orders2, 5);
   return (
     <div className="w-full">
       <div className="flex gap-4">
@@ -75,12 +85,14 @@ const StatistiqueVente = () => {
         <Card className="flex-1">
           <CardHeader>
             <CardTitle> Top Ventes</CardTitle>
+            <CardDescription>Produits les plus vendus</CardDescription>
+            <TopSellsList bestSeller={bestSeller} />
           </CardHeader>
         </Card>
         <Card className="flex-1">
           <CardHeader>
             <CardTitle>Suivi des commandes</CardTitle>
-            <OrderList orders={orders}/>
+            <OrderList orders={orders2}/>
           </CardHeader>
         </Card>
       </div>
