@@ -29,11 +29,15 @@ export interface BestSeller {
  */
 export function getBestSellingProducts(
   orders: OrderInput[],
-  topN: number = 10,
+  topN: number = 20,
   by: "sales" | "quantity" = "sales"
 ): BestSeller[] {
   // 1️⃣ On agrège les données par produit
   const agg: Record<string, BestSeller> = {};
+  if (!orders || !Array.isArray(orders)) {
+    console.warn("Données invalides pour le calcul des meilleures ventes :", orders);
+    return [];
+  }
 
   for (const order of orders) {
     for (const item of order.items) {
