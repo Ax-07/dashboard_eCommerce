@@ -22,6 +22,10 @@ export const getComputeSells = (
   data: { Order: OrderInput[] }
 ): SalesByDate[] => {
 
+  if (!data || !data.Order || !Array.isArray(data.Order)) {
+    console.warn("Données invalides pour le calcul des ventes :", data);
+    return [];
+  }
   const intermediate = data.Order.reduce<Record<string, SalesByDate>>(
     (acc, order) => {
       // 1) Formatage de la date
