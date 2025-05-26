@@ -8,39 +8,50 @@ import {
 } from "@/src/components/ui/card";
 import React from "react";
 import BarChartArea from "@/src/components/custom/charts/BarChartArea";
-import { ChartAreaInteractive } from "@/src/components/custom/charts/chart-area-interactive";
-import { chartData, chartConfig } from "@/src/components/custom/charts/chart-area-interactive";
 import MultiLineChart from "@/src/components/custom/charts/Multi-Line-Chart";
 import { PieChartComponent } from "@/src/components/custom/charts/pie-chart";
-import { ALLSELLS } from "@/src/mock/sells/monthly_sales";
 import { useChartsDatas } from "@/src/components/custom/charts/useChartsDatas";
 import OrderList from "../order/OrderList";
-import { ORDERS } from "@/src/mock";
 import { getComputeSells } from "@/src/mock/sells/computeSells";
 import { getBestSellingProducts } from "@/src/mock/sells/computeTopSells";
 import TopSellsList from "./TopSellsList";
+import { DatePickerWithRange } from "@/src/components/custom/range-date-picker";
 
 interface StatistiqueVenteProps {
   data: any;
 }
 
 const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({data}) => {
+  const [dateRange, setDateRange] = React.useState<{
+    from: Date
+    to: Date
+  }>({
+    from: new Date(new Date().getFullYear(), 0, 1),
+    to:   new Date(),
+  })
+
   const parsedData = JSON.parse(data.value);
-  const orders2 = parsedData.Order; console.log("orders2", orders2);
+  const orders2 = parsedData?.Order;
+
   const sellsbycategorybydate = getComputeSells({ Order: orders2 });
   const { chartData, chartConfig, total, pieChartData } = useChartsDatas({
     data: sellsbycategorybydate,
-    startDate: sellsbycategorybydate[0].date,
-    endDate: sellsbycategorybydate[sellsbycategorybydate.length - 1].date,
+    dateRange
   });
-  const bestSeller = getBestSellingProducts(orders2, 5);
+    
+  const bestSeller = getBestSellingProducts(orders2, 10);
   return (
     <div className="w-full">
+      <DatePickerWithRange
+        className="ml-auto mb-2"
+        date={dateRange}
+        onChange={(r) => {
+          if (r.from && r.to) setDateRange({ from: r.from, to: r.to })
+        }}
+      />      
       <div className="flex gap-4">
-        {/* Graphiques Chiffre d'affaires */}
+        {/* Graphiques Chiffre d'affaires par categories*/}
         <div className="flex-1">
-            {/* <BarChartArea venteTotalMenuel={venteTotalMenuel} chartConfig={chartConfig} /> */}
-            {/* <ChartAreaInteractive /> */}
             <MultiLineChart 
               title="Volumes quotidiens par catégorie" 
               description="Évolution quotidienne des ventes sur les 3 derniers mois"
@@ -48,7 +59,10 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({data}) => {
               chartConfig={chartConfig} 
             />
         </div>
-        <div className="flex flex-col flex-1 gap-4 h-full">
+        <div className="flex-1">
+            <BarChartArea chartData={chartData} chartConfig={chartConfig} />
+          </div>
+        <div className="flex-1">
             <PieChartComponent
               title="Répartition des ventes par catégorie"
               description="Répartition des ventes sur les 3 derniers mois"
@@ -56,29 +70,6 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({data}) => {
               chartConfig={chartConfig}
               total={total}
               />
-          {/* <div className="flex flex-1 gap-4">
-            <Card className="flex-1">
-              <CardHeader>
-                <CardTitle>CA total</CardTitle>
-                <CardDescription>Sur les 12 derniers mois</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>1000 €</p>
-
-              </CardContent>
-            </Card>
-            <Card className="flex-1">
-              <CardTitle>Total</CardTitle>
-            </Card>
-          </div>
-          <div className="flex gap-4">
-            <Card className="flex-1">
-              <CardHeader>
-                <CardTitle>CA total</CardTitle>
-              </CardHeader>
-            </Card>
-            <Card className="flex-1"></Card>
-          </div> */}
         </div>
       </div>
       <div className="flex gap-4 mt-4">
