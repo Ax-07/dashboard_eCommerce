@@ -83,9 +83,9 @@ const OrderList: React.FC<OrderListProps> = ({ orders }) => {
   );
   const [colToSort, setColToSort] = React.useState<
     "id" | "produit" | "montant" | "client" | "date" | "type" | "status"
-  >("id");
+  >("date");
   const [sortDirection, setSortDirection] = React.useState<"asc" | "desc">(
-    "asc"
+    "desc"
   );
   const [searchTerm, setSearchTerm] = React.useState<string>("");
 
@@ -125,7 +125,7 @@ const OrderList: React.FC<OrderListProps> = ({ orders }) => {
     setSearchTerm(term);
   };
 
-  const filteredOrder = orders.filter((o) => {
+  const filteredOrder = orders?.filter((o) => {
     // Extraction propre de la colonne à chercher
     const fieldValue = (() => {
       switch (colToSearch) {
@@ -237,7 +237,7 @@ const OrderList: React.FC<OrderListProps> = ({ orders }) => {
         case "status":
           return o.status;
         default:
-          return o.id;
+          return o.createdAt;
       }
     },
     sortDirection
