@@ -4,7 +4,13 @@ import { DashboardShell } from "@/src/blocks/dashboardBlocks/DashboardShell";
 import { getTestGenerator } from "@/src/stores/actions/getTestGenerator";
 
 const CAPage = () => {
- const data = getTestGenerator();
+ const data = getTestGenerator().then((data) => {
+   return data;
+  }).catch((error) => {
+   console.error("Error fetching data:", error);
+   return { value: '{"Order": []}' }; // Fallback to empty data if error occurs
+  }
+ );
   return (
     <DashboardShell>
       <section
