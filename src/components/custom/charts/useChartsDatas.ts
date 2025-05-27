@@ -1,5 +1,5 @@
 // @/src/components/custom/charts/useChatsDatas.ts
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
   differenceInDays,
   startOfWeek,
@@ -26,6 +26,7 @@ export const useChartsDatas = ({
   data = [],
   dateRange,
 }: UseChartProps) => {
+
   const from = dateRange?.from
   const to   = dateRange?.to
   const spanDays = useMemo(() => {
@@ -95,8 +96,20 @@ export const useChartsDatas = ({
     return Array.from(m.values())
   }, [filteredData, spanDays, categoryKeys])
 
+  const chartData = useMemo<ChartData[]>(() => {
+    return bucketedData.map((d) => {
+      const newData: ChartData = { date: d.date };
+      
+      categoryKeys.forEach((key) => {
+
+        newData[key] = d[key] as number;
+      });
+      return newData;
+    });
+  }, [bucketedData, categoryKeys]);
+
   // Calculer le total par catégorie
-  const totalByCategory = bucketedData.reduce<Record<string, number>>((acc, curr) => {
+  const totalByCategory = chartData.reduce<Record<string, number>>((acc, curr) => {
     categoryKeys.forEach((k) => {
       acc[k] = (acc[k] || 0) + (typeof curr[k] === "number" ? (curr[k] as number) : 0)
     })
@@ -112,17 +125,6 @@ export const useChartsDatas = ({
     value: totalByCategory[key],
     fill: `var(--color-${key})`,
   }));
-  // Préparer les données pour le graphique Multi-line et bar-chart
-  const chartData = useMemo<ChartData[]>(() => {
-    return filteredData.map(d => {
-      const newData = { date: d.date } as ChartData;
-      categoryKeys.forEach(key => {
-        // on sait que d[key] est number ou string
-        newData[key] = d[key] as number;
-      });
-      return newData;
-    });
-  }, [filteredData, categoryKeys]);
 
   // calculs de tendance
   const calcTrend = (first: number, last: number) => {
@@ -151,16 +153,28 @@ export const useChartsDatas = ({
     const lastSum = sumAt(chartData.length - 1)
     globalTrendPercent = calcTrend(firstSum, lastSum)
   }
-  console.log("Tendances par catégorie :", trendsByCategory)
-  console.log("Tendance globale :", globalTrendPercent)
 
 
   return {
-    chartData: bucketedData,
+    chartData,
     pieChartData,
     chartConfig,
     totalByCategory,
     total,
     dateRange,
   }
+}
+
+export const useChartState = () => {
+   const [hiddenKeys, setHiddenKeys] = useState<string[]>([]);
+      const toggleKey = (key: string) => {
+        setHiddenKeys((prev) => {
+          const newHiddenKeys = prev.includes(key)
+            ? prev.filter((k) => k !== key)
+            : [...prev, key];
+          console.log("Toggled key:", key, "Hidden keys:", newHiddenKeys);
+          return newHiddenKeys;
+        });
+      };
+  return { hiddenKeys, toggleKey }
 }
