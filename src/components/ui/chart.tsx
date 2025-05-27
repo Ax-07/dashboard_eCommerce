@@ -3,6 +3,9 @@
 import { cn } from "@/src/utils/tailwind_cn"
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
+import { useChartState } from "../custom/charts/useChartsDatas"
+import { useChartStore } from "@/src/stores/useChartStore"
+import { LegendProps } from "recharts"
 
 
 // Format: { THEME_NAME: CSS_SELECTOR }
@@ -24,7 +27,7 @@ type ChartContextProps = {
 
 const ChartContext = React.createContext<ChartContextProps | null>(null)
 
-function useChart() {
+export function useChart() {
   const context = React.useContext(ChartContext)
 
   if (!context) {
@@ -45,7 +48,7 @@ const ChartContainer = React.forwardRef<
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId()
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
-
+   
   return (
     <ChartContext.Provider value={{ config }}>
       <div
@@ -82,17 +85,17 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
         __html: Object.entries(THEMES)
           .map(
             ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
-  })
-  .join("\n")}
-}
-`
+              ${prefix} [data-chart=${id}] {
+              ${colorConfig
+                .map(([key, itemConfig]) => {
+                  const color =
+                    itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
+                    itemConfig.color
+                  return color ? `  --color-${key}: ${color};` : null
+                })
+                .join("\n")}
+              }
+              `
           )
           .join("\n"),
       }}
@@ -131,8 +134,7 @@ const ChartTooltipContent = React.forwardRef<
     },
     ref
   ) => {
-    const { config } = useChart()
-
+    const { config } = useChart();
     const tooltipLabel = React.useMemo(() => {
       if (hideLabel || !payload?.length) {
         return null
@@ -231,10 +233,13 @@ const ChartTooltipContent = React.forwardRef<
                         "flex flex-1 justify-between leading-none",
                         nestLabel ? "items-end" : "items-center"
                       )}
+                      
                     >
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="text-muted-foreground">
+                        <span 
+                          className={cn("text-muted-foreground")}
+                          >
                           {itemConfig?.label || item.name}
                         </span>
                       </div>
@@ -295,12 +300,14 @@ const ChartLegendContent = React.forwardRef<
               className={cn(
                 "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
               )}
+
             >
               {itemConfig?.icon && !hideIcon ? (
                 <itemConfig.icon />
               ) : (
                 <div
-                  className="h-2 w-2 shrink-0 rounded-[2px]"
+                  className={cn("h-2 w-2 shrink-0 rounded-[2px]")}
+
                   style={{
                     backgroundColor: item.color,
                   }}
@@ -363,3 +370,56 @@ export {
   ChartLegendContent,
   ChartStyle,
 }
+
+
+interface CustomLegendProps extends Pick<LegendProps, "payload" | "verticalAlign"> {
+  config: ChartConfig;
+  hiddenKeys: string[];
+  onToggleKey: (key: string) => void;
+  className?: string;
+}
+
+/**
+ * Composant de légende personnalisé pour Recharts
+ * utilise le même style que ChartLegendContent
+ */
+export const CustomLegend: React.FC<CustomLegendProps> = ({
+  payload = [],
+  verticalAlign = "bottom",
+  config,
+  hiddenKeys,
+  onToggleKey,
+  className,
+}) => {
+  if (!payload || payload.length === 0) return null;
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center gap-4",
+        verticalAlign === "top" ? "pb-3" : "pt-3",
+        className
+      )}
+    >
+      {payload.map((item) => {
+        const key = String(item.dataKey);
+        const isHidden = hiddenKeys.includes(key);
+        return (
+          <div
+            key={key}
+            onClick={() => onToggleKey(key)}
+            className={cn(
+              "flex items-center gap-1.5 cursor-pointer [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground",
+              isHidden && "line-through opacity-40"
+            )}
+          >
+            <span
+              className="h-2 w-2 shrink-0 rounded-[2px]"
+              style={{ backgroundColor: item.color }}
+            />
+            {config[key]?.label || key}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
