@@ -53,6 +53,7 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({data}) => {
         {/* Graphiques Chiffre d'affaires par categories*/}
         <div className="flex-1">
             <MultiLineChart 
+            id="multi-line-chart"
               title="Volumes quotidiens par catégorie" 
               description="Évolution quotidienne des ventes sur les 3 derniers mois"
               chartData={chartData} 
@@ -60,7 +61,7 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({data}) => {
             />
         </div>
         <div className="flex-1">
-            <BarChartArea chartData={chartData} chartConfig={chartConfig} />
+            <BarChartArea id="bar-chart" chartData={chartData} chartConfig={chartConfig} />
           </div>
         <div className="flex-1">
             <PieChartComponent
