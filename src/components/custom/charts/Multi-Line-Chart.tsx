@@ -1,7 +1,7 @@
 // @/src/components/custom/charts/Multi-Line-Chart.tsx
 "use client";
-import React from "react";
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import React, { useCallback, useEffect } from "react";
+import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -17,6 +17,8 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
+  CustomLegend,
+  useChart,
 } from "@/src/components/ui/chart";
 import { useIsMobile } from "@/src/hooks/use-mobile";
 import { ToggleGroup } from "../../ui/toggle-group";
@@ -28,8 +30,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { ChartData } from "./useChartsDatas";
+import { ChartData, useChartState } from "./useChartsDatas";
+import { useChartStore } from "@/src/stores/useChartStore";
 interface MultiLineChartProps {
+  id: string;
   title: string;
   description: string;
   chartData: ChartData[];
@@ -46,161 +50,111 @@ export function getLastValue(data: ChartData[], key: keyof ChartData): number {
   return 0;
 }
 const MultiLineChart: React.FC<MultiLineChartProps> = ({
+  id,
   title,
   description,
   chartData,
   chartConfig,
 }) => {
   const isMobile = useIsMobile();
-  const [timeRange, setTimeRange] = React.useState("30d");
   const [selectedKey, setSelectedKey] = React.useState<
     keyof typeof chartConfig | "all"
   >("all");
-
-  React.useEffect(() => {
-    if (isMobile) {
-      setTimeRange("7d");
-    }
-  }, [isMobile]);
-
+  const stored = useChartStore(s => s.hiddenKeysByChart[id]);
+  const hiddenKeys = stored ?? [];  // fallback en local, hors selector
+  const toggleKey = useChartStore((s) => s.toggleKey);
+  
   // Trier dynamiquement les clés pour que la série avec la plus grande valeur apparaisse au-dessus
   const sortedKeys = React.useMemo<(keyof typeof chartConfig)[]>(() => {
-    const keys = Object.keys(chartConfig) as (keyof typeof chartConfig)[];
-    return keys.sort(
-      (a, b) => getLastValue(chartData, a) - getLastValue(chartData, b)
-    );
-  }, [chartData]);
+  const keys = Object.keys(chartConfig) as (keyof typeof chartConfig)[];
+  return keys.sort(
+    (a, b) => getLastValue(chartData, a) - getLastValue(chartData, b)
+  )
+}, [chartData, chartConfig]);
+
   return (
     <Card className="@container/card h-full">
-      <CardHeader className="relative">
-        {/* <CardTitle>{title}</CardTitle>
-        <CardDescription>
-          <span className="@[540px]/card:block hidden">
-            {description}
-          </span>
-          <span className="@[540px]/card:hidden">Last {timeRange}</span>
-        </CardDescription> */}
-        <div className="absolute right-4 top-4">
-          <ToggleGroup
-            type="single"
-            value={String(selectedKey)}
-            onValueChange={(val) =>
-              setSelectedKey(val as keyof typeof chartConfig | "all")
-            }
-            variant="outline"
-            className="@[767px]/card:flex hidden"
-          >
-            <ToggleGroupItem value="all" className="h-8 px-2.5 border cursor-pointer rounded-md">Toutes</ToggleGroupItem>
-            {(Object.keys(chartConfig) as (keyof typeof chartConfig)[]).map(
-              (key) => (
-                <ToggleGroupItem key={key} value={String(key)} className="h-8 px-2.5 border cursor-pointer rounded-md">
-                  {chartConfig[key].label}
-                </ToggleGroupItem>
-              )
-            )}
-          </ToggleGroup>
-          <Select
-            value={String(selectedKey)}
-            onValueChange={(val) =>
-              setSelectedKey(val as keyof typeof chartConfig | "all")
-            }
-            >
-            <SelectTrigger
-              className="@[767px]/card:hidden flex w-40"
-              aria-label="Select a value"
-            >
-                <SelectValue placeholder="All" />
-            </SelectTrigger>
-            <SelectContent className="rounded-xl">
-              <SelectItem value="all" className="rounded-lg">
-                All
-              </SelectItem>
-              {(Object.keys(chartConfig) as (keyof typeof chartConfig)[]).map(
-                (key) => (
-                  <SelectItem key={key} value={String(key)}>
-                    {chartConfig[key].label}
-                  </SelectItem>
-                )
-              )}
-            </SelectContent>
-          </Select>
-        </div>
-      </CardHeader>
+      
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        {chartData.length > 0 ?
-          <ChartContainer
-            config={chartConfig}
-            className="aspect-auto h-[150px] w-full"
+        {chartData.length === 0 ? (
+          <div className="flex items-center justify-center text-muted-foreground">
+            Pas de données disponibles
+          </div>
+        ) : (
+          // 1) On ouvre le contexte
+<ChartContainer config={chartConfig} className="aspect-auto h-[150px] w-full">
+          <LineChart
+            data={chartData}
+            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
           >
-            <LineChart
-              data={chartData}
-              margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="date"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                minTickGap={32}
-                tickFormatter={(value) => {
-                  const date = new Date(value);
-                  return date.toLocaleDateString("fr-FR", {
-                    month: "short",
-                    // day: "numeric",
-                    // year: "numeric",
-                  });
-                }}
-              />
-              <YAxis
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => {
-                  return value.toLocaleString("fr-FR", {
-                    style: "currency",
-                    currency: "EUR",
-                  });
-                }}
-              />
-              <ChartTooltip
-                cursor={false}
-                content={
-                  <ChartTooltipContent
-                    labelFormatter={(value) => {
-                      return new Date(value).toLocaleDateString("fr-FR");
-                    }}
-                    indicator="dot"
-                  />
-                }
-              />
-                      <ChartLegend content={<ChartLegendContent />} />
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={32}
+              tickFormatter={(value) =>
+                new Date(value).toLocaleDateString("fr-FR", { month: "short" })
+              }
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(value) =>
+                value.toLocaleString("fr-FR", {
+                  style: "currency",
+                  currency: "EUR",
+                })
+              }
+            />
 
-              {sortedKeys
-                .filter((key) => selectedKey === "all" || key === selectedKey)
-                .map((key) => (
-                  <Line
-                    key={key}
-                    type="monotone"
-                    dataKey={key}
-                    stroke={`var(--color-${key})`}
-                    strokeWidth={2}
-                    dot={false}
-                    activeDot={{
-                      r: 6,
-                      stroke: `var(--color-${key})`,
-                      strokeWidth: 2,
-                      fill: "white",
-                    }}
-                  />
-                ))}
-            </LineChart>
-          </ChartContainer>
-          : (
-            <div className="flex items-center justify-center text-muted-foreground">
-              Pas de données disponibles
-            </div>
-          )
-        }
+            <ChartTooltip
+              cursor={false}
+              content={
+                <ChartTooltipContent
+                  labelFormatter={(value) =>
+                    new Date(value).toLocaleDateString("fr-FR")
+                  }
+                  indicator="dot"
+                />
+              }
+            />
+
+            <ChartLegend
+        verticalAlign="bottom"
+        content={(props) => (
+            <CustomLegend
+              {...props}
+              config={chartConfig}
+              hiddenKeys={hiddenKeys}
+              onToggleKey={(key) => toggleKey(id, key)}
+            />
+        )}
+      />
+
+            {sortedKeys
+              .filter((key) => selectedKey === "all" || key === selectedKey)
+              .map((key) => (
+                <Line
+                  key={key}
+                  type="monotone"
+                  dataKey={String(key)}
+                  stroke={`var(--color-${key})`}
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{
+                    r: 6,
+                    stroke: `var(--color-${key})`,
+                    strokeWidth: 2,
+                    fill: "white",
+                  }}
+                  hide={hiddenKeys.includes(String(key))}
+                />
+              ))}
+          </LineChart>
+        </ChartContainer>
+        )}
       </CardContent>
     </Card>
   );
