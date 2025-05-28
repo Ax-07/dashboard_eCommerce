@@ -12,7 +12,6 @@ import {
   CustomLegend,
 } from "@/src/components/ui/chart";
 import { PieChartData } from "./useChartsDatas";
-import { useChartStore } from "@/src/stores/useChartStore";
 
 interface PieChartProps {
   id: string;
