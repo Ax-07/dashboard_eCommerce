@@ -121,7 +121,7 @@ export const useChartsDatas = ({
 
   // Préparer les données pour le graphique en camembert
   const pieChartData: PieChartData[] = categoryKeys.map(key => ({
-    name: chartConfig[key].label,
+    name: key,
     value: totalByCategory[key],
     fill: `var(--color-${key})`,
   }));
