@@ -6,6 +6,8 @@ import {
   startOfMonth,
   format,
 } from "date-fns"
+import { getComputeSells } from "@/src/mock/sells/computeSells";
+import { OrderItemInput, OrderOutput } from "@/src/lib/validators/order.zod";
 export interface ChartData {
   date: string;
   [key: string]: number | string;
@@ -18,21 +20,52 @@ export type PieChartData = {
 }
 
 interface UseChartProps {
-  data?: ChartData[];
+  orders?: OrderOutput[];
   dateRange?: { from?: Date; to?: Date }
 }
 
 export const useChartsDatas = ({
-  data = [],
+  orders = [],
   dateRange,
 }: UseChartProps) => {
 
-  const from = dateRange?.from
-  const to   = dateRange?.to
+    const data = getComputeSells({ Order: orders });
+  const sellsbycategorybydate = data;
+  const from = dateRange?.from;
+  const to   = dateRange?.to;
+
+    // 1) filtrage des orders brutes
+  const filteredOrders = useMemo(() => {
+    if (!from || !to) return orders;
+    const fromTs = from.getTime();
+    const toTs   = to.getTime();
+    return orders.filter(o => {
+      const ts = new Date(o.updatedAt).getTime();  // adapter selon ton champ date
+      return ts >= fromTs && ts <= toTs;
+    });
+  }, [orders, from, to]);
+  
+  // Calculer la période de temps sélectionnée
   const spanDays = useMemo(() => {
     if (!from || !to) return 0
     return differenceInDays(to, from)
-  }, [from, to])
+  }, [from, to]);
+
+  // 1) Calculer la période pour formater l'affichage des graphiques
+  const tickFormatter = useMemo(() => {
+  return (value: string) => {
+    const date = new Date(value);
+    if (spanDays <= 30) {
+      return format(date, "dd/MM");
+    } else if (spanDays <= 90) {
+      return format(date, "dd/MM");
+    } else if (spanDays <= 365) {
+      return format(date, "MMM");
+    } else {
+      return format(date, "yyyy");
+    }
+  };
+}, [spanDays]);
 
   const sample: ChartData = data[0] || {};
   const categoryKeys = Object.keys(sample).filter(key => key !== "date");
@@ -108,21 +141,37 @@ export const useChartsDatas = ({
     });
   }, [bucketedData, categoryKeys]);
 
-  // Calculer le total par catégorie
-  const totalByCategory = chartData.reduce<Record<string, number>>((acc, curr) => {
+  // Calculer le total des ventes par catégorie
+  const totalSellByCategory = chartData.reduce<Record<string, number>>((acc, curr) => {
     categoryKeys.forEach((k) => {
       acc[k] = (acc[k] || 0) + (typeof curr[k] === "number" ? (curr[k] as number) : 0)
     })
     return acc
   }, {})
 
-  // Calculer le total global
-  const total = Object.values(totalByCategory).reduce((a, b) => a + b, 0)
+  // Calculer le nombre total des commandes par catégories
+  const totalOrdersByCategories = chartData.reduce<Record<string, number>>((acc, curr) => {
+    categoryKeys.forEach((k) => {
+      acc[k] = (acc[k] || 0) + (typeof curr[k] === "number" ? 1 : 0)
+    })
+    return acc
+  }
+  , {})
+
+  // Calculer le nombre total de commandes
+  const totalOrders = filteredOrders.length;
+
+
+  // Calculer le nombre total de clients uniques
+  const uniqueCustomers = new Set(filteredOrders.map(o => o.customerId)).size;
+
+  // Calculer le total des ventes
+  const totalSell = Object.values(totalSellByCategory).reduce((a, b) => a + b, 0)
 
   // Préparer les données pour le graphique en camembert
   const pieChartData: PieChartData[] = categoryKeys.map(key => ({
     name: key,
-    value: totalByCategory[key],
+    value: totalSellByCategory[key],
     fill: `var(--color-${key})`,
   }));
 
@@ -159,9 +208,16 @@ export const useChartsDatas = ({
     chartData,
     pieChartData,
     chartConfig,
-    totalByCategory,
-    total,
     dateRange,
+    tickFormatter,
+    sellsbycategorybydate,
+    totalSell,
+    totalByCategory: totalSellByCategory,
+    totalOrders,
+    totalOrdersByCategories,
+    uniqueCustomers,
+    trendsByCategory,
+    globalTrendPercent,
   }
 }
 
