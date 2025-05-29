@@ -2,7 +2,6 @@ import React from "react";
 import {
   ChartContainer,
   ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   CustomLegend,
@@ -16,9 +15,10 @@ interface BarChartAreaProps {
   id: string;
   chartData: ChartData[];
   chartConfig: ChartConfig;
+    tickFormatter: (value: string) => string;
 }
 
-const BarChartArea: React.FC<BarChartAreaProps> = ({ id, chartData, chartConfig }) => {
+const BarChartArea: React.FC<BarChartAreaProps> = ({ id, chartData, chartConfig, tickFormatter }) => {
   const entries = Object.entries(chartConfig) as Array<[string, { label: string; color: string }]>;
   const stored = useChartStore((s) => s.hiddenKeysByChart[id]);
   const hiddenKeys = stored ?? []; // fallback en local, hors selector
@@ -34,7 +34,7 @@ const BarChartArea: React.FC<BarChartAreaProps> = ({ id, chartData, chartConfig 
           axisLine={false}
           tickMargin={8}
           minTickGap={32}
-          tickFormatter={(value) => new Date(value).toLocaleDateString("fr-FR", { month: "short" })}
+  tickFormatter={tickFormatter}
         />
         <YAxis
           tickLine={false}
