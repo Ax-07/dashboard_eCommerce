@@ -8,7 +8,7 @@ import { firstNamesByCountry, lastNamesByCountry, addressesByCountry, phoneConfi
 import { PRODUCTS } from '../../mock/index'
 
 // Configuration
-const sampleCount = 100; // Nombre d'échantillons à générer
+const sampleCount = 50; // Nombre d'échantillons à générer
 const CART_PER_USER = 2; // Nombre de paniers par utilisateur
 const ITEMS_PER_CART = 5;
 const ORDERS_PER_USER = 2;
@@ -46,6 +46,28 @@ function generateFieldValue(model: string, field: DMMF.Field, i: number): Scalar
     return generatePlaceholder(model, field, i);
 }
 /**
+ * Génère une valeur pour un champ d'énumération.
+ * @param field Le méta-champ Prisma (DMMF.Field) de type enum.
+ * @param i     L'index de l'élément en cours de génération (pour une répartition cyclique ou aléatoire).
+ * @param enumsMap Mapping du nom de l'énumération vers son tableau de valeurs.
+ * @returns     Une des valeurs de l'énumération, ou null si vide / pas enum.
+ */
+function generateRandomEnum(
+  field: DMMF.Field,
+  i: number,
+  enumsMap: Record<string, string[]>
+): string | null {
+  if (field.kind !== 'enum') return null;
+
+  const values = enumsMap[field.type] || [];
+  if (values.length === 0) {
+    return null;
+  }
+  const idx = Math.floor(Math.random() * values.length);
+  return values[idx];
+}
+
+/**
  * Renvoie une date ISO aléatoire entre `start` et `end`
  */
 function randomDateISO(start: Date, end: Date): string {
@@ -59,10 +81,10 @@ function randomDateISO(start: Date, end: Date): string {
  * `maxDeltaMs` est en millisecondes.
  */
 function randomDateNear(start: Date, maxDeltaMs: number): string {
-  const s = start.getTime();
-  const e = s + maxDeltaMs;
-  const randMs = s + Math.random() * (e - s);
-  return new Date(randMs).toISOString();
+    const s = start.getTime();
+    const e = s + maxDeltaMs;
+    const randMs = s + Math.random() * (e - s);
+    return new Date(randMs).toISOString();
 }
 
 // Exemples d’utilisation :
@@ -219,15 +241,19 @@ async function main() {
                             const idField = model.fields.find(f => f.isId);
                             if (!idField) return; // Si aucun champ ID n'est trouvé, passe au modèle suivant
                             const orderId = generateFieldValue('Order', idField, uIdx * ORDERS_PER_USER + j);
-
+                            const statusField         = model.fields.find(f => f.name === 'status');
+                            const paymentStatusField  = model.fields.find(f => f.name === 'paymentStatus');
+                            const shippingStatusField = model.fields.find(f => f.name === 'shippingStatus');
                             const createdAt = randomDateISO(debutPeriode, finPeriode);
                             const updatedAt = randomDateNear(new Date(createdAt), 3600_000);
+
                             const order = {
                                 id: orderId,
                                 userId: userId,
-                                status: 'pending',
-                                paymentStatus: 'pending',
-                                shippingStatus: 'pending',
+                                customerId: userId,
+                                status: statusField ? generateRandomEnum(statusField, uIdx, enumsMap) : 'pending',
+                                paymentStatus: paymentStatusField ? generateRandomEnum(paymentStatusField, uIdx, enumsMap) : 'pending',
+                                shippingStatus: shippingStatusField ? generateRandomEnum(shippingStatusField, uIdx, enumsMap) : 'pending',
                                 totalAmount: 0,
                                 subtotal: 0,
                                 taxAmount: 0,
@@ -366,17 +392,16 @@ async function main() {
             const discount = typeof order.discount === 'number' ? order.discount : 0; // Remise par défaut si absent
             const totalAmount = subtotal + taxAmount + shippingCost - discount; // Total TTC
             const paymentId = uuidv4(); // Génération d'un ID de paiement
-            const paidAt = randomDateNear(new Date(order.updatedAt), 3600_000);
             // Prépare l’objet Payment
             const payment = {
                 id: paymentId,
-                method: 'visa',
+                method: '',
                 currency: 'EUR',
-                provider: 'stripe',
+                provider: '',
                 transactionId: null,
-                status: 'pending', // statut initial
+                status:  order.paymentStatus as string, // Statut de paiement
                 amount: null,      // à remplir en post-traitement
-                paidAt: paidAt,
+                paidAt: null, // à remplir en post-traitement
                 refundedAmount: null,
             };
             // On réécrit dans l’objet
@@ -398,11 +423,11 @@ async function main() {
             const order = (output['Order']).find(o => o.paymentId === payment.id);
             if (order) {
                 payment.amount = order.totalAmount; // on copie le total TTC dans le montant payé
-                payment.paidAt = new Date().toISOString(); // on marque la date de paiement maintenant
-                payment.status = 'paid'; // on positionne le statut sur “paid”
-                payment.method = 'visa'; // 
+                payment.paidAt = randomDateNear(new Date(order.updatedAt), 3600_000); // on marque la date de paiement maintenant
+                payment.status = order.paymentStatus as string || 'paid'; // on marque le statut de paiement
+                payment.method = order.paymentStatus === 'paid' ? 'visa' : ''; // on marque le moyen de paiement
                 payment.currency = 'eur';
-                payment.provider = 'stripe'
+                payment.provider = order.paymentStatus === 'paid' ? 'stripe' : ''; // on marque le provider de paiement
             }
         });
     }
