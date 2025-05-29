@@ -17,6 +17,7 @@ interface MultiLineChartProps {
   id: string;
   chartData: ChartData[];
   chartConfig: ChartConfig;
+  tickFormatter: (value: string) => string;
 }
 // Helper: get last value of a key in data array
 export function getLastValue(data: ChartData[], key: keyof ChartData): number {
@@ -28,7 +29,7 @@ export function getLastValue(data: ChartData[], key: keyof ChartData): number {
   }
   return 0;
 }
-const MultiLineChart: React.FC<MultiLineChartProps> = ({ id, chartData, chartConfig }) => {
+const MultiLineChart: React.FC<MultiLineChartProps> = ({ id, chartData, chartConfig, tickFormatter }) => {
   const isMobile = useIsMobile();
   const stored = useChartStore((s) => s.hiddenKeysByChart[id]);
   const hiddenKeys = stored ?? []; // fallback en local, hors selector
@@ -50,7 +51,7 @@ const MultiLineChart: React.FC<MultiLineChartProps> = ({ id, chartData, chartCon
           axisLine={false}
           tickMargin={8}
           minTickGap={32}
-          tickFormatter={(value) => new Date(value).toLocaleDateString("fr-FR", { month: "short" })}
+  tickFormatter={tickFormatter}
         />
         <YAxis
           tickLine={false}
