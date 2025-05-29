@@ -166,3 +166,4 @@ export const OrderSchema = z.object({
 
 export type OrderInput = z.infer<typeof OrderSchema>;
 export type OrderItemInput = z.infer<typeof OrderItemSchema>;
+export type OrderOutput = z.infer<typeof OrderSchema>;
