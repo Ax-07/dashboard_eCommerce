@@ -114,7 +114,7 @@ export function DatePickerWithRange({
                       })
                     }}
                 >
-                    Last month
+                    This trimester
                 </ToggleGroupItem>
                 {/* This year */}
                 <ToggleGroupItem
