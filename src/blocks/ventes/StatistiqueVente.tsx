@@ -10,6 +10,7 @@ import { getComputeSells } from "@/src/mock/sells/computeSells";
 import { getBestSellingProducts } from "@/src/mock/sells/computeTopSells";
 import TopSellsList from "./TopSellsList";
 import { DatePickerWithRange } from "@/src/components/custom/range-date-picker";
+import { Order } from "@/generated/prisma";
 
 interface StatistiqueVenteProps {
   data: any;
@@ -24,50 +25,125 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
     to: new Date(),
   });
 
-  const parsedData = JSON.parse(data.value);
-  const orders2 = parsedData?.Order;
 
-  const sellsbycategorybydate = getComputeSells({ Order: orders2 });
-  const { chartData, chartConfig, total, pieChartData } = useChartsDatas({
-    data: sellsbycategorybydate,
+  const parsedData = JSON.parse(data.value);
+  const orders = parsedData?.Order;
+
+  const { chartData, chartConfig, pieChartData, tickFormatter, sellsbycategorybydate, totalSell, totalOrders, uniqueCustomers } = useChartsDatas({
+    orders: orders,
     dateRange,
   });
 
-  const bestSeller = getBestSellingProducts(orders2, 10);
+  const bestSeller = getBestSellingProducts(orders, 10);
   return (
     <div className="w-full">
       <DatePickerWithRange
-        className="ml-auto mb-2"
+        className="ml-auto mb-4"
         date={dateRange}
         onChange={(r) => {
           if (r.from && r.to) setDateRange({ from: r.from, to: r.to });
         }}
       />
-      <div className="flex gap-4">
-        {/* Graphiques Chiffre d'affaires par categories*/}
+      {/* Statistiques et évolutions de chiffre d'affaire */}
+      <div className="flex gap-4 mb-4">
         <div className="flex-1">
-          <MultiLineChart id="multi-line-chart" chartData={chartData} chartConfig={chartConfig} />
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Chiffre d'affaires</CardTitle>
+              <CardDescription>Statistiques de ventes</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {totalSell.toLocaleString("fr-FR", {
+                  style: "currency",
+                  currency: "EUR",
+                })}
+              </div>
+            </CardContent>
+          </Card>
         </div>
         <div className="flex-1">
-          <BarChartArea id="bar-chart" chartData={chartData} chartConfig={chartConfig} />
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Commandes</CardTitle>
+              <CardDescription>Nombre de commandes</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {totalOrders.toLocaleString("fr-FR")}
+              </div>
+            </CardContent>
+          </Card>
         </div>
         <div className="flex-1">
-          <PieChartComponent id="pie-chart" chartData={pieChartData} chartConfig={chartConfig} total={total} />
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Clients</CardTitle>
+              <CardDescription>Nombre de clients uniques</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {uniqueCustomers.toLocaleString("fr-FR")}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
-      <div className="flex gap-4 mt-4">
+      {/* Graphiques Chiffre d'affaires par categories*/}
+      <div className="flex gap-4 mb-4">
+        <div className="flex-1">
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Chiffre d'affaires par jour</CardTitle>
+              <CardDescription>Graphique des ventes par jour</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <MultiLineChart id="multi-line-chart" chartData={chartData} chartConfig={chartConfig} tickFormatter={tickFormatter} />
+            </CardContent>
+          </Card>
+        </div>
+        <div className="flex-1">
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Chiffre d'affaires par catégorie</CardTitle>
+              <CardDescription>Graphique des ventes par catégorie</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <BarChartArea id="bar-chart" chartData={chartData} chartConfig={chartConfig} tickFormatter={tickFormatter} />
+            </CardContent>
+          </Card>
+        </div>
+        <div className="flex-1">
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>Répartition des ventes</CardTitle>
+              <CardDescription>Ventes par catégorie</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <PieChartComponent id="pie-chart" chartData={pieChartData} chartConfig={chartConfig} total={totalSell} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      {/* Top vente et liste des dernières commandes */}
+      <div className="flex gap-4">
         <Card className="flex-1">
           <CardHeader>
             <CardTitle> Top Ventes</CardTitle>
             <CardDescription>Produits les plus vendus</CardDescription>
-            <TopSellsList bestSeller={bestSeller} />
           </CardHeader>
+          <CardContent>
+            <TopSellsList bestSeller={bestSeller} />
+          </CardContent>
         </Card>
         <Card className="flex-1">
           <CardHeader>
             <CardTitle>Suivi des commandes</CardTitle>
-            <OrderList orders={orders2} />
+            <CardDescription>Liste des commandes récentes</CardDescription>
           </CardHeader>
+          <CardContent>
+            <OrderList orders={orders} />
+          </CardContent>
         </Card>
       </div>
     </div>
