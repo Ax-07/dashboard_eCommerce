@@ -31,6 +31,7 @@ export const OrderItemSchema = z.object({
   orderId: z.string().uuid(),
   productId: z.string(),
   productName: z.string(),
+  category: z.string().optional(),
   sku: z.string(),
   quantity: z.number().int().nonnegative(),
   unitPrice: z.number().nonnegative(),
