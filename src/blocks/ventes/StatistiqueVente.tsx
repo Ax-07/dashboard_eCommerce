@@ -6,11 +6,9 @@ import MultiLineChart from "@/src/components/custom/charts/Multi-Line-Chart";
 import { PieChartComponent } from "@/src/components/custom/charts/pie-chart";
 import { useChartsDatas } from "@/src/components/custom/charts/useChartsDatas";
 import OrderList from "../order/OrderList";
-import { getComputeSells } from "@/src/mock/sells/computeSells";
 import { getBestSellingProducts } from "@/src/mock/sells/computeTopSells";
 import TopSellsList from "./TopSellsList";
 import { DatePickerWithRange } from "@/src/components/custom/range-date-picker";
-import { Order } from "@/generated/prisma";
 
 interface StatistiqueVenteProps {
   data: any;
