@@ -29,22 +29,22 @@ export const useChartsDatas = ({
   dateRange,
 }: UseChartProps) => {
 
-    const data = getComputeSells({ Order: orders });
+  const data = getComputeSells({ Order: orders });
   const sellsbycategorybydate = data;
   const from = dateRange?.from;
-  const to   = dateRange?.to;
+  const to = dateRange?.to;
 
-    // 1) filtrage des orders brutes
+  // 1) filtrage des orders brutes
   const filteredOrders = useMemo(() => {
     if (!from || !to) return orders;
     const fromTs = from.getTime();
-    const toTs   = to.getTime();
+    const toTs = to.getTime();
     return orders.filter(o => {
       const ts = new Date(o.updatedAt).getTime();  // adapter selon ton champ date
       return ts >= fromTs && ts <= toTs;
     });
   }, [orders, from, to]);
-  
+
   // Calculer la période de temps sélectionnée
   const spanDays = useMemo(() => {
     if (!from || !to) return 0
@@ -53,19 +53,19 @@ export const useChartsDatas = ({
 
   // 1) Calculer la période pour formater l'affichage des graphiques
   const tickFormatter = useMemo(() => {
-  return (value: string) => {
-    const date = new Date(value);
-    if (spanDays <= 30) {
-      return format(date, "dd/MM");
-    } else if (spanDays <= 90) {
-      return format(date, "dd/MM");
-    } else if (spanDays <= 365) {
-      return format(date, "MMM");
-    } else {
-      return format(date, "yyyy");
-    }
-  };
-}, [spanDays]);
+    return (value: string) => {
+      const date = new Date(value);
+      if (spanDays <= 30) {
+        return format(date, "dd/MM");
+      } else if (spanDays <= 90) {
+        return format(date, "dd/MM");
+      } else if (spanDays <= 365) {
+        return format(date, "MMM");
+      } else {
+        return format(date, "yyyy");
+      }
+    };
+  }, [spanDays]);
 
   const sample: ChartData = data[0] || {};
   const categoryKeys = Object.keys(sample).filter(key => key !== "date");
@@ -81,7 +81,7 @@ export const useChartsDatas = ({
   const filteredData = useMemo(() => {
     if (!from || !to) return data
     const fromTs = from.getTime()
-    const toTs   = to.getTime()
+    const toTs = to.getTime()
     return data
       .filter((d) => {
         const ts = new Date(d.date).getTime()
@@ -90,7 +90,7 @@ export const useChartsDatas = ({
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   }, [data, from, to])
 
-// 4) Choix du « bucket » en fonction de la durée
+  // 4) Choix du « bucket » en fonction de la durée
   const bucketedData = useMemo<ChartData[]>(() => {
     // Cas journalier : on garde tel quel
     if (spanDays <= 30) {
@@ -132,7 +132,7 @@ export const useChartsDatas = ({
   const chartData = useMemo<ChartData[]>(() => {
     return bucketedData.map((d) => {
       const newData: ChartData = { date: d.date };
-      
+
       categoryKeys.forEach((key) => {
 
         newData[key] = d[key] as number;
@@ -140,6 +140,15 @@ export const useChartsDatas = ({
       return newData;
     });
   }, [bucketedData, categoryKeys]);
+
+  // --- Ventes --- //
+
+  // Caluler le nombre total des transactions par statut
+  const totalTransactionsByStatus = filteredOrders.reduce<Record<string, number>>((acc, order) => {
+    const status = order.status;
+    acc[status] = (acc[status] || 0) + 1;
+    return acc;
+  }, {});
 
   // Calculer le total des ventes par catégorie
   const totalSellByCategory = chartData.reduce<Record<string, number>>((acc, curr) => {
@@ -149,31 +158,40 @@ export const useChartsDatas = ({
     return acc
   }, {})
 
+  // Calculer le total des ventes
+  const totalSell = Object.values(totalSellByCategory).reduce((a, b) => a + b, 0)
+
+  // --- Commandes --- //
+
   // Calculer le nombre total des commandes par catégories
   const totalOrdersByCategories = chartData.reduce<Record<string, number>>((acc, curr) => {
     categoryKeys.forEach((k) => {
       acc[k] = (acc[k] || 0) + (typeof curr[k] === "number" ? 1 : 0)
     })
     return acc
-  }
-  , {})
+  }, {})
 
   // Calculer le nombre total de commandes
   const totalOrders = filteredOrders.length;
 
+  // Calculer le nombre total de commandes par catégorie
+  const totalOrdersByCategory = filteredOrders.reduce<Record<string, number>>((acc, order) => {
+    order.items.forEach((item: OrderItemInput) => {
+      const category = item.category ?? "autre";
+      acc[category] = (acc[category] || 0) + 1;
+    });
+    return acc;
+  }, {});
+
+  // Calculer la valeur moyenne des commandes
+  const averageOrderValue = totalSell / totalOrders || 0;
+
+  // --- Clients --- //
 
   // Calculer le nombre total de clients uniques
   const uniqueCustomers = new Set(filteredOrders.map(o => o.customerId)).size;
 
-  // Calculer le total des ventes
-  const totalSell = Object.values(totalSellByCategory).reduce((a, b) => a + b, 0)
-
-  // Préparer les données pour le graphique en camembert
-  const pieChartData: PieChartData[] = categoryKeys.map(key => ({
-    name: key,
-    value: totalSellByCategory[key],
-    fill: `var(--color-${key})`,
-  }));
+  // --- Tendances --- //
 
   // calculs de tendance
   const calcTrend = (first: number, last: number) => {
@@ -203,6 +221,12 @@ export const useChartsDatas = ({
     globalTrendPercent = calcTrend(firstSum, lastSum)
   }
 
+  // Préparer les données pour le graphique en camembert
+  const pieChartData: PieChartData[] = categoryKeys.map(key => ({
+    name: key,
+    value: totalSellByCategory[key],
+    fill: `var(--color-${key})`,
+  }));
 
   return {
     chartData,
@@ -222,15 +246,15 @@ export const useChartsDatas = ({
 }
 
 export const useChartState = () => {
-   const [hiddenKeys, setHiddenKeys] = useState<string[]>([]);
-      const toggleKey = (key: string) => {
-        setHiddenKeys((prev) => {
-          const newHiddenKeys = prev.includes(key)
-            ? prev.filter((k) => k !== key)
-            : [...prev, key];
-          console.log("Toggled key:", key, "Hidden keys:", newHiddenKeys);
-          return newHiddenKeys;
-        });
-      };
+  const [hiddenKeys, setHiddenKeys] = useState<string[]>([]);
+  const toggleKey = (key: string) => {
+    setHiddenKeys((prev) => {
+      const newHiddenKeys = prev.includes(key)
+        ? prev.filter((k) => k !== key)
+        : [...prev, key];
+      console.log("Toggled key:", key, "Hidden keys:", newHiddenKeys);
+      return newHiddenKeys;
+    });
+  };
   return { hiddenKeys, toggleKey }
 }
