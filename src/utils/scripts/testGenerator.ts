@@ -303,6 +303,7 @@ async function main() {
             if (!saleOptions) continue; // Si aucune option de vente n'est trouvée, passe à l'itération suivante
             const optionValue = saleOptions.values[(k % saleOptions.values.length)];
 
+            const category = prod.category ? prod.category.id : 'autres'; // Catégorie du produit
             const sku = optionValue.sku || `${cart.id}-${k}`;
             const qty = optionValue.quantity || 1; // Quantité par défaut à 1 si non spécifiée
             const unitPrice = Number(((optionValue.unitPrice ?? prod.price ?? 0).toFixed(2))); // Prix unitaire (ou prix par défaut)
@@ -313,6 +314,7 @@ async function main() {
                 cartId: cart.id,
                 productId: prod.id,
                 productName: prod.name,
+                category: category, // Catégorie du produit
                 sku: sku,
                 quantity: qty,
                 unitPrice: unitPrice,
@@ -364,6 +366,7 @@ async function main() {
                 orderId: order.id,
                 productId: prod.id,
                 productName: prod.name,
+                category: prod.category ? prod.category.id : 'autres', // Catégorie du produit
                 sku: sku,
                 quantity: qty,
                 unitPrice: unitPrice,
@@ -414,6 +417,7 @@ async function main() {
             output['Payment'].push(payment);
             modelIds['Payment'].push(paymentId);
             order.paymentId = paymentId; // On lie le paiement à la commande
+            order.payment = payment; // On ajoute le paiement à la commande
         });
     }
     // 4) Post-traitement des Payments : caler le montant sur la commande
