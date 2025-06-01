@@ -1,11 +1,19 @@
 // @/src/components/custom/charts/useChatsDatas.ts
 import { useEffect, useMemo, useState } from "react"
-import {
+import { 
   differenceInDays,
   startOfWeek,
   startOfMonth,
+  startOfQuarter,
+  startOfYear,
+  startOfDay,
+  subDays,
+  subWeeks,
+  subMonths,
+  subQuarters,
+  subYears,
   format,
-} from "date-fns"
+} from "date-fns";
 import { getComputeSells } from "@/src/mock/sells/computeSells";
 import { OrderItemInput, OrderOutput } from "@/src/lib/validators/order.zod";
 export interface ChartData {
@@ -90,7 +98,7 @@ export const useChartsDatas = ({
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   }, [data, from, to])
 
-  // 4) Choix du « bucket » en fonction de la durée
+  // 4) Choix du « bucket » en fonction de la durée (quotidien / hebdo / mensuel)
   const bucketedData = useMemo<ChartData[]>(() => {
     // Cas journalier : on garde tel quel
     if (spanDays <= 30) {
@@ -193,33 +201,146 @@ export const useChartsDatas = ({
 
   // --- Tendances --- //
 
+    // ───> 9) Fonction utilitaire : somme par catégorie sur une plage de dates
+  function sumByCategoryBetween(
+    startDate: Date,
+    endDate: Date
+  ): Record<string, number> {
+    const sums: Record<string, number> = {};
+    categoryKeys.forEach((k) => (sums[k] = 0));
+
+    sellsbycategorybydate.forEach((d) => {
+      const dt = new Date(d.date);
+      if (dt >= startDate && dt <= endDate) {
+        categoryKeys.forEach((k) => {
+          const val = typeof d[k] === "number" ? (d[k] as number) : 0;
+          sums[k] += val;
+        });
+      }
+    });
+
+    return sums;
+  }
+
   // calculs de tendance
-  const calcTrend = (first: number, last: number) => {
+  const calcTrendPercent = (first: number, last: number) => {
     if (first === 0) return 0
     return parseFloat((((last - first) / first) * 100).toFixed(2))
   }
 
-  // tendances par catégorie
-  const trendsByCategory = categoryKeys.reduce<Record<string, number>>((acc, key) => {
-    if (chartData.length >= 2) {
-      const firstV = chartData[0][key] as number
-      const lastV = chartData[chartData.length - 1][key] as number
-      acc[key] = calcTrend(firstV, lastV)
-    } else {
-      acc[key] = 0
-    }
-    return acc
-  }, {})
+  // ───> 11) On définit la date de référence pour les calculs (aujourd’hui ou dateRange.to)
+  const referenceDate = to ? new Date(to) : new Date();
 
-  // tendance globale : on compare la somme du premier jour vs la somme du dernier
-  let globalTrendPercent = 0
-  if (chartData.length >= 2) {
-    const sumAt = (idx: number) =>
-      categoryKeys.reduce((s, k) => s + (chartData[idx][k] as number), 0)
-    const firstSum = sumAt(0)
-    const lastSum = sumAt(chartData.length - 1)
-    globalTrendPercent = calcTrend(firstSum, lastSum)
+  // ───> 12) Calcul des différents points de découpe
+  // 12.1) JOURNALIER
+  const currDayStart = startOfDay(referenceDate);
+  const prevDayStart = subDays(currDayStart, 1);
+  // 12.2) HEBDO
+  const currWeekStart = startOfWeek(referenceDate, { weekStartsOn: 1 });
+  const prevWeekStart = subWeeks(currWeekStart, 1);
+  const prevWeekEnd = subDays(currWeekStart, 1);
+  // 12.3) MENSUEL
+  const currMonthStart = startOfMonth(referenceDate);
+  const prevMonthStart = subMonths(currMonthStart, 1);
+  const prevMonthEnd = subDays(currMonthStart, 1);
+  // 12.4) TRIMESTRIEL
+  const currQuarterStart = startOfQuarter(referenceDate);
+  const prevQuarterStart = subQuarters(currQuarterStart, 1);
+  const prevQuarterEnd = subDays(currQuarterStart, 1);
+  // 12.5) ANNUEL
+  const currYearStart = startOfYear(referenceDate);
+  const prevYearStart = subYears(currYearStart, 1);
+  const prevYearEnd = subDays(currYearStart, 1);
+
+// ───> 13) Aggrégation pour chaque période
+  // 13.1) Daily
+  const sumPrevDay = sumByCategoryBetween(prevDayStart, prevDayStart);
+  const sumCurrDay = sumByCategoryBetween(currDayStart, referenceDate);
+
+  // 13.2) Weekly
+  const sumPrevWeek = sumByCategoryBetween(prevWeekStart, prevWeekEnd);
+  const sumCurrWeek = sumByCategoryBetween(currWeekStart, referenceDate);
+
+  // 13.3) Monthly
+  const sumPrevMonth = sumByCategoryBetween(prevMonthStart, prevMonthEnd);
+  // On peut décider de prendre jusqu’à la référence ou jusqu’à la fin du mois
+  // Disons qu’on prend jusqu’à la date de référence pour rester cohérent
+  const sumCurrMonth = sumByCategoryBetween(currMonthStart, referenceDate);
+
+  // 13.4) Quarterly
+  const sumPrevQuarter = sumByCategoryBetween(prevQuarterStart, prevQuarterEnd);
+  const sumCurrQuarter = sumByCategoryBetween(currQuarterStart, referenceDate);
+
+  // 13.5) Yearly
+  const sumPrevYear = sumByCategoryBetween(prevYearStart, prevYearEnd);
+  const sumCurrYear = sumByCategoryBetween(currYearStart, referenceDate);
+
+  // ───> 14) Calcul des tendances % par catégorie
+  const dailyTrendByCategory: Record<string, number> = {};
+  const weeklyTrendByCategory: Record<string, number> = {};
+  const monthlyTrendByCategory: Record<string, number> = {};
+  const quarterlyTrendByCategory: Record<string, number> = {};
+  const yearlyTrendByCategory: Record<string, number> = {};
+
+  categoryKeys.forEach((k) => {
+    dailyTrendByCategory[k] = calcTrendPercent(sumPrevDay[k], sumCurrDay[k]);
+    weeklyTrendByCategory[k] = calcTrendPercent(
+      sumPrevWeek[k],
+      sumCurrWeek[k]
+    );
+    monthlyTrendByCategory[k] = calcTrendPercent(
+      sumPrevMonth[k],
+      sumCurrMonth[k]
+    );
+    quarterlyTrendByCategory[k] = calcTrendPercent(
+      sumPrevQuarter[k],
+      sumCurrQuarter[k]
+    );
+    yearlyTrendByCategory[k] = calcTrendPercent(
+      sumPrevYear[k],
+      sumCurrYear[k]
+    );
+  });
+
+  // ───> 15) Si vous voulez une tendance “globale” non plus par catégorie
+  //        mais sur la somme de toutes les catégories, vous pouvez aussi :
+  function sumAllCategories(obj: Record<string, number>): number {
+    return categoryKeys.reduce((acc, k) => acc + (obj[k] || 0), 0);
   }
+
+  const globalDailyTrend = calcTrendPercent(
+    sumAllCategories(sumPrevDay),
+    sumAllCategories(sumCurrDay)
+  );
+  const globalWeeklyTrend = calcTrendPercent(
+    sumAllCategories(sumPrevWeek),
+    sumAllCategories(sumCurrWeek)
+  );
+  const globalMonthlyTrend = calcTrendPercent(
+    sumAllCategories(sumPrevMonth),
+    sumAllCategories(sumCurrMonth)
+  );
+  const globalQuarterlyTrend = calcTrendPercent(
+    sumAllCategories(sumPrevQuarter),
+    sumAllCategories(sumCurrQuarter)
+  );
+  const globalYearlyTrend = calcTrendPercent(
+    sumAllCategories(sumPrevYear),
+    sumAllCategories(sumCurrYear)
+  );
+
+    // ───> 18) **NOUVEAU** : Calcul des tendances **du chiffre d’affaires** (somme totale)
+  // Pour chaque granularité, on somme d’abord toutes les catégories, puis on calcule le %
+  const revenueSumPrevDay     = sumAllCategories(sumPrevDay);
+  const revenueSumCurrDay     = sumAllCategories(sumCurrDay);
+  const revenueSumPrevWeek    = sumAllCategories(sumPrevWeek);
+  const revenueSumCurrWeek    = sumAllCategories(sumCurrWeek);
+  const revenueSumPrevMonth   = sumAllCategories(sumPrevMonth);
+  const revenueSumCurrMonth   = sumAllCategories(sumCurrMonth);
+  const revenueSumPrevQuarter = sumAllCategories(sumPrevQuarter);
+  const revenueSumCurrQuarter = sumAllCategories(sumCurrQuarter);
+  const revenueSumPrevYear    = sumAllCategories(sumPrevYear);
+  const revenueSumCurrYear    = sumAllCategories(sumCurrYear);
 
   // Préparer les données pour le graphique en camembert
   const pieChartData: PieChartData[] = categoryKeys.map(key => ({
@@ -229,19 +350,42 @@ export const useChartsDatas = ({
   }));
 
   return {
-    chartData,
-    pieChartData,
-    chartConfig,
-    dateRange,
-    tickFormatter,
-    sellsbycategorybydate,
-    totalSell,
-    totalByCategory: totalSellByCategory,
-    totalOrders,
-    totalOrdersByCategories,
-    uniqueCustomers,
-    trendsByCategory,
-    globalTrendPercent,
+    chartData, // les données du graphique
+    pieChartData, // les données du graphique en camembert
+    chartConfig, // la configuration du graphique
+    dateRange, // la plage de dates sélectionnée
+    tickFormatter, // la fonction de formatage des dates pour l'axe X
+    sellsbycategorybydate, // les ventes par catégorie et par date
+    totalSell, // le chiffre d'affaires total
+    totalSellByCategory, // le chiffre d'affaires par catégorie
+    totalOrders, // le nombre total de commandes
+    totalOrdersByCategories, // le nombre total de commandes par catégorie
+    uniqueCustomers, // le nombre de clients uniques
+    totalTransactionsByStatus, // le nombre total de transactions par statut
+    totalOrdersByCategory, // le nombre total de commandes par catégorie
+    averageOrderValue, // la valeur moyenne des commandes
+    trendsByCategory: {
+      daily: dailyTrendByCategory,
+      weekly: weeklyTrendByCategory,
+      monthly: monthlyTrendByCategory,
+      quarterly: quarterlyTrendByCategory,
+      yearly: yearlyTrendByCategory,
+    },
+    globalTrendPercent: {
+      daily: globalDailyTrend,
+      weekly: globalWeeklyTrend,
+      monthly: globalMonthlyTrend,
+      quarterly: globalQuarterlyTrend,
+      yearly: globalYearlyTrend,
+    },
+    sells: {
+      daily: revenueSumCurrDay,
+      weekly: revenueSumCurrWeek,
+      monthly: revenueSumCurrMonth,
+      quarterly: revenueSumCurrQuarter,
+      yearly: revenueSumCurrYear,
+    }
+
   }
 }
 
