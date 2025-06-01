@@ -23,11 +23,27 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
     to: new Date(),
   });
 
-
   const parsedData = JSON.parse(data.value);
   const orders = parsedData?.Order;
 
-  const { chartData, chartConfig, pieChartData, tickFormatter, sellsbycategorybydate, totalSell, totalOrders, uniqueCustomers } = useChartsDatas({
+  const {
+    chartData, // les données du graphique
+    pieChartData, // les données du graphique en camembert
+    chartConfig, // la configuration du graphique
+    tickFormatter, // la fonction de formatage des dates pour l'axe X
+    sellsbycategorybydate, // les ventes par catégorie et par date
+    totalSell, // le chiffre d'affaires total
+    totalSellByCategory, // le chiffre d'affaires par catégorie
+    totalOrders, // le nombre total de commandes
+    totalOrdersByCategories, // le nombre total de commandes par catégorie
+    uniqueCustomers, // le nombre de clients uniques
+    trendsByCategory, // les tendances par catégorie
+    globalTrendPercent, // la tendance globale en pourcentage
+    totalTransactionsByStatus, // le nombre total de transactions par statut
+    totalOrdersByCategory, // le nombre total de commandes par catégorie
+    averageOrderValue, // la valeur moyenne des commandes
+    sells, // les ventes totales (daily, weekly, monthly, quarterly, yearly)
+  } = useChartsDatas({
     orders: orders,
     dateRange,
   });
@@ -38,9 +54,7 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
       <DatePickerWithRange
         className="ml-auto mb-4"
         date={dateRange}
-        onChange={(r) => {
-          if (r.from && r.to) setDateRange({ from: r.from, to: r.to });
-        }}
+        onChange={(r) => {if (r.from && r.to) setDateRange({ from: r.from, to: r.to });}}
       />
       {/* Statistiques et évolutions de chiffre d'affaire */}
       <div className="flex gap-4 mb-4">
@@ -52,10 +66,47 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {totalSell.toLocaleString("fr-FR", {
-                  style: "currency",
-                  currency: "EUR",
-                })}
+                {totalSell.toLocaleString("fr-FR", {style: "currency", currency: "EUR"})}
+              </div>
+              <div className="text-sm text-gray-500">
+                {globalTrendPercent.yearly >= 0 ? (
+                  <span className="text-green-600">+{globalTrendPercent.yearly}%</span>
+                ) : (
+                  <span className="text-red-600">{globalTrendPercent.yearly}%</span>
+                )}{" "}
+                par rapport à l'année précédente
+              </div>
+              <div className="text-sm text-gray-500">
+                {globalTrendPercent.quarterly >= 0 ? (
+                  <span className="text-green-600">+{globalTrendPercent.quarterly}%</span>
+                ) : (
+                  <span className="text-red-600">{globalTrendPercent.quarterly}%</span>
+                )}{" "}
+                par rapport au trimestre précédent
+              </div>
+              <div className="text-sm text-gray-500">
+                {globalTrendPercent.monthly >= 0 ? (
+                  <span className="text-green-600">+{globalTrendPercent.monthly}%</span>
+                ) : (
+                  <span className="text-red-600">{globalTrendPercent.monthly}%</span>
+                )}{" "}
+                par rapport au mois précédent 
+              </div>
+              <div className="text-sm text-gray-500">
+                {globalTrendPercent.weekly >= 0 ? (
+                  <span className="text-green-600">+{globalTrendPercent.weekly}%</span>
+                ) : (
+                  <span className="text-red-600">{globalTrendPercent.weekly}%</span>
+                )}{" "}
+                par rapport à la semaine dernière
+              </div>
+              <div className="text-sm text-gray-500">
+                {globalTrendPercent.daily >= 0 ? (
+                  <span className="text-green-600">+{globalTrendPercent.daily}%</span>
+                ) : (
+                  <span className="text-red-600">{globalTrendPercent.daily}%</span>
+                )}{" "}
+                par rapport à la veille
               </div>
             </CardContent>
           </Card>
@@ -67,9 +118,7 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
               <CardDescription>Nombre de commandes</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {totalOrders.toLocaleString("fr-FR")}
-              </div>
+              <div className="text-2xl font-bold">{totalOrders.toLocaleString("fr-FR")}</div>
             </CardContent>
           </Card>
         </div>
@@ -80,9 +129,7 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
               <CardDescription>Nombre de clients uniques</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {uniqueCustomers.toLocaleString("fr-FR")}
-              </div>
+              <div className="text-2xl font-bold">{uniqueCustomers.toLocaleString("fr-FR")}</div>
             </CardContent>
           </Card>
         </div>
@@ -96,7 +143,12 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
               <CardDescription>Graphique des ventes par jour</CardDescription>
             </CardHeader>
             <CardContent>
-              <MultiLineChart id="multi-line-chart" chartData={chartData} chartConfig={chartConfig} tickFormatter={tickFormatter} />
+              <MultiLineChart
+                id="multi-line-chart"
+                chartData={chartData}
+                chartConfig={chartConfig}
+                tickFormatter={tickFormatter}
+              />
             </CardContent>
           </Card>
         </div>
@@ -107,7 +159,12 @@ const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
               <CardDescription>Graphique des ventes par catégorie</CardDescription>
             </CardHeader>
             <CardContent>
-              <BarChartArea id="bar-chart" chartData={chartData} chartConfig={chartConfig} tickFormatter={tickFormatter} />
+              <BarChartArea
+                id="bar-chart"
+                chartData={chartData}
+                chartConfig={chartConfig}
+                tickFormatter={tickFormatter}
+              />
             </CardContent>
           </Card>
         </div>
