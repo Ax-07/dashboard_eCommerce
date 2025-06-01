@@ -18,6 +18,19 @@ const categoryMap = {
 } as const;
 
 // 3️⃣ Fonction principale, avec typage de l’entrée et de la sortie
+/**
+ * Calcule les ventes par date à partir des données d'ordres.
+ * @param data 
+ * @returns 
+ * Renvoie un tableau de ventes par date, trié par date.
+ * Chaque entrée contient la date et les totaux par catégorie.
+ * Exemple de sortie :
+ * ```json
+ * [
+ *   { "date": "01/01/2025", "fleurs": 632, "resines": 0, "huiles": 0, "eliquides": 0 },
+ *   { "date": "02/01/2025", "fleurs": 0, "resines": 100, "huiles": 50, "eliquides": 200 },
+ *  ... * ]
+ */
 export const getComputeSells = (
   data: { Order: OrderInput[] }
 ): SalesByDate[] => {
