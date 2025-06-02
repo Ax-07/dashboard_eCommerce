@@ -11,7 +11,7 @@ import { PRODUCTS } from '../../mock/index'
 const sampleCount = 50; // Nombre d'échantillons à générer
 const CART_PER_USER = 2; // Nombre de paniers par utilisateur
 const ITEMS_PER_CART = 5;
-const ORDERS_PER_USER = 2;
+const ORDERS_PER_USER = 20;
 const ITEMS_PER_ORDER = 5;
 const ORDER_TAX_RATE = 0.2;
 const DEFAULT_SHIPPING = 5.0;
@@ -88,7 +88,7 @@ function randomDateNear(start: Date, maxDeltaMs: number): string {
 }
 
 // Exemples d’utilisation :
-const debutPeriode = new Date("2025-01-01T00:00:00.000Z");
+const debutPeriode = new Date("2024-01-01T00:00:00.000Z");
 const finPeriode = new Date();  // maintenant
 
 async function main() {
@@ -435,6 +435,8 @@ async function main() {
             }
         });
     }
+
+    // 5) Post-traitement des Orders : caler sur le status du pai
 
     writeFileSync('./src/mock/test-generator.json', JSON.stringify(output, null, 2), 'utf-8');
 }
