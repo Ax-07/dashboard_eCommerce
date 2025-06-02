@@ -15,12 +15,8 @@ interface StatistiqueVenteProps {
 }
 
 const StatistiqueVente: React.FC<StatistiqueVenteProps> = ({ data }) => {
-  const [dateRange, setDateRange] = React.useState<{
-    from: Date;
-    to: Date;
-  }>({
-    from: new Date(new Date().getFullYear(), 0, 1),
-    to: new Date(),
+  const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date }>({
+    from: new Date(new Date().getFullYear(), 0, 1), to: new Date(),
   });
 
   const parsedData = JSON.parse(data.value);
