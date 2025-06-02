@@ -1,3 +1,5 @@
+import { OrderOutput } from "@/src/lib/validators/order.zod";
+
 // @/src/stores/actions/getTestGenerator.ts
 export const getTestGenerator = async () => {
   const base = "http://localhost:3000";
