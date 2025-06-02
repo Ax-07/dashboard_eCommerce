@@ -1,5 +1,5 @@
 // @/src/components/custom/charts/useChatsDatas.ts
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { 
   differenceInDays,
   startOfWeek,
