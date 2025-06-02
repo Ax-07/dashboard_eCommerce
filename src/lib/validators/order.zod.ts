@@ -9,7 +9,7 @@ export const OrderStatusEnum = z.enum([
   "cancelled", "refunded", "return_requested", "return_approved"
 ]);
 export const PaymentStatusEnum = z.enum(["paid", "pending", "failed", "refunded"]);
-export const ShippingStatusEnum = z.enum(["pending", "paid", "processing", "shipped", "delivered", "canceled", "complete", "refunded", "retur_requested", "return_approved"]);
+export const ShippingStatusEnum = z.enum(["pending", "paid", "processing", "shipped", "delivered", "cancelled", "completed", "refunded", "return_requested", "return_approved"]);
 export const BillingStatusEnum = z.enum(["pending", "paid", "failed"]);
 export const RefundRequestStatusEnum = z.enum(["pending", "approved", "rejected", "refunded"]);
 export const ReturnStatusEnum = z.enum(["pending", "received", "rejected"]);
