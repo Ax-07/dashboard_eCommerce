@@ -77,7 +77,12 @@ export default function Home() {
             </div>
             {/* Nombre de commandes */}
             <div className="flex flex-col gap-2 rounded-xl bg-muted/50 p-4">
-              <OrdersKPI totalOrders={totalOrders} averageOrderValue={averageOrderValue} orderCompletionRate={orderCompletionRate} totalOrdersByStatus={totalOrdersByStatus}/>
+              <OrdersKPI
+                totalOrders={totalOrders}
+                averageOrderValue={averageOrderValue}
+                orderCompletionRate={orderCompletionRate}
+                totalOrdersByStatus={totalOrdersByStatus}
+              />
             </div>
             {/* Panier moyen */}
             <div className="flex flex-col gap-2 rounded-xl bg-muted/50 p-4">
