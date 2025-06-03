@@ -53,18 +53,18 @@ function generateFieldValue(model: string, field: DMMF.Field, i: number): Scalar
  * @returns     Une des valeurs de l'énumération, ou null si vide / pas enum.
  */
 function generateRandomEnum(
-  field: DMMF.Field,
-  i: number,
-  enumsMap: Record<string, string[]>
+    field: DMMF.Field,
+    i: number,
+    enumsMap: Record<string, string[]>
 ): string | null {
-  if (field.kind !== 'enum') return null;
+    if (field.kind !== 'enum') return null;
 
-  const values = enumsMap[field.type] || [];
-  if (values.length === 0) {
-    return null;
-  }
-  const idx = Math.floor(Math.random() * values.length);
-  return values[idx];
+    const values = enumsMap[field.type] || [];
+    if (values.length === 0) {
+        return null;
+    }
+    const idx = Math.floor(Math.random() * values.length);
+    return values[idx];
 }
 
 /**
@@ -241,8 +241,8 @@ async function main() {
                             const idField = model.fields.find(f => f.isId);
                             if (!idField) return; // Si aucun champ ID n'est trouvé, passe au modèle suivant
                             const orderId = generateFieldValue('Order', idField, uIdx * ORDERS_PER_USER + j);
-                            const statusField         = model.fields.find(f => f.name === 'status');
-                            const paymentStatusField  = model.fields.find(f => f.name === 'paymentStatus');
+                            const statusField = model.fields.find(f => f.name === 'status');
+                            const paymentStatusField = model.fields.find(f => f.name === 'paymentStatus');
                             const shippingStatusField = model.fields.find(f => f.name === 'shippingStatus');
                             const createdAt = randomDateISO(debutPeriode, finPeriode);
                             const updatedAt = randomDateNear(new Date(createdAt), 3600_000);
@@ -402,7 +402,7 @@ async function main() {
                 currency: 'EUR',
                 provider: '',
                 transactionId: null,
-                status:  order.paymentStatus as string, // Statut de paiement
+                status: order.paymentStatus as string, // Statut de paiement
                 amount: null,      // à remplir en post-traitement
                 paidAt: null, // à remplir en post-traitement
                 refundedAmount: null,
