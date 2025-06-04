@@ -5,7 +5,6 @@ interface OrdersKPIProps {
     // For example, you might want to pass in total orders, average order value, etc.
     totalOrders?: number;
     totalOrdersByStatus?: Record<string, number>; // Optional, can be used to display orders by status
-    averageOrderValue?: number;
     orderCompletionRate?: number; // Percentage of completed orders
     period?: string; // Optional, can be used to display the period of the KPI
 }
@@ -13,7 +12,6 @@ interface OrdersKPIProps {
 const OrdersKPI: React.FC<OrdersKPIProps> = ({
     totalOrders,
     totalOrdersByStatus,
-    averageOrderValue,
     orderCompletionRate,
     period, // Optional, can be used to display the period of the KPI
 }) => {
@@ -40,11 +38,6 @@ const OrdersKPI: React.FC<OrdersKPIProps> = ({
             Période: {period}
             </div>
         )}
-      {averageOrderValue !== undefined && (
-        <div className="text-sm">
-          Valeur moyenne de la commande: {averageOrderValue.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}
-        </div>
-      )}
       {orderCompletionRate !== undefined && (
         <div className={`text-sm ${orderCompletionRate >= 80 ? 'text-green-600' : 'text-red-600'}`}>
           Taux de complétion des commandes: {orderCompletionRate.toFixed(2)}%
