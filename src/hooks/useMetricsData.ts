@@ -15,6 +15,7 @@ import {
     differenceInDays,
 } from "date-fns";
 import { OrderOutput, OrderItemInput } from "@/src/lib/validators/order.zod";
+import { PeriodType } from "./useOrders";
 
 type RevenueByCategory = Record<string, number>;
 type TrendByCategory = Record<string, number>;
@@ -27,32 +28,21 @@ type GlobalTrend = {
     annuel: number;
 };
 
-export type PeriodType =
-    | "journalière"
-    | "hebdomadaire"
-    | "mensuel"
-    | "trimestriel"
-    | "annuel";
-
 interface UseMetricsProps {
     orders: OrderOutput[];
     dateRange?: { from?: Date; to?: Date };
+    period: PeriodType;
 }
 
 export function useMetricsData({ orders, dateRange }: UseMetricsProps) {
+    console.log('daterange', dateRange)
     //
     // ─── 0) Calculer fromStart (00:00:00) et toEnd (23:59:59.999) au tout début
     //
-    const fromStart = useMemo<Date | undefined>(() => {
-        if (!dateRange?.from) return undefined;
-        return startOfDay(dateRange.from);
-    }, [dateRange]);
+    const fromStart = dateRange?.from;
+    const toEnd = dateRange?.to;
 
-    const toEnd = useMemo<Date | undefined>(() => {
-        if (!dateRange?.to) return undefined;
-        return endOfDay(dateRange.to);
-    }, [dateRange]);
-
+    console.log('fromStart', fromStart, 'toEnd', toEnd);
     /**
      * Filtre les commandes en fonction de la plage de dates spécifiée.
      * Si aucune plage n'est spécifiée, retourne toutes les commandes.
