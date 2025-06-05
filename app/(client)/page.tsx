@@ -12,18 +12,22 @@ import RevenueKPI from "@/src/components/custom/kpi/RevenueKPI";
 import OrdersKPI from "@/src/components/custom/kpi/OrdersKPI";
 import CartsKPI from "@/src/components/custom/kpi/AverageOrderValueKPI";
 import AverageOrderValueKPI from "@/src/components/custom/kpi/AverageOrderValueKPI";
+import { endOfDay, startOfDay } from "date-fns";
+import { useOrders } from "@/src/hooks/useOrders";
+import { useRevenueMetrics } from "@/src/hooks/useRevenueMetrics";
+import { useAOV } from "@/src/hooks/useAOV";
+import { useCustomerMetrics } from "@/src/hooks/useCustomerMetrics";
 
 export default function Home() {
   const { session, loading } = useAuth();
   const [orders, setOrders] = React.useState([]);
   const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date }>({
-    from: new Date(new Date().getFullYear(), 0, 1),
-    to: new Date(),
+    from: startOfDay(new Date(new Date().getFullYear(), 0, 1)), // Début de l'année en cours
+    to: endOfDay(new Date()) // Fin de la journée actuelle
   });
   useEffect(() => {
     getTestGenerator()
       .then((data) => {
-        console.log("Fetched data:", data);
         const orders = data?.Order || [];
         setOrders(orders);
       })
@@ -33,17 +37,23 @@ export default function Home() {
   }, []);
 
   const {
-    totalRevenue,
-    revenueByCategory,
-    uniqueCustomers,
+    ordersByDateRange,
     totalOrders,
     totalOrdersByStatus,
     orderCompletionRate,
-    averageOrderValue,
+    period,
+    referenceDate,
+  } = useOrders({ orders, dateRange });
+
+  const {
+    totalRevenue,
+    revenueByCategory,
     globalTrend,
     trendByCategory,
-    period,
-  } = useMetricsData({ orders, dateRange });
+  } = useRevenueMetrics({ orders: ordersByDateRange, dateRange, period, referenceDate });
+
+    const { averageOrderValue } = useAOV({ orders: ordersByDateRange });
+    const { totalUniqueCustomers, ordersByCustomer } = useCustomerMetrics({orders: ordersByDateRange})
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -64,7 +74,7 @@ export default function Home() {
           className=""
           date={dateRange}
           onChange={(r) => {
-            if (r.from && r.to) setDateRange({ from: r.from, to: r.to });
+            if (r.from && r.to) setDateRange({ from: startOfDay(r.from), to: endOfDay(r.to) });
           }}
         />
         {/* Section 1: KPIs */}
@@ -79,7 +89,6 @@ export default function Home() {
             <div className="flex flex-col gap-2 rounded-xl bg-muted/50 p-4">
               <OrdersKPI
                 totalOrders={totalOrders}
-                averageOrderValue={averageOrderValue}
                 orderCompletionRate={orderCompletionRate}
                 totalOrdersByStatus={totalOrdersByStatus}
               />
